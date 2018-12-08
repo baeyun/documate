@@ -1,0 +1,85 @@
+import Breadcrumb from '../src/components/Breadcrumb'
+import Sidenav from '../src/containers/Sidenav'
+import Button from '../src/components/Button'
+import Code from '../src/components/Code'
+import Main from '../src/containers/Main'
+
+<Sidenav>
+
+<Sidenav.Logo src="./img/logo.png" />
+
+<Sidenav.Label>Introduction</Sidenav.Label>
+
+<Sidenav.Item subnav={[
+  {text: 'Rethinking the DOM', link: '/'},
+  {text: 'First steps', link: '/'},
+  {text: 'Under the hood', link: '/'}
+]}>How it works</Sidenav.Item>
+
+<Sidenav.Item>Getting started</Sidenav.Item>
+<Sidenav.Item>Creating your first project</Sidenav.Item>
+
+<Sidenav.Label>Advanced Patterns</Sidenav.Label>
+<Sidenav.Item>Hooks</Sidenav.Item>
+<Sidenav.Item>Render Props</Sidenav.Item>
+<Sidenav.Item>Higher Order Components</Sidenav.Item>
+
+<Sidenav.Label>Others</Sidenav.Label>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+
+</Sidenav>
+
+<Main topbar={true}>
+
+# Introduction
+
+Welcome to *Documate v0.1.0*. Documate is a documentation site generator and automator. It basically allows you to write docs and forget
+about designing and maintaining your site. Documate does all the heavy lifting and makes you focus on your goals. With Documate, you'll
+actually enjoy writing docs.
+
+# Components
+
+## Code Blocks
+
+```
+const MainUpdateRegulator = class extends UpdateRegisterTask {
+  get index() { return this.index++ }
+}
+```
+
+
+## Breadcrumbs
+
+<Breadcrumb slugs={[
+  {text: 'Home', link: '/'},
+  {text: 'Introduction', link: '/docs/introduction'},
+  {text: 'Breadcrumbs', link: '/docs/introduction#breadcrumbs'}
+]} />
+
+## Buttons
+
+<Button children={"Run Demo"} />
+<Button primary pullRight children={"Next Page"} />
+<Button success children={"Success"} />
+<Button warning pullLeft children={"Warning"} />
+<Button danger children={"Danger"} />
+
+## Tables
+
+|Property|Parameter|Default|Return value|
+|---|---|---|--
+|updateScheduleSync|[BatchedUpdate](http://localhost:1234/docs/dom-updates/BatchedUpdate)|new BatchedUpdate()|ScheduleType|
+|generateFromScheduledTask|string|'DEFAULT_TASK'|void|
+|defineComponent|ComponentConfig|new ComponentConfig()|Component|
+|migrateMixin|Mixin|void|Mixin or Error|
+|refineSurfaceModel|int|0 (initial surface)|void|
+
+## Tags
+
+Call the shouldUpdateProcess() in the `ProcessUpdate` class to recover cached contents.
+
+### Work in Progress!!!
+
+</Main>
