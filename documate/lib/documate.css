@@ -7,6 +7,7 @@
 body {
   margin: 0;
   overflow: hidden;
+  font-size: 18px;
 }
 
 p {
@@ -17,6 +18,11 @@ a, a:hover, a:visited {
   text-decoration: none;
   color: #8d5ff8;
   width: fit-content;
+  transition: .1s;
+}
+
+pre {
+  font-family: SFMono-Regular, Consolas, Menlo, monospace !important;
 }
 
 table {
@@ -45,20 +51,29 @@ table thead th {
 }
 
 #Sidenav a {
-  color: #333333;
+  color: rgb(219, 219, 219);
+  padding: 5px 10px;
 }
 
-pre {
-  font-family: SFMono-Regular, Consolas, Menlo, monospace !important;
+#Sidenav a:hover {
+  background: #eeeeee;
+  color: #000;
+  border-radius: 5px;
+}
+
+.subnav-item + .subnav-item {
+  margin: 15px 0;
 }
 
 #Topbar > button:hover i {
   color: #333333;
 }
 
-.subnav-item > a:hover {
-  color: #333333;
-}
+/* .topbar-menu-item:hover {} */
+
+/* .topbar-menu-item:hover a {
+  color: #000000 !important;
+} */
 
 /* Small-screen embedded devices */
 
@@ -82,3 +97,5 @@ pre {
     overflow: auto !important;
   }
 }
+
+/* Experimental Arrow Icon */

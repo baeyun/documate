@@ -21,7 +21,7 @@ export default class Main extends React.Component {
   
     return (
       <main id="Main" style={mainStyles}>
-        { this.props.topbar === true && <Topbar/> }
+        { this.props.topbar === true && <Topbar menu={this.props.menu || false} /> }
         <div id="content" style={{...contentStyles}}>{this.props.children}</div>
       </main>
     )

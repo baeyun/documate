@@ -1,6 +1,7 @@
 import Breadcrumb from '../src/components/Breadcrumb'
 import Sidenav from '../src/containers/Sidenav'
 import Button from '../src/components/Button'
+import Alert from '../src/components/Alert'
 import Code from '../src/components/Code'
 import Main from '../src/containers/Main'
 
@@ -29,9 +30,48 @@ import Main from '../src/containers/Main'
 <Sidenav.Item>Migrating from React 14</Sidenav.Item>
 <Sidenav.Item>How to render faster</Sidenav.Item>
 
+<Sidenav.Label>Others</Sidenav.Label>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+
+<Sidenav.Label>Others</Sidenav.Label>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+
+<Sidenav.Label>Others</Sidenav.Label>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+
+<Sidenav.Label>Others</Sidenav.Label>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+
+<Sidenav.Label>Others</Sidenav.Label>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+<Sidenav.Item>The global context</Sidenav.Item>
+<Sidenav.Item>Migrating from React 14</Sidenav.Item>
+<Sidenav.Item>How to render faster</Sidenav.Item>
+
 </Sidenav>
 
-<Main topbar={true}>
+<Main
+  topbar={true}
+  menu={[
+    {link: '/', text: 'Home'},
+    {link: '/', text: 'Community'},
+    {link: '/', text: 'Benchmarks'},
+    {link: '/', text: 'About'},
+  ]}
+>
 
 # Introduction
 
@@ -40,6 +80,14 @@ about designing and maintaining your site. Documate does all the heavy lifting a
 actually enjoy writing docs.
 
 # Components
+
+## Alerts
+
+<Alert>This is a default alert.</Alert>
+<Alert primary>This is a primary alert.</Alert>
+<Alert success>This is a success alert.</Alert>
+<Alert warning>This is a warning alert.</Alert>
+<Alert danger>This is a danger alert.</Alert>
 
 ## Code Blocks
 
@@ -76,10 +124,8 @@ const MainUpdateRegulator = class extends UpdateRegisterTask {
 |migrateMixin|Mixin|void|Mixin or Error|
 |refineSurfaceModel|int|0 (initial surface)|void|
 
-## Tags
+## Code Sweets
 
 Call the shouldUpdateProcess() in the `ProcessUpdate` class to recover cached contents.
-
-### Work in Progress!!!
 
 </Main>

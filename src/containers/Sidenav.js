@@ -1,16 +1,17 @@
 import React from 'react'
 import RESSheet from 'ressheet'
-import logo from './logo.js'
+import logo from '../components/logo'
 
 const itemStyles = {
   display: 'block',
-  marginTop: 15,
+  marginTop: 5,
   fontSize: 16,
   fontWeight: 600
 }
 
 const subnavItemStyles = {
-  margin: '5px 0',
+  position: 'relative',
+  left: -25,
   listStyle: 'none'
 }
 
@@ -21,7 +22,7 @@ export default class Sidebar extends React.Component {
     render() {
       return (
         <h4 style={{
-          color: '#9696a0',
+          color: '#ccc',
           fontWeight: 300,
           textTransform: 'uppercase',
           fontSize: 14
@@ -34,7 +35,7 @@ export default class Sidebar extends React.Component {
     render() {
       return (
         <div style={{margin: '15px 0 25px', textAlign: 'center'}}>
-          <img src={logo} width={200} />
+          <img src={logo} width={100} title="Documate Homepage" />
         </div>
       )
     }
@@ -45,7 +46,7 @@ export default class Sidebar extends React.Component {
       isCurrentSubnavOpen: false,
       navItemIcon: 'right'
     }
-
+    
     toggleNavItemSubnav(e) {
       e.preventDefault()
       if (this.state.isCurrentSubnavOpen == false) {
@@ -65,12 +66,13 @@ export default class Sidebar extends React.Component {
       return (
         <>
           <a onClick={this.toggleNavItemSubnav.bind(this)} href={this.props.href || '/'} style={{...itemStyles}}>
-            <i style={{marginRight: 7}} className={'fas fa-angle-' + this.state.navItemIcon} /> {this.props.children}
+            {/* <i style={{marginRight: 7}} className={'fas fa-angle-' + this.state.navItemIcon} /> */}
+            {this.props.children}
           </a>
           {
             this.state.isCurrentSubnavOpen && (
               <div className="subnav">
-                <ul>
+                <ul style={{listStylePosition: 'outside'}}>
                   {
                     typeof this.props.subnav === 'object' && this.props.subnav.map((subnav, i) => (
                       <li className="subnav-item" style={subnavItemStyles} key={'_subNavItemLink_' + i}>
@@ -87,12 +89,10 @@ export default class Sidebar extends React.Component {
     }
   }
 
-  componentDidMount() {}
-
   render() {
     let sidenavStyles = new RESSheet(this.props, {
       default: {
-        backgroundColor: '#f9fafc',
+        backgroundColor: '#222831',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -100,7 +100,8 @@ export default class Sidebar extends React.Component {
         width: 300,
         height: '100vh',
         padding: 20,
-        fontSize: 15
+        fontSize: 15,
+        overflowY: 'auto'
       }
     })
   
