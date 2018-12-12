@@ -7,7 +7,7 @@
 body {
   margin: 0;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 p {
@@ -116,4 +116,20 @@ table thead th {
   }
 }
 
-/* Experimental Arrow Icon */
+/* Experimentals */
+
+.subnav-item-animate {
+  animation: .2s slideDown ease-in-out 0s;
+}
+
+@keyframes slideDown {
+  from, 0% {
+    display: none;
+    transform: translateY(-10px);
+  }
+
+  to, 100% {
+    display: inline-block;
+    transform: translateY(0);
+  }
+}

@@ -9,7 +9,23 @@ const defaultStyles = {
     padding: 5
   },
   listItem: {
-    margin: '15px 0 15px 15px'
+    position: 'relative',
+    left: -50,
+    listStyle: 'none',
+    lineHeight: 2,
+    margin: '10px 0'
+  },
+  bigHeader: {
+    fontWeight: 700,
+    fontSize: 35,
+    margin: '10px 0',
+    display: 'block'
+  },
+  smallHeader: {
+    fontWeight: 300,
+    fontSize: 20,
+    margin: '30px 0',
+    display: 'block'
   },
   header: {
     fontFamily: 'Segoe UI, sans-serif',
@@ -28,10 +44,12 @@ const defaultStyles = {
     fontFamily: 'monospace'
   },
   editor: {
-    backgroundColor: '#2e3440',
-    width: 'fit-content',
+    backgroundColor: '#282c34',
+    width: '100%',
     padding: '10px 5px',
-    borderRadius: 3
+    borderRadius: 3,
+    lineHeight: 1.5,
+    overflow: 'auto'
   }
 }
 
@@ -39,12 +57,18 @@ const defaultStyles = {
 // elements that would appear. Some of the styles here could be
 // inherited from the themeConfig
 const overrideComponents = {
-  h1: props => <h1 style={{...defaultStyles.header}} {...props} />,
+  h1: props => <span style={defaultStyles.bigHeader} {...props} />,
   h2: props => <h2 style={{...defaultStyles.header}} {...props} />,
+  // h3 - Thin sub-headers
+  h3: props => <span style={{...defaultStyles.smallHeader}} {...props} />,
   h4: props => <h4 style={{...defaultStyles.header}} {...props} />,
   blockquote: props => <blockquote style={{...defaultStyles.blockquote}} {...props} />,
   table: props => <div style={{...defaultStyles.fixedTableLayout}} children={<table {...props} />} />,
-  li: props => <li style={{...defaultStyles.listItem}} {...props} />,
+  li: props => (
+    <li style={{...defaultStyles.listItem}}>
+      <i style={{color: '#05a1e2', margin: 10, float: 'left'}} className="fas fa-dot-circle" /> {props.children}
+    </li>
+  ),
   pre: props => <pre style={defaultStyles.editor} children={<code language="js" {...props} />} />
 }
 

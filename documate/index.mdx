@@ -18,6 +18,9 @@ import Main from '../src/containers/Main'
 ]}>Getting started</Sidenav.Item>
 <Sidenav.Item>Who should use Documate</Sidenav.Item>
 <Sidenav.Item>Understanding MDX</Sidenav.Item>
+<Sidenav.Item subnav={[
+  {text: 'v0.1.0', link: '#'}
+]}>Changelog</Sidenav.Item>
 
 <Sidenav.Label>Basic Components</Sidenav.Label>
 <Sidenav.Item>Accordions</Sidenav.Item>
@@ -66,13 +69,22 @@ import Main from '../src/containers/Main'
 
 # Introduction
 
+### The last documentation tool you'll ever need. Consistent documents with semantic versioning and advanced React + Markdown components. Your journey to write proper docs starts here.
+
 Welcome to *Documate v0.1.0*. Documate is a documentation site generator and automator. It basically allows you to write docs and forget
-about designing and maintaining your site. Documate does all the heavy lifting and makes you focus on your goals. With Documate, you'll
-actually enjoy writing docs.
+about designing and maintaining your site. Documate does all the heavy lifting and makes you focus on actually writing docs.
 
-# Components
+## Features
 
-## Alerts
+- **Blazing fast** - Uses Parcel to bundle in multiple cores.
+- **Light** - Transpiles your MDX (Component based Markdown) one-on-one to plain HTML.
+- **Configurable** - Extendibility is a merit deserved.
+- **Cross-browser** - Your site works across most browsers (except **>IE8** ofcourse).
+- **React-based** - Documate is designed to be used as a React project however it can be used for any other library/framework/language.
+
+## Components
+
+### Alerts
 
 <Alert>This is a default alert.</Alert>
 <Alert primary>This is a primary alert.</Alert>
@@ -80,16 +92,28 @@ actually enjoy writing docs.
 <Alert warning>This is a warning alert.</Alert>
 <Alert danger>This is a danger alert.</Alert>
 
-## Code Blocks
+### Code Blocks
 
 ```
-const MainUpdateRegulator = class extends UpdateRegisterTask {
-  get index() { return this.index++ }
+import { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
 }
 ```
 
 
-## Breadcrumbs
+### Breadcrumbs
 
 <Breadcrumb slugs={[
   {text: 'Home', link: '/'},
@@ -97,7 +121,7 @@ const MainUpdateRegulator = class extends UpdateRegisterTask {
   {text: 'Breadcrumbs', link: '/docs/introduction#breadcrumbs'}
 ]} />
 
-## Buttons
+### Buttons
 
 <Button children={"Run Demo"} />
 <Button primary pullRight children={"Next Page"} />
@@ -105,7 +129,7 @@ const MainUpdateRegulator = class extends UpdateRegisterTask {
 <Button warning pullLeft children={"Warning"} />
 <Button danger children={"Danger"} />
 
-## Tables
+### Tables
 
 |Property|Parameter|Default|Return value|
 |---|---|---|--
@@ -115,6 +139,6 @@ const MainUpdateRegulator = class extends UpdateRegisterTask {
 |migrateMixin|Mixin|void|Mixin or Error|
 |refineSurfaceModel|int|0 (initial surface)|void|
 
-## Tables
+### Tables
 
 </Main>

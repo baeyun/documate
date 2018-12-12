@@ -24362,7 +24362,7 @@ var subnavDotStyles = {
   background: '#05a1e2',
   position: 'relative',
   left: -13,
-  bottom: -12,
+  bottom: -18,
   float: 'left',
   borderRadius: '50%'
 };
@@ -24466,11 +24466,16 @@ function (_React$Component3) {
           margin: '15px 0 25px',
           textAlign: 'center'
         }
+      }, _react.default.createElement("a", {
+        style: {
+          backgroundColor: 'transparent'
+        },
+        href: this.props.link || '/'
       }, _react.default.createElement("img", {
         src: _logo.default,
         width: 100,
         title: "Documate Homepage"
-      }));
+      })));
     }
   }]);
 
@@ -24498,7 +24503,8 @@ function (_React$Component4) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this2)), "state", {
       isSubnav: false,
       isCurrentSubnavOpen: false,
-      navItemIcon: 'right'
+      navItemIcon: 'right',
+      shouldAnimate: false
     });
 
     return _this2;
@@ -24519,12 +24525,15 @@ function (_React$Component4) {
       if (this.state.isCurrentSubnavOpen == false) {
         this.setState({
           isCurrentSubnavOpen: true,
-          navItemIcon: 'down'
+          navItemIcon: 'down',
+          shouldAnimate: true
         });
       } else if (this.state.isCurrentSubnavOpen == true) {
+        e.target.nextElementSibling.classList.remove('subnav-item-animate');
         this.setState({
           isCurrentSubnavOpen: false,
-          navItemIcon: 'right'
+          navItemIcon: 'right',
+          shouldAnimate: false
         });
       }
     }
@@ -24538,7 +24547,7 @@ function (_React$Component4) {
         href: this.props.href || '/',
         style: _objectSpread({}, itemStyles)
       }, this.props.children), this.state.isCurrentSubnavOpen && _react.default.createElement("div", {
-        className: "subnav"
+        className: 'subnav' + this.state.shouldAnimate ? 'subnav-item-animate' : ''
       }, _react.default.createElement("ul", {
         style: {
           listStylePosition: 'outside'
@@ -25082,7 +25091,12 @@ function (_React$Component) {
           text: 'Running & updating',
           link: '#'
         }]
-      }, "Getting started"), _react.default.createElement(_Sidenav.default.Item, null, "Who should use Documate"), _react.default.createElement(_Sidenav.default.Item, null, "Understanding MDX"), _react.default.createElement(_Sidenav.default.Label, null, "Basic Components"), _react.default.createElement(_Sidenav.default.Item, null, "Accordions"), _react.default.createElement(_Sidenav.default.Item, null, "Alert"), _react.default.createElement(_Sidenav.default.Item, null, "Breadcrumbs"), _react.default.createElement(_Sidenav.default.Item, null, "Buttons"), _react.default.createElement(_Sidenav.default.Item, null, "Code Blocks"), _react.default.createElement(_Sidenav.default.Item, null, "Permalinks"), _react.default.createElement(_Sidenav.default.Item, null, "Tables"), _react.default.createElement(_Sidenav.default.Item, null, "Tabs"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced Components"), _react.default.createElement(_Sidenav.default.Item, null, "Enhanced Grids"), _react.default.createElement(_Sidenav.default.Item, null, "Responsive design"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced"), _react.default.createElement(_Sidenav.default.Item, null, "ReactRouter configuration"), _react.default.createElement(_Sidenav.default.Item, null, "The `themeConfig`"), _react.default.createElement(_Sidenav.default.Item, null, "Continuous deployment"), _react.default.createElement(_Sidenav.default.Item, null, "Semantic versioning"), _react.default.createElement(_Sidenav.default.Item, null, "Extending UI"), _react.default.createElement(_Sidenav.default.Item, {
+      }, "Getting started"), _react.default.createElement(_Sidenav.default.Item, null, "Who should use Documate"), _react.default.createElement(_Sidenav.default.Item, null, "Understanding MDX"), _react.default.createElement(_Sidenav.default.Item, {
+        subnav: [{
+          text: 'v0.1.0',
+          link: '#'
+        }]
+      }, "Changelog"), _react.default.createElement(_Sidenav.default.Label, null, "Basic Components"), _react.default.createElement(_Sidenav.default.Item, null, "Accordions"), _react.default.createElement(_Sidenav.default.Item, null, "Alert"), _react.default.createElement(_Sidenav.default.Item, null, "Breadcrumbs"), _react.default.createElement(_Sidenav.default.Item, null, "Buttons"), _react.default.createElement(_Sidenav.default.Item, null, "Code Blocks"), _react.default.createElement(_Sidenav.default.Item, null, "Permalinks"), _react.default.createElement(_Sidenav.default.Item, null, "Tables"), _react.default.createElement(_Sidenav.default.Item, null, "Tabs"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced Components"), _react.default.createElement(_Sidenav.default.Item, null, "Enhanced Grids"), _react.default.createElement(_Sidenav.default.Item, null, "Responsive design"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced"), _react.default.createElement(_Sidenav.default.Item, null, "ReactRouter configuration"), _react.default.createElement(_Sidenav.default.Item, null, "The `themeConfig`"), _react.default.createElement(_Sidenav.default.Item, null, "Continuous deployment"), _react.default.createElement(_Sidenav.default.Item, null, "Semantic versioning"), _react.default.createElement(_Sidenav.default.Item, null, "Extending UI"), _react.default.createElement(_Sidenav.default.Item, {
         subnav: [{
           text: 'Webpack',
           link: '#'
@@ -25115,17 +25129,70 @@ function (_React$Component) {
         name: "h1",
         components: components
       }, "Introduction"), _react.default.createElement(_tag.MDXTag, {
+        name: "h3",
+        components: components
+      }, "The last documentation tool you'll ever need. Consistent documents with semantic versioning and advanced React + Markdown components. Your journey to write proper docs starts here."), _react.default.createElement(_tag.MDXTag, {
         name: "p",
         components: components
       }, "Welcome to ", _react.default.createElement(_tag.MDXTag, {
         name: "em",
         components: components,
         parentName: "p"
-      }, "Documate v0.1.0"), ". Documate is a documentation site generator and automator. It basically allows you to write docs and forget\nabout designing and maintaining your site. Documate does all the heavy lifting and makes you focus on your goals. With Documate, you'll\nactually enjoy writing docs."), _react.default.createElement(_tag.MDXTag, {
-        name: "h1",
+      }, "Documate v0.1.0"), ". Documate is a documentation site generator and automator. It basically allows you to write docs and forget\nabout designing and maintaining your site. Documate does all the heavy lifting and makes you focus on actually writing docs."), _react.default.createElement(_tag.MDXTag, {
+        name: "h2",
+        components: components
+      }, "Features"), _react.default.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, _react.default.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, _react.default.createElement(_tag.MDXTag, {
+        name: "strong",
+        components: components,
+        parentName: "li"
+      }, "Blazing fast"), " - Uses Parcel to bundle in multiple cores."), _react.default.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, _react.default.createElement(_tag.MDXTag, {
+        name: "strong",
+        components: components,
+        parentName: "li"
+      }, "Light"), " - Transpiles your MDX (Component based Markdown) one-on-one to plain HTML."), _react.default.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, _react.default.createElement(_tag.MDXTag, {
+        name: "strong",
+        components: components,
+        parentName: "li"
+      }, "Configurable"), " - Extendibility is a merit deserved."), _react.default.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, _react.default.createElement(_tag.MDXTag, {
+        name: "strong",
+        components: components,
+        parentName: "li"
+      }, "Cross-browser"), " - Your site works across most browsers (except ", _react.default.createElement(_tag.MDXTag, {
+        name: "strong",
+        components: components,
+        parentName: "li"
+      }, ">IE8"), " ofcourse)."), _react.default.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, _react.default.createElement(_tag.MDXTag, {
+        name: "strong",
+        components: components,
+        parentName: "li"
+      }, "React-based"), " - Documate is designed to be used as a React project however it can be used for any other library/framework/language.")), _react.default.createElement(_tag.MDXTag, {
+        name: "h2",
         components: components
       }, "Components"), _react.default.createElement(_tag.MDXTag, {
-        name: "h2",
+        name: "h3",
         components: components
       }, "Alerts"), _react.default.createElement(_Alert.default, null, "This is a default alert."), _react.default.createElement(_Alert.default, {
         primary: true
@@ -25136,7 +25203,7 @@ function (_React$Component) {
       }, "This is a warning alert."), _react.default.createElement(_Alert.default, {
         danger: true
       }, "This is a danger alert."), _react.default.createElement(_tag.MDXTag, {
-        name: "h2",
+        name: "h3",
         components: components
       }, "Code Blocks"), _react.default.createElement(_tag.MDXTag, {
         name: "pre",
@@ -25148,8 +25215,8 @@ function (_React$Component) {
         props: {
           "metastring": null
         }
-      }, "const MainUpdateRegulator = class extends UpdateRegisterTask {\n  get index() { return this.index++ }\n}\n")), _react.default.createElement(_tag.MDXTag, {
-        name: "h2",
+      }, "import { useState } from 'react';\n\nfunction Example() {\n  // Declare a new state variable, which we'll call \"count\"\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}\n")), _react.default.createElement(_tag.MDXTag, {
+        name: "h3",
         components: components
       }, "Breadcrumbs"), _react.default.createElement(_Breadcrumb.default, {
         slugs: [{
@@ -25163,7 +25230,7 @@ function (_React$Component) {
           link: '/docs/introduction#breadcrumbs'
         }]
       }), _react.default.createElement(_tag.MDXTag, {
-        name: "h2",
+        name: "h3",
         components: components
       }, "Buttons"), _react.default.createElement(_Button.default, {
         children: "Run Demo"
@@ -25182,7 +25249,7 @@ function (_React$Component) {
         danger: true,
         children: "Danger"
       }), _react.default.createElement(_tag.MDXTag, {
-        name: "h2",
+        name: "h3",
         components: components
       }, "Tables"), _react.default.createElement(_tag.MDXTag, {
         name: "table",
@@ -25395,7 +25462,7 @@ function (_React$Component) {
           "align": null
         }
       }, "void")))), _react.default.createElement(_tag.MDXTag, {
-        name: "h2",
+        name: "h3",
         components: components
       }, "Tables")));
     }
@@ -25418,11 +25485,11 @@ var _index = _interopRequireDefault(require("../documate/index.mdx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 var defaultStyles = {
   fixedTableLayout: {
@@ -25430,7 +25497,23 @@ var defaultStyles = {
     padding: 5
   },
   listItem: {
-    margin: '15px 0 15px 15px'
+    position: 'relative',
+    left: -50,
+    listStyle: 'none',
+    lineHeight: 2,
+    margin: '10px 0'
+  },
+  bigHeader: {
+    fontWeight: 700,
+    fontSize: 35,
+    margin: '10px 0',
+    display: 'block'
+  },
+  smallHeader: {
+    fontWeight: 300,
+    fontSize: 20,
+    margin: '30px 0',
+    display: 'block'
   },
   header: {
     fontFamily: 'Segoe UI, sans-serif',
@@ -25449,10 +25532,12 @@ var defaultStyles = {
     fontFamily: 'monospace'
   },
   editor: {
-    backgroundColor: '#2e3440',
-    width: 'fit-content',
+    backgroundColor: '#282c34',
+    width: '100%',
     padding: '10px 5px',
-    borderRadius: 3
+    borderRadius: 3,
+    lineHeight: 1.5,
+    overflow: 'auto'
   } // MDX uses these styled components to replace the default HTML
   // elements that would appear. Some of the styles here could be
   // inherited from the themeConfig
@@ -25460,13 +25545,19 @@ var defaultStyles = {
 };
 var overrideComponents = {
   h1: function h1(props) {
-    return _react.default.createElement("h1", _extends({
-      style: _objectSpread({}, defaultStyles.header)
+    return _react.default.createElement("span", _extends({
+      style: defaultStyles.bigHeader
     }, props));
   },
   h2: function h2(props) {
     return _react.default.createElement("h2", _extends({
       style: _objectSpread({}, defaultStyles.header)
+    }, props));
+  },
+  // h3 - Thin sub-headers
+  h3: function h3(props) {
+    return _react.default.createElement("span", _extends({
+      style: _objectSpread({}, defaultStyles.smallHeader)
     }, props));
   },
   h4: function h4(props) {
@@ -25486,9 +25577,16 @@ var overrideComponents = {
     });
   },
   li: function li(props) {
-    return _react.default.createElement("li", _extends({
+    return _react.default.createElement("li", {
       style: _objectSpread({}, defaultStyles.listItem)
-    }, props));
+    }, _react.default.createElement("i", {
+      style: {
+        color: '#05a1e2',
+        margin: 10,
+        float: 'left'
+      },
+      className: "fas fa-dot-circle"
+    }), " ", props.children);
   },
   pre: function pre(props) {
     return _react.default.createElement("pre", {
@@ -25531,7 +25629,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61577" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55823" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -21,7 +21,7 @@ const subnavDotStyles = {
   background: '#05a1e2',
   position: 'relative',
   left: -13,
-  bottom: -12,
+  bottom: -18,
   float: 'left',
   borderRadius: '50%'
 }
@@ -46,7 +46,9 @@ export default class Sidebar extends React.Component {
     render() {
       return (
         <div style={{margin: '15px 0 25px', textAlign: 'center'}}>
-          <img src={logo} width={100} title="Documate Homepage" />
+          <a style={{backgroundColor: 'transparent'}} href={this.props.link || '/'}>
+            <img src={logo} width={100} title="Documate Homepage" />
+          </a>
         </div>
       )
     }
@@ -56,7 +58,8 @@ export default class Sidebar extends React.Component {
     state = {
       isSubnav: false,
       isCurrentSubnavOpen: false,
-      navItemIcon: 'right'
+      navItemIcon: 'right',
+      shouldAnimate: false
     }
 
     componentWillMount() {
@@ -71,12 +74,16 @@ export default class Sidebar extends React.Component {
       if (this.state.isCurrentSubnavOpen == false) {
         this.setState({
           isCurrentSubnavOpen: true,
-          navItemIcon: 'down'
+          navItemIcon: 'down',
+          shouldAnimate: true
         })
       } else if (this.state.isCurrentSubnavOpen == true) {
+        e.target.nextElementSibling.classList.remove('subnav-item-animate')
+
         this.setState({
           isCurrentSubnavOpen: false,
-          navItemIcon: 'right'
+          navItemIcon: 'right',
+          shouldAnimate: false
         })
       }
     }
@@ -88,12 +95,11 @@ export default class Sidebar extends React.Component {
             this.state.isSubnav && <span style={subnavDotStyles} />
           }
           <a onClick={this.toggleNavItemSubnav.bind(this)} href={this.props.href || '/'} style={{...itemStyles}}>
-            {/* <i style={{marginRight: 7}} className={'fas fa-angle-' + this.state.navItemIcon} /> */}
             {this.props.children}
           </a>
           {
             this.state.isCurrentSubnavOpen && (
-              <div className="subnav">
+              <div className={'subnav' + this.state.shouldAnimate ? 'subnav-item-animate' : ''}>
                 <ul style={{listStylePosition: 'outside'}}>
                   {
                     typeof this.props.subnav === 'object' && this.props.subnav.map((subnav, i) => (
