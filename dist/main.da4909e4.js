@@ -24356,6 +24356,16 @@ var subnavItemStyles = {
   left: -25,
   listStyle: 'none'
 };
+var subnavDotStyles = {
+  width: 8,
+  height: 8,
+  background: '#05a1e2',
+  position: 'relative',
+  left: -13,
+  bottom: -12,
+  float: 'left',
+  borderRadius: '50%'
+};
 
 var Sidebar =
 /*#__PURE__*/
@@ -24486,6 +24496,7 @@ function (_React$Component4) {
     _this2 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(_class4)).call.apply(_getPrototypeOf3, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this2)), "state", {
+      isSubnav: false,
       isCurrentSubnavOpen: false,
       navItemIcon: 'right'
     });
@@ -24494,6 +24505,13 @@ function (_React$Component4) {
   }
 
   _createClass(_class4, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.subnav) this.setState({
+        isSubnav: true
+      });
+    }
+  }, {
     key: "toggleNavItemSubnav",
     value: function toggleNavItemSubnav(e) {
       e.preventDefault();
@@ -24513,7 +24531,9 @@ function (_React$Component4) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("a", {
+      return _react.default.createElement(_react.default.Fragment, null, this.state.isSubnav && _react.default.createElement("span", {
+        style: subnavDotStyles
+      }), _react.default.createElement("a", {
         onClick: this.toggleNavItemSubnav.bind(this),
         href: this.props.href || '/',
         style: _objectSpread({}, itemStyles)
@@ -24524,13 +24544,13 @@ function (_React$Component4) {
           listStylePosition: 'outside'
         }
       }, _typeof(this.props.subnav) === 'object' && this.props.subnav.map(function (subnav, i) {
-        return _react.default.createElement("li", {
+        return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("li", {
           className: "subnav-item",
           style: subnavItemStyles,
           key: '_subNavItemLink_' + i
         }, _react.default.createElement("a", {
           href: subnav.link
-        }, subnav.text));
+        }, subnav.text)));
       }))));
     }
   }]);
@@ -25062,7 +25082,18 @@ function (_React$Component) {
           text: 'Running & updating',
           link: '#'
         }]
-      }, "Getting started"), _react.default.createElement(_Sidenav.default.Item, null, "Who should use Documate"), _react.default.createElement(_Sidenav.default.Item, null, "Understanding MDX"), _react.default.createElement(_Sidenav.default.Label, null, "Basic Components"), _react.default.createElement(_Sidenav.default.Item, null, "Accordions"), _react.default.createElement(_Sidenav.default.Item, null, "Alert"), _react.default.createElement(_Sidenav.default.Item, null, "Breadcrumbs"), _react.default.createElement(_Sidenav.default.Item, null, "Buttons"), _react.default.createElement(_Sidenav.default.Item, null, "Code"), _react.default.createElement(_Sidenav.default.Item, null, "Permalinks"), _react.default.createElement(_Sidenav.default.Item, null, "Tables"), _react.default.createElement(_Sidenav.default.Item, null, "Tabs"), _react.default.createElement(_Sidenav.default.Item, null, "Responsive design"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced"), _react.default.createElement(_Sidenav.default.Item, null, "ReactRouter configuration"), _react.default.createElement(_Sidenav.default.Item, null, "The `themeConfig`"), _react.default.createElement(_Sidenav.default.Item, null, "Continuous deployment"), _react.default.createElement(_Sidenav.default.Item, null, "Semantic versioning"), _react.default.createElement(_Sidenav.default.Item, null, "Extending UI"), _react.default.createElement(_Sidenav.default.Item, null, "Integrating with other build tools"), _react.default.createElement(_Sidenav.default.Label, null, "Extras"), _react.default.createElement(_Sidenav.default.Item, null, "Contributing"), _react.default.createElement(_Sidenav.default.Item, null, "Support us"), _react.default.createElement(_Sidenav.default.Item, null, "Other related projects"), _react.default.createElement(_Sidenav.default.Item, null, "About us")), _react.default.createElement(_Main.default, {
+      }, "Getting started"), _react.default.createElement(_Sidenav.default.Item, null, "Who should use Documate"), _react.default.createElement(_Sidenav.default.Item, null, "Understanding MDX"), _react.default.createElement(_Sidenav.default.Label, null, "Basic Components"), _react.default.createElement(_Sidenav.default.Item, null, "Accordions"), _react.default.createElement(_Sidenav.default.Item, null, "Alert"), _react.default.createElement(_Sidenav.default.Item, null, "Breadcrumbs"), _react.default.createElement(_Sidenav.default.Item, null, "Buttons"), _react.default.createElement(_Sidenav.default.Item, null, "Code Blocks"), _react.default.createElement(_Sidenav.default.Item, null, "Permalinks"), _react.default.createElement(_Sidenav.default.Item, null, "Tables"), _react.default.createElement(_Sidenav.default.Item, null, "Tabs"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced Components"), _react.default.createElement(_Sidenav.default.Item, null, "Enhanced Grids"), _react.default.createElement(_Sidenav.default.Item, null, "Responsive design"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced"), _react.default.createElement(_Sidenav.default.Item, null, "ReactRouter configuration"), _react.default.createElement(_Sidenav.default.Item, null, "The `themeConfig`"), _react.default.createElement(_Sidenav.default.Item, null, "Continuous deployment"), _react.default.createElement(_Sidenav.default.Item, null, "Semantic versioning"), _react.default.createElement(_Sidenav.default.Item, null, "Extending UI"), _react.default.createElement(_Sidenav.default.Item, {
+        subnav: [{
+          text: 'Webpack',
+          link: '#'
+        }, {
+          text: 'Rollup',
+          link: '#'
+        }, {
+          text: 'Parcel',
+          link: '#'
+        }]
+      }, "Integrating with other build tools"), _react.default.createElement(_Sidenav.default.Label, null, "Extras"), _react.default.createElement(_Sidenav.default.Item, null, "Contributing"), _react.default.createElement(_Sidenav.default.Item, null, "Support us"), _react.default.createElement(_Sidenav.default.Item, null, "Other related projects"), _react.default.createElement(_Sidenav.default.Item, null, "About us")), _react.default.createElement(_Main.default, {
         topbar: true,
         menu: [{
           link: '/',
@@ -25366,14 +25397,7 @@ function (_React$Component) {
       }, "void")))), _react.default.createElement(_tag.MDXTag, {
         name: "h2",
         components: components
-      }, "Code Sweets"), _react.default.createElement(_tag.MDXTag, {
-        name: "p",
-        components: components
-      }, "Call the shouldUpdateProcess() in the ", _react.default.createElement(_tag.MDXTag, {
-        name: "inlineCode",
-        components: components,
-        parentName: "p"
-      }, "ProcessUpdate"), " class to recover cached contents.")));
+      }, "Tables")));
     }
   }]);
 
@@ -25425,9 +25449,10 @@ var defaultStyles = {
     fontFamily: 'monospace'
   },
   editor: {
-    // fontFamily: 'SFMono-Regular, Consolas, Menlo, monospace',
-    borderRadius: 2,
-    backgroundColor: '#f8f8f8'
+    backgroundColor: '#2e3440',
+    width: 'fit-content',
+    padding: '10px 5px',
+    borderRadius: 3
   } // MDX uses these styled components to replace the default HTML
   // elements that would appear. Some of the styles here could be
   // inherited from the themeConfig
@@ -25467,6 +25492,7 @@ var overrideComponents = {
   },
   pre: function pre(props) {
     return _react.default.createElement("pre", {
+      style: defaultStyles.editor,
       children: _react.default.createElement("code", _extends({
         language: "js"
       }, props))
@@ -25505,7 +25531,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49954" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61577" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

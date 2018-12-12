@@ -15,6 +15,17 @@ const subnavItemStyles = {
   listStyle: 'none'
 }
 
+const subnavDotStyles = {
+  width: 8,
+  height: 8,
+  background: '#05a1e2',
+  position: 'relative',
+  left: -13,
+  bottom: -12,
+  float: 'left',
+  borderRadius: '50%'
+}
+
 export default class Sidebar extends React.Component {
   state = {}
 
@@ -43,8 +54,16 @@ export default class Sidebar extends React.Component {
   
   static Item = class extends React.Component {
     state = {
+      isSubnav: false,
       isCurrentSubnavOpen: false,
       navItemIcon: 'right'
+    }
+
+    componentWillMount() {
+      if (this.props.subnav)
+        this.setState({
+          isSubnav: true
+        })
     }
     
     toggleNavItemSubnav(e) {
@@ -65,6 +84,9 @@ export default class Sidebar extends React.Component {
     render() {
       return (
         <>
+          {
+            this.state.isSubnav && <span style={subnavDotStyles} />
+          }
           <a onClick={this.toggleNavItemSubnav.bind(this)} href={this.props.href || '/'} style={{...itemStyles}}>
             {/* <i style={{marginRight: 7}} className={'fas fa-angle-' + this.state.navItemIcon} /> */}
             {this.props.children}
@@ -75,9 +97,11 @@ export default class Sidebar extends React.Component {
                 <ul style={{listStylePosition: 'outside'}}>
                   {
                     typeof this.props.subnav === 'object' && this.props.subnav.map((subnav, i) => (
-                      <li className="subnav-item" style={subnavItemStyles} key={'_subNavItemLink_' + i}>
-                        <a href={subnav.link}>{subnav.text}</a>
-                      </li>
+                      <>
+                        <li className="subnav-item" style={subnavItemStyles} key={'_subNavItemLink_' + i}>
+                          <a href={subnav.link}>{subnav.text}</a>
+                        </li>
+                      </>
                     ))
                   }
                 </ul>

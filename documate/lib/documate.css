@@ -16,13 +16,13 @@ p {
 
 a, a:hover, a:visited {
   text-decoration: none;
-  color: #8d5ff8;
+  color: #05a1e2;
   width: fit-content;
   transition: .1s;
 }
 
-pre {
-  font-family: SFMono-Regular, Consolas, Menlo, monospace !important;
+pre, pre * {
+  font-family: Inconsolata, monospace;
 }
 
 table {
@@ -46,19 +46,19 @@ table thead th {
   border: 1px solid #ccc;
 }
 
-/* #root > div {
+#root > div {
   overflow: auto;
-} */
+}
 
 #Sidenav a {
   color: rgb(219, 219, 219);
   padding: 5px 10px;
+  border-radius: 5px;
 }
 
 #Sidenav a:hover {
   background: #eeeeee;
   color: #000;
-  border-radius: 5px;
 }
 
 .subnav-item + .subnav-item {
@@ -78,6 +78,10 @@ table thead th {
 /* Small-screen embedded devices */
 
 @media only screen and (max-width: 850px) {
+  #root > div {
+    overflow: hidden;
+  }
+
   #Sidenav {
     display: none;
   }

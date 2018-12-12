@@ -24,10 +24,13 @@ import Main from '../src/containers/Main'
 <Sidenav.Item>Alert</Sidenav.Item>
 <Sidenav.Item>Breadcrumbs</Sidenav.Item>
 <Sidenav.Item>Buttons</Sidenav.Item>
-<Sidenav.Item>Code</Sidenav.Item>
+<Sidenav.Item>Code Blocks</Sidenav.Item>
 <Sidenav.Item>Permalinks</Sidenav.Item>
 <Sidenav.Item>Tables</Sidenav.Item>
 <Sidenav.Item>Tabs</Sidenav.Item>
+
+<Sidenav.Label>Advanced Components</Sidenav.Label>
+<Sidenav.Item>Enhanced Grids</Sidenav.Item>
 <Sidenav.Item>Responsive design</Sidenav.Item>
 
 <Sidenav.Label>Advanced</Sidenav.Label>
@@ -36,7 +39,11 @@ import Main from '../src/containers/Main'
 <Sidenav.Item>Continuous deployment</Sidenav.Item>
 <Sidenav.Item>Semantic versioning</Sidenav.Item>
 <Sidenav.Item>Extending UI</Sidenav.Item>
-<Sidenav.Item>Integrating with other build tools</Sidenav.Item>
+<Sidenav.Item subnav={[
+  {text: 'Webpack', link: '#'},
+  {text: 'Rollup', link: '#'},
+  {text: 'Parcel', link: '#'}
+]}>Integrating with other build tools</Sidenav.Item>
 
 <Sidenav.Label>Extras</Sidenav.Label>
 <Sidenav.Item>Contributing</Sidenav.Item>
@@ -108,8 +115,6 @@ const MainUpdateRegulator = class extends UpdateRegisterTask {
 |migrateMixin|Mixin|void|Mixin or Error|
 |refineSurfaceModel|int|0 (initial surface)|void|
 
-## Code Sweets
-
-Call the shouldUpdateProcess() in the `ProcessUpdate` class to recover cached contents.
+## Tables
 
 </Main>

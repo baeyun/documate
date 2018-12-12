@@ -28,9 +28,10 @@ const defaultStyles = {
     fontFamily: 'monospace'
   },
   editor: {
-    // fontFamily: 'SFMono-Regular, Consolas, Menlo, monospace',
-    borderRadius: 2,
-    backgroundColor: '#f8f8f8'
+    backgroundColor: '#2e3440',
+    width: 'fit-content',
+    padding: '10px 5px',
+    borderRadius: 3
   }
 }
 
@@ -44,7 +45,7 @@ const overrideComponents = {
   blockquote: props => <blockquote style={{...defaultStyles.blockquote}} {...props} />,
   table: props => <div style={{...defaultStyles.fixedTableLayout}} children={<table {...props} />} />,
   li: props => <li style={{...defaultStyles.listItem}} {...props} />,
-  pre: props => <pre children={<code language="js" {...props} />} />
+  pre: props => <pre style={defaultStyles.editor} children={<code language="js" {...props} />} />
 }
 
 ReactDOM.render(
