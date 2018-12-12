@@ -44,20 +44,7 @@ const overrideComponents = {
   blockquote: props => <blockquote style={{...defaultStyles.blockquote}} {...props} />,
   table: props => <div style={{...defaultStyles.fixedTableLayout}} children={<table {...props} />} />,
   li: props => <li style={{...defaultStyles.listItem}} {...props} />,
-  pre: class extends React.Component {
-    // componentDidMount() {
-    //   console.log(this.props)
-    //   let copyIcon = document.querySelectorAll('.toolbar-item > a')
-
-    //   copyIcon.forEach(function(e) {
-    //     e.innerHTML = <i className="fas fa-copy" />
-    //   })
-    // }
-
-    render() {
-      return <pre className="language-js" style={{...defaultStyles.editor}} {...this.props} />
-    }
-  },
+  pre: props => <pre children={<code language="js" {...props} />} />
 }
 
 ReactDOM.render(

@@ -1,35 +1,40 @@
 import React from 'react'
 import RESSheet from 'ressheet'
 
+const topbarMenuStyles = {
+  float: 'right',
+  position: 'relative',
+  top: -22,
+  left: -30
+}
+
 const controlsStyles = {
-  background: 'none',
+  background: 'transparent',
   border: 'none',
   fontSize: 25,
   color: '#c2c5ca'
 }
 
 const menuItemStyles = {
-  listStyles: 'none',
-  float: 'left',
-  display: 'inline',
-  // fontWeight: 'bold',
-  padding: 5,
-  margin: 3
+  display: 'inline-block',
+  color: 'white',
+  textAlign: 'center',
+  padding: '14px'
 }
 
 export default class Topbar extends React.Component {
 
   static Menu = class extends React.Component {
     render() {
+      // TODO: Make menu overlap and not overflow (x) like reactjs.org
       return (
-        <div style={{float: 'right', position: 'relative', top: -18, right: 25}} id="topbar-menu">
-          <ul>
+          <ul style={topbarMenuStyles} id="topbar-menu">
             {
               // Certain that menu exists. No extra definitions required.
               this.props.menu.map((menuItem) => (
                 <li style={menuItemStyles} className="topbar-menu-item">
                   <a
-                    style={{color: '#333'}}
+                    style={{color: controlsStyles.color}}
                     href={menuItem.link || '/'}
                   >
                     { menuItem.icon && <i className={menuItem.icon} /> || menuItem.text || 'Link'}
@@ -38,7 +43,6 @@ export default class Topbar extends React.Component {
               ))
             }
           </ul>
-        </div>
       )
     }
   }

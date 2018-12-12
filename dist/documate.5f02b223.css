@@ -7,7 +7,7 @@
 body {
   margin: 0;
   overflow: hidden;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 p {
@@ -46,9 +46,9 @@ table thead th {
   border: 1px solid #ccc;
 }
 
-#root > div {
+/* #root > div {
   overflow: auto;
-}
+} */
 
 #Sidenav a {
   color: rgb(219, 219, 219);
@@ -71,9 +71,9 @@ table thead th {
 
 /* .topbar-menu-item:hover {} */
 
-/* .topbar-menu-item:hover a {
+.topbar-menu-item:hover a {
   color: #000000 !important;
-} */
+}
 
 /* Small-screen embedded devices */
 
@@ -95,6 +95,20 @@ table thead th {
     margin: 0;
     float: left;
     overflow: auto !important;
+  }
+
+  #Topbar {
+    background-color: #222831;
+  }
+
+  #Topbar #topbar-menu {
+    position: relative;
+    top: -22px;
+    left: -30px;
+    float: right;
+    overflow: auto;
+    white-space: nowrap;
+    max-width: 258px;
   }
 }
 

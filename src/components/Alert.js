@@ -27,6 +27,7 @@ export default class Alert extends React.Component {
   render() {
     let alertStyles = new RESSheet(this.props, {
       'default': {
+        borderRadius: 3,
         margin: '20px 0',
         padding: '20px 15px',
         width: 'fit-content',

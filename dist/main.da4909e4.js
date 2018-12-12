@@ -24689,6 +24689,7 @@ function (_React$Component) {
     value: function render() {
       var alertStyles = new _ressheet.default(this.props, {
         'default': {
+          borderRadius: 3,
           margin: '20px 0',
           padding: '20px 15px',
           width: 'fit-content',
@@ -24790,19 +24791,23 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var topbarMenuStyles = {
+  float: 'right',
+  position: 'relative',
+  top: -22,
+  left: -30
+};
 var controlsStyles = {
-  background: 'none',
+  background: 'transparent',
   border: 'none',
   fontSize: 25,
   color: '#c2c5ca'
 };
 var menuItemStyles = {
-  listStyles: 'none',
-  float: 'left',
-  display: 'inline',
-  // fontWeight: 'bold',
-  padding: 5,
-  margin: 3
+  display: 'inline-block',
+  color: 'white',
+  textAlign: 'center',
+  padding: '14px'
 };
 
 var Topbar =
@@ -24866,28 +24871,24 @@ function (_React$Component2) {
   _createClass(_class, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
-        style: {
-          float: 'right',
-          position: 'relative',
-          top: -18,
-          right: 25
-        },
+      // TODO: Make menu overlap and not overflow (x) like reactjs.org
+      return _react.default.createElement("ul", {
+        style: topbarMenuStyles,
         id: "topbar-menu"
-      }, _react.default.createElement("ul", null, // Certain that menu exists. No extra definitions required.
+      }, // Certain that menu exists. No extra definitions required.
       this.props.menu.map(function (menuItem) {
         return _react.default.createElement("li", {
           style: menuItemStyles,
           className: "topbar-menu-item"
         }, _react.default.createElement("a", {
           style: {
-            color: '#333'
+            color: controlsStyles.color
           },
           href: menuItem.link || '/'
         }, menuItem.icon && _react.default.createElement("i", {
           className: menuItem.icon
         }) || menuItem.text || 'Link'));
-      })));
+      }));
     }
   }]);
 
@@ -25052,29 +25053,32 @@ function (_React$Component) {
         src: "./img/logo.png"
       }), _react.default.createElement(_Sidenav.default.Label, null, "Introduction"), _react.default.createElement(_Sidenav.default.Item, {
         subnav: [{
-          text: 'Rethinking the DOM',
-          link: '/'
+          text: 'Installation & setup',
+          link: '#'
         }, {
-          text: 'First steps',
-          link: '/'
+          text: 'Setup',
+          link: '#'
         }, {
-          text: 'Under the hood',
-          link: '/'
+          text: 'Running & updating',
+          link: '#'
         }]
-      }, "How it works"), _react.default.createElement(_Sidenav.default.Item, null, "Getting started"), _react.default.createElement(_Sidenav.default.Item, null, "Creating your first project"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced Patterns"), _react.default.createElement(_Sidenav.default.Item, null, "Hooks"), _react.default.createElement(_Sidenav.default.Item, null, "Render Props"), _react.default.createElement(_Sidenav.default.Item, null, "Higher Order Components"), _react.default.createElement(_Sidenav.default.Label, null, "Others"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Label, null, "Others"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Label, null, "Others"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Label, null, "Others"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Label, null, "Others"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Label, null, "Others"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster"), _react.default.createElement(_Sidenav.default.Item, null, "The global context"), _react.default.createElement(_Sidenav.default.Item, null, "Migrating from React 14"), _react.default.createElement(_Sidenav.default.Item, null, "How to render faster")), _react.default.createElement(_Main.default, {
+      }, "Getting started"), _react.default.createElement(_Sidenav.default.Item, null, "Who should use Documate"), _react.default.createElement(_Sidenav.default.Item, null, "Understanding MDX"), _react.default.createElement(_Sidenav.default.Label, null, "Basic Components"), _react.default.createElement(_Sidenav.default.Item, null, "Accordions"), _react.default.createElement(_Sidenav.default.Item, null, "Alert"), _react.default.createElement(_Sidenav.default.Item, null, "Breadcrumbs"), _react.default.createElement(_Sidenav.default.Item, null, "Buttons"), _react.default.createElement(_Sidenav.default.Item, null, "Code"), _react.default.createElement(_Sidenav.default.Item, null, "Permalinks"), _react.default.createElement(_Sidenav.default.Item, null, "Tables"), _react.default.createElement(_Sidenav.default.Item, null, "Tabs"), _react.default.createElement(_Sidenav.default.Item, null, "Responsive design"), _react.default.createElement(_Sidenav.default.Label, null, "Advanced"), _react.default.createElement(_Sidenav.default.Item, null, "ReactRouter configuration"), _react.default.createElement(_Sidenav.default.Item, null, "The `themeConfig`"), _react.default.createElement(_Sidenav.default.Item, null, "Continuous deployment"), _react.default.createElement(_Sidenav.default.Item, null, "Semantic versioning"), _react.default.createElement(_Sidenav.default.Item, null, "Extending UI"), _react.default.createElement(_Sidenav.default.Item, null, "Integrating with other build tools"), _react.default.createElement(_Sidenav.default.Label, null, "Extras"), _react.default.createElement(_Sidenav.default.Item, null, "Contributing"), _react.default.createElement(_Sidenav.default.Item, null, "Support us"), _react.default.createElement(_Sidenav.default.Item, null, "Other related projects"), _react.default.createElement(_Sidenav.default.Item, null, "About us")), _react.default.createElement(_Main.default, {
         topbar: true,
         menu: [{
           link: '/',
           text: 'Home'
         }, {
           link: '/',
-          text: 'Community'
-        }, {
-          link: '/',
-          text: 'Benchmarks'
+          text: 'Support'
         }, {
           link: '/',
           text: 'About'
+        }, {
+          link: '/',
+          text: 'Contributing'
+        }, {
+          link: '/',
+          text: '@packem'
         }]
       }, _react.default.createElement(_tag.MDXTag, {
         name: "h1",
@@ -25390,24 +25394,6 @@ var _index = _interopRequireDefault(require("../documate/index.mdx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -25479,36 +25465,13 @@ var overrideComponents = {
       style: _objectSpread({}, defaultStyles.listItem)
     }, props));
   },
-  pre:
-  /*#__PURE__*/
-  function (_React$Component) {
-    _inherits(pre, _React$Component);
-
-    function pre() {
-      _classCallCheck(this, pre);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(pre).apply(this, arguments));
-    }
-
-    _createClass(pre, [{
-      key: "render",
-      // componentDidMount() {
-      //   console.log(this.props)
-      //   let copyIcon = document.querySelectorAll('.toolbar-item > a')
-      //   copyIcon.forEach(function(e) {
-      //     e.innerHTML = <i className="fas fa-copy" />
-      //   })
-      // }
-      value: function render() {
-        return _react.default.createElement("pre", _extends({
-          className: "language-js",
-          style: _objectSpread({}, defaultStyles.editor)
-        }, this.props));
-      }
-    }]);
-
-    return pre;
-  }(_react.default.Component)
+  pre: function pre(props) {
+    return _react.default.createElement("pre", {
+      children: _react.default.createElement("code", _extends({
+        language: "js"
+      }, props))
+    });
+  }
 };
 
 _reactDom.default.render(_react.default.createElement(_tag.MDXProvider, {
@@ -25542,7 +25505,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58474" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49954" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
