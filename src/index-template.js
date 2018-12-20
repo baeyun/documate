@@ -1,4 +1,4 @@
-module.exports = (nav) => `<!DOCTYPE html>
+module.exports = nav => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,5 +10,8 @@ module.exports = (nav) => `<!DOCTYPE html>
   <nav id="navbar">
     ${nav}
   </nav>
+  <main>
+    
+  </main>
 </body>
 </html>`

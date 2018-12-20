@@ -2,25 +2,29 @@ const { readFileSync, writeFileSync } = require('fs')
 const { exec } = require('child_process')
 
 const { Converter } = require('showdown')
-const htmlTemplate = require('./html-template')
+const htmlTemplate = require('./index-template')
 const converter = new Converter()
 const navContent = readFileSync('./documate/nav.md').toString()
 const nav = converter.makeHtml(navContent)
+const links = navContent.match(/^\s*\-\s*\[.+\]\((.+)\)\s*$/gim)
+  .map(link => link.match(/\((.+)\)/i)[1])
 
-writeFileSync('./cache/index.html', htmlTemplate(nav))
+console.log(links)
 
-const thread = exec(
-  'parcel ./cache/index.html --out-dir ./documate/public --no-cache'
-)
+// writeFileSync('./documate/cache/index.html', htmlTemplate(nav))
 
-thread.stdout.on('data', (data) => {
-  console.log(data.toString())
-})
+// const thread = exec(
+//   'parcel ./documate/cache/index.html --out-dir ./documate/public --no-cache'
+// )
 
-thread.stderr.on('data', (data) => {
-  console.log(data.toString())
-})
+// thread.stdout.on('data', data => {
+//   console.log(data.toString())
+// })
 
-thread.on('exit', (code) => {
-  console.log(`Child exited with code ${code}`)
-})
+// thread.stderr.on('data', data => {
+//   console.log(data.toString())
+// })
+
+// thread.on('exit', code => {
+//   console.log(`Child exited with code ${code}`)
+// })
