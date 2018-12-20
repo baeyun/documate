@@ -1,0 +1,7 @@
+- [Welcome](/)
+- [Getting Started](/)
+  - [Installation](/)
+    - [MacOS](/)
+    - [Windows](/)
+    - [Linux](/)
+- [Windows](/)
