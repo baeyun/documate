@@ -6,18 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Documate</title>
   <style>
-body {
-  background: red;
-  color: blue;
-}
+
   </style>
 </head>
 <body>
   <nav id="navbar">
     <ul>
-<li><a href="../public/partials/J4lSVyk6GgFHR-FZ.html">Welcome</a></li>
-<li><a href="../public/partials/G9XmbDdSVd9lUgUL.html">Getting Started</a></li>
-<li><a href="../public/partials/I4wZn1o505kBLidL.html">Installation</a></li>
+<li><a href="../public/partials/0NbTZFXw8-P-HGrN.html">Welcome</a></li>
+<li><a href="../public/partials/iYdTB-8UnwQXG92a.html">Getting Started</a></li>
+<li><a href="../public/partials/G3aM6oK9MCcsE1Fi.html">Installation</a></li>
 </ul>
   </nav>
   <main id="main-content">
@@ -25,7 +22,20 @@ body {
   </main>
 
   <script type="text/javascript">
-console.log('HIIRAAN')
+document.querySelectorAll('#navbar a').forEach(function(el) {
+	el.onclick = function(e) {
+		e.preventDefault();
+
+		fetch(el.href, {method: 'GET'})
+		.then(function(res) {
+      return res.text();
+    })
+		.then(function(textResult) {
+			document.getElementById('main-content').innerHTML = textResult;
+		});
+	}
+});
+
   </script>
 </body>
 </html>
