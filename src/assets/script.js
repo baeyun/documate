@@ -6,11 +6,21 @@ document.querySelectorAll('#navbar a').forEach(function(el) {
 		.then(function(res) {
       return res.text();
     })
-		.then(function(textResult) {
-			document.getElementById('main-content').innerHTML = textResult;
+		.then(function(partial) {
+			document.querySelector('#main-content > div.content.active').classList.remove('active');
+
+			var contentDiv = document.createElement('div');
+			contentDiv.className = 'content active';
+			contentDiv.innerHTML = partial;
+			document.getElementById('main-content').appendChild(contentDiv);
+			
+			// highlight only if contains code
+			let regex = new RegExp('\<\/code\>');
+			if (regex.test(partial))
+				hljs.initHighlighting();
     })
     .catch(function(e) {
-      document.getElementById('main-content').innerHTML = "<h2>Error: Failed to connect to server.</h2>"
+      document.getElementById('main-content').innerHTML = "<h2>Error: Unable to obtain document.</h2>"
     });
 	}
 });

@@ -1,0 +1,35 @@
+<h1 id="gettingstarted">Getting Started</h1>
+<p>Documate is a simple <em>static documentation generator</em> that renders your Markdown files
+into a beautiful HTML site that you could then deploy to a server or some serverless
+cloud.</p>
+<pre><code class="javascript language-javascript">const testConfig = (config) =&gt; config.test()
+</code></pre>
+<h1 id="installation">Installation</h1>
+<p>To be able to use Documate, you just have to install it globally:</p>
+<pre><code>$ npm install -g documate
+  # or
+$ yarn add documate --global
+</code></pre>
+<h1 id="usage">Usage</h1>
+<p>The basic commands include:</p>
+<pre><code class="bash language-bash"># Create an empty project
+$ documate init my-cool-docs
+
+# Run your awesome docs (run from project root)
+$ documate start
+
+# Build your docs (run from project root)
+$ documate build
+</code></pre>
+<p>Your docs should appear in the <code>./documate/</code> folder. You can reference any Markdown file to
+include in your docs. Just don't edit any file/folder that is created during runtime.</p>
+<h2 id="thenavmdfile">The <code>nav.md</code> file</h2>
+<p>Okay. So this is your main file you'll be referencing quite much. It is so simple to say that it's
+just but a tweakable (fully-responsive) navbar that is docked to the left side of your screen. It's
+a list of Markdown links that could point to any given URL. Sweet right?</p>
+<p>Furthermore, only links that have been interacted with will load particular content (we call <em>partials</em> - long story why we called it such) at a time. If your user's browser is smart enough to cache fetched content, they are gonna have an excellent experience.</p>
+<h2 id="offlinecapabilitiespwastrategiesserviceworkersetc">Offline capabilities? (PWA strategies, service workers, etc)</h2>
+<p>Implementing <code>ServiceWorker</code> is a priceless feature we will be adding soon. Keep up with the updates and
+your site will be given offline support (on user-prompt included as well)!</p>
+<h2 id="deploying">Deploying</h2>
+<p>This feature is yet to come. Please support us to have this feature ready in sooner.</p>

@@ -1,3 +1,2 @@
-- [Welcome](./welcome.md)
+- [Introduction](./introduction.md)
 - [Getting Started](./docs/getting-started.md)
-  - [Installation](./docs/installation.md)
