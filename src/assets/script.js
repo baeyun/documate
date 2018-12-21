@@ -1,7 +1,7 @@
 document.querySelectorAll('#navbar a').forEach(function(el) {
 	el.onclick = function(e) {
 		e.preventDefault();
-		
+
 		document.querySelectorAll('#navbar a').forEach(function(a) {
 			a.classList.remove('active');
 		});

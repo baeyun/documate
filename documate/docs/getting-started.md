@@ -5,13 +5,48 @@ into a beautiful HTML site that you could then deploy to a server or some server
 cloud.
 
 ```javascript
-const testConfig = (config) => config.test()
+import { combineReducers } from 'redux'
+import {
+  SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT,
+  REQUEST_POSTS, RECEIVE_POSTS
+} from '../actions'
 
-class App {
-  static state = {}
+const selectedSubreddit = (state = 'reactjs', action) => {
+  switch (action.type) {
+    case SELECT_SUBREDDIT:
+      return action.subreddit
+    default:
+      return state
+  }
+}
 
-  get onChange() {
-    App.setState(App.state, {i: 7 ** 1 >> 0})
+const posts = (state = {
+  isFetching: false,
+  didInvalidate: false,
+  items: []
+}, action) => {
+  switch (action.type) {
+    case INVALIDATE_SUBREDDIT:
+      return {
+        ...state,
+        didInvalidate: true
+      }
+    case REQUEST_POSTS:
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      }
+    case RECEIVE_POSTS:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.posts,
+        lastUpdated: action.receivedAt
+      }
+    default:
+      return state
   }
 }
 

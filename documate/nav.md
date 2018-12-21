@@ -1,3 +1,2 @@
 - [Introduction](./introduction.md)
 - [Getting Started](./docs/getting-started.md)
-- [PKG Availability Tool](./docs/pkg-availability.md)
