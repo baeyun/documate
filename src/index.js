@@ -78,7 +78,7 @@ writeFileSync(
 )
 
 const thread = exec(
-  'parcel ./documate/cache/index.html --out-dir ./documate/public --no-cache'
+  'parcel ./documate/cache/index.html --out-dir ./documate/public --port 1234 --no-cache'
 )
 
 thread.stdout.on('data', data => {

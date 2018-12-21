@@ -1,0 +1,61 @@
+<div id="TU_ufnu25QflQNq4" class="content active">
+  <h1 id="components">Components</h1>
+<p>This section just displays the different component types we support. We assume you have a basic
+understanding of Markdown and some of its flavors, such as GitHub.</p>
+<h2 id="typography">Typography</h2>
+<h1 id="heading1">Heading 1</h1>
+<h2 id="heading2">Heading 2</h2>
+<h3 id="heading3">Heading 3</h3>
+<h4 id="heading4">Heading 4</h4>
+<h5 id="heading5">Heading 5</h5>
+<h6 id="heading6">Heading 6</h6>
+<h3 id="buttons">Buttons</h3>
+<p><button class="documate-default">Default</button>
+<button class="documate-primary">Primary</button>
+<button class="documate-success">Success</button>
+<button class="documate-warning">Warning</button>
+<button class="documate-danger">Danger</button></p>
+<h3 id="codeblocks">Code Blocks</h3>
+<p>We use <a href="https://highlightjs.org">HighlightJS</a> to display code in awesome blocks we style with our base CSS.
+If you wish to integrate your own theme, then just replace the custom theme with your own (after build). Unfortunately, we don't support dynamic theme changing though we do have some ideas in place. Hopefully, we will be implementing these features in the near future.</p>
+<p>To display code in a certain language, append the name of your language to the regular triple backticks. The language must flow with the name of the HighlightJS version. So for instance:</p>
+<pre><code class="rust language-rust">// Packem module bundler plugin
+#![crate_type = "dylib"]
+#![feature(std_misc)]
+
+use std::ffi::CString;
+
+#[allow(non_snake_case)] // C++ plugin
+extern "stdcall" {
+    fn packem_run(hWnd: u32, lpText: *const i8, lpCaption: *const i8, uType: u32) -&gt; u32;
+}
+
+#[no_mangle]
+#[allow(non_snake_case)]
+pub unsafe extern "run" fn PackemPlugin(devserver_ptr: u32)
+{
+    let info_str = format!("MyPlugin created: {}!", devserver_ptr.instance.time());
+    let caption = CString::new("Hello from my Packem plugin!").unwrap();
+    packem_run(0, info_str.as_ptr(), caption.as_ptr(), 0);
+}
+</code></pre>
+<pre><code class="typescript language-typescript">// This is some TypeScript
+
+namespace sign {
+  export interface detached {
+    (msg: Uint8Array, secretKey: Uint8Array): Uint8Array;
+    verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
+  }
+
+  export interface keyPair {
+    (): SignKeyPair;
+    fromSecretKey(secretKey: Uint8Array): SignKeyPair;
+    fromSeed(secretKey: Uint8Array): SignKeyPair;
+  }
+}
+</code></pre>
+  <span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/shell.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/rust
+.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/typescript.min.js"></span>
+</div>
