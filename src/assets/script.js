@@ -1,6 +1,11 @@
 document.querySelectorAll('#navbar a').forEach(function(el) {
 	el.onclick = function(e) {
 		e.preventDefault();
+		
+		document.querySelectorAll('#navbar a').forEach(function(a) {
+			a.classList.remove('active');
+		});
+		el.classList.add('active');
 
 		var activeContent = document.querySelector('#main-content > div.content.active');
 		var requestedPartialID = el.href.match(/partials\/(.+).html/)[1];

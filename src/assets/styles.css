@@ -79,7 +79,8 @@ nav#navbar a {
   border-radius: 5px;
 }
 
-nav#navbar a:hover {
+nav#navbar a:hover,
+nav#navbar a.active {
   background-color: #f9f9f9;
   color: #222831;
 }

@@ -92,7 +92,8 @@ nav#navbar a {
   border-radius: 5px;
 }
 
-nav#navbar a:hover {
+nav#navbar a:hover,
+nav#navbar a.active {
   background-color: #f9f9f9;
   color: #222831;
 }
@@ -121,13 +122,13 @@ main#main-content > div.content.active {
 <body>
   <nav id="navbar">
     <ul>
-<li><a href="/__/public/partials/mt0bOOsP27BUaB8l.html">Introduction</a></li>
-<li><a href="/__/public/partials/xwbvXt9fBpx1VyL1.html">Getting Started</a></li>
-<li><a href="/__/public/partials/O9e7XPqLjYqLraDM.html">PKG Availability Tool</a></li>
+<li><a href="/__/public/partials/fZ2wxFwPWhUYUUMP.html">Introduction</a></li>
+<li><a href="/__/public/partials/2pA-Wflkfwwx4ZqE.html">Getting Started</a></li>
+<li><a href="/__/public/partials/yFhL8EHupXf5ca8W.html">PKG Availability Tool</a></li>
 </ul>
   </nav>
   <main id="main-content">
-    <div id="mt0bOOsP27BUaB8l" class="content active">
+    <div id="fZ2wxFwPWhUYUUMP" class="content active">
   <h1 id="introduction">Introduction</h1>
 <p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
 professional site.</p>
@@ -140,6 +141,10 @@ professional site.</p>
   <script>document.querySelectorAll('#navbar a').forEach(function (el) {
   el.onclick = function (e) {
     e.preventDefault();
+    document.querySelectorAll('#navbar a').forEach(function (a) {
+      a.classList.remove('active');
+    });
+    el.classList.add('active');
     var activeContent = document.querySelector('#main-content > div.content.active');
     var requestedPartialID = el.href.match(/partials\/(.+).html/)[1];
     var cachedPartial = document.getElementById(requestedPartialID); // do nothing if already active
