@@ -12,9 +12,9 @@
 <body>
   <nav id="navbar">
     <ul>
-<li><a href="../public/partials/0NbTZFXw8-P-HGrN.html">Welcome</a></li>
-<li><a href="../public/partials/iYdTB-8UnwQXG92a.html">Getting Started</a></li>
-<li><a href="../public/partials/G3aM6oK9MCcsE1Fi.html">Installation</a></li>
+<li><a href="../public/partials/rV_05vnFSl5PnFAG.html">Welcome</a></li>
+<li><a href="../public/partials/oYpQVvVgqX2Y5DRG.html">Getting Started</a></li>
+<li><a href="../public/partials/YxGqXxWfDt_jgNVg.html">Installation</a></li>
 </ul>
   </nav>
   <main id="main-content">
@@ -32,7 +32,10 @@ document.querySelectorAll('#navbar a').forEach(function(el) {
     })
 		.then(function(textResult) {
 			document.getElementById('main-content').innerHTML = textResult;
-		});
+    })
+    .catch(function(e) {
+      document.getElementById('main-content').innerHTML = "<h2>Failed to connect to server.</h2>"
+    });
 	}
 });
 

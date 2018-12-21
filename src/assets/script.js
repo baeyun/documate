@@ -8,6 +8,9 @@ document.querySelectorAll('#navbar a').forEach(function(el) {
     })
 		.then(function(textResult) {
 			document.getElementById('main-content').innerHTML = textResult;
-		});
+    })
+    .catch(function(e) {
+      document.getElementById('main-content').innerHTML = "<h2>Error: Failed to connect to server.</h2>"
+    });
 	}
 });
