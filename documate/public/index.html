@@ -53,15 +53,34 @@ a {
 <body>
   <nav id="navbar">
     <ul>
+<<<<<<< HEAD
 <li><a href="/__\public\partials\AG1zkjVX7UA73Rhb.html">Welcome</a></li>
 <li><a href="/__\public\partials\GL3dZ_AA79edYYti.html">Getting Started</a></li>
 <li><a href="/__\public\partials\YF2-3yYPXUxuu_nL.html">Installation</a></li>
+=======
+<li><a href="/__/public/partials/rV_05vnFSl5PnFAG.html">Welcome</a></li>
+<li><a href="/__/public/partials/oYpQVvVgqX2Y5DRG.html">Getting Started</a></li>
+<li><a href="/__/public/partials/YxGqXxWfDt_jgNVg.html">Installation</a></li>
+>>>>>>> bbab0d5bd53778a27a344c0724f9fde7b7f02b2c
 </ul>
   </nav>
   <main id="main-content">
     <h1 id="welcomeguysssss">Welcome, GUYSSSSS</h1>
   </main>
 
-  <script>console.log('HIIRAAN');</script>
+  <script>document.querySelectorAll('#navbar a').forEach(function (el) {
+  el.onclick = function (e) {
+    e.preventDefault();
+    fetch(el.href, {
+      method: 'GET'
+    }).then(function (res) {
+      return res.text();
+    }).then(function (textResult) {
+      document.getElementById('main-content').innerHTML = textResult;
+    }).catch(function (e) {
+      document.getElementById('main-content').innerHTML = "<h2>Failed to connect to server.</h2>";
+    });
+  };
+});</script>
 </body>
 </html>
