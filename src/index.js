@@ -11,6 +11,11 @@ const uniqider = require('uniqider')
 const { Converter } = require('showdown')
 const htmlTemplate = require('./index-template')
 const converterInstance = new Converter()
+// const generateTokensScript =`
+// <script type="text/javascript">hljs.initHighlighting();</script>
+// `
+
+let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
 let initialPartial = ''
 
@@ -26,16 +31,34 @@ navContent.split('\n').filter(l => l.trim() !== '')
   // FIXME: `*` not appropriate
   let link = line.match(/\([\.\/]*(.+)\)/i)
   let id = uniqider()
-  let partial = converterInstance.makeHtml(
-    readFileSync('./documate/' + link[1]).toString()
-  )
+  let partial = readFileSync('./documate/' + link[1]).toString()
+
+  // Match partial string before load to avoid
+  // unnecessary DOM calls then highlight only
+  // if <pre> tag contains a <code> sibling.
+  let codePattern = partial.match(/^```(\w+)\s*$/gim);
+
+  if (!!codePattern) {
+    codePattern.map((matched) => {
+      codeLanguages.push(matched.substr(3, matched.length))
+    })
+  }
+
+  let codeLinks = codeLanguages
+    .map(lang => 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/' + lang + '.min.js')
+    .map(mappedLink => '<span hidden="true" class="highlight-langs" data-src="' + mappedLink + '"></span>')
+    .join('\n')
+  let partialHTML = `
+    ${converterInstance.makeHtml(partial)}
+    ${codeLinks}
+    `
   
   if (i === 0)
-    initialPartial = partial
+    initialPartial = partialHTML
 
   writeFileSync(
     `./documate/public/partials/${id}.html`,
-    partial
+    partialHTML
   )
 
   try {

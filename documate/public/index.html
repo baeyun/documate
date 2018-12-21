@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Documate</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/javascript.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
   <style>/*	Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
 --------------------------------------------------------------------------------------- */
@@ -122,18 +121,18 @@ main#main-content > div.content.active {
 <body>
   <nav id="navbar">
     <ul>
-<li><a href="/__/public/partials/gYXRgLCVLlWU2pkj.html">Introduction</a></li>
-<li><a href="/__/public/partials/6YL3azSXkndYVSlE.html">Getting Started</a></li>
+<li><a href="/__/public/partials/KbjfOY77uSn4RzbL.html">Introduction</a></li>
+<li><a href="/__/public/partials/lSAqdOH3xboSpUTl.html">Getting Started</a></li>
 </ul>
   </nav>
   <main id="main-content">
-    <div class="content active">
-      <h1 id="introduction">Introduction</h1>
+    
+    <h1 id="introduction">Introduction</h1>
 <p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
 professional site.</p>
 <h1 id="history">History</h1>
-<!-- Static  -->
-    </div>
+    
+    
   </main>
 
   <script>document.querySelectorAll('#navbar a').forEach(function (el) {
@@ -144,16 +143,22 @@ professional site.</p>
     }).then(function (res) {
       return res.text();
     }).then(function (partial) {
-      document.querySelector('#main-content > div.content.active').classList.remove('active');
-      var contentDiv = document.createElement('div');
-      contentDiv.className = 'content active';
-      contentDiv.innerHTML = partial;
-      document.getElementById('main-content').appendChild(contentDiv); // highlight only if contains code
-
-      var regex = new RegExp('\<\/code\>');
-      if (regex.test(partial)) hljs.initHighlighting();
+      document.querySelector('#main-content').innerHTML = partial;
+      document.querySelectorAll('#main-content .highlight-langs').forEach(function (hiddenSpan) {
+        // console.log(hiddenSpan.getAttribute('data-src'))
+        fetch(hiddenSpan.getAttribute('data-src')).then(function (data) {
+          return data.text();
+        }).then(function (scriptText) {
+          hiddenSpan.remove();
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.innerHTML = scriptText;
+          document.body.appendChild(script);
+          hljs.initHighlighting();
+        });
+      });
     }).catch(function (e) {
-      document.getElementById('main-content').innerHTML = "<h2>Error: Unable to obtain document.</h2>";
+      document.getElementById('main-content').innerHTML = "<h1>Error: Unable to obtain document.</h1>";
     });
   };
 });</script>

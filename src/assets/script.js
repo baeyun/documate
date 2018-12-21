@@ -6,21 +6,24 @@ document.querySelectorAll('#navbar a').forEach(function(el) {
 		.then(function(res) {
       return res.text();
     })
-		.then(function(partial) {
-			document.querySelector('#main-content > div.content.active').classList.remove('active');
-
-			var contentDiv = document.createElement('div');
-			contentDiv.className = 'content active';
-			contentDiv.innerHTML = partial;
-			document.getElementById('main-content').appendChild(contentDiv);
-			
-			// highlight only if contains code
-			let regex = new RegExp('\<\/code\>');
-			if (regex.test(partial))
-				hljs.initHighlighting();
+		.then(function(partial) {	
+			document.querySelector('#main-content').innerHTML = partial;
+			document.querySelectorAll('#main-content .highlight-langs').forEach(function(hiddenSpan) {
+				// console.log(hiddenSpan.getAttribute('data-src'))
+				fetch(hiddenSpan.getAttribute('data-src'))
+				.then(function(data) { return data.text(); })
+				.then(function(scriptText) {
+					hiddenSpan.remove();
+					let script = document.createElement('script');
+					script.type = 'text/javascript';
+					script.innerHTML = scriptText;
+					document.body.appendChild(script);
+					hljs.initHighlighting();
+				});
+			});
     })
     .catch(function(e) {
-      document.getElementById('main-content').innerHTML = "<h2>Error: Unable to obtain document.</h2>"
+      document.getElementById('main-content').innerHTML = "<h1>Error: Unable to obtain document.</h1>"
     });
 	}
 });

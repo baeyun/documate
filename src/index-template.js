@@ -15,7 +15,6 @@ module.exports = (nav, defaultPartial = '') => `<!DOCTYPE html>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Documate</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/javascript.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
   <style type="text/css">
 ${resetStyles}
@@ -32,9 +31,7 @@ ${styles}
     ${nav}
   </nav>
   <main id="main-content">
-    <div class="content active">
-      ${defaultPartial}
-    </div>
+    ${defaultPartial}
   </main>
 
   <script type="text/javascript">
