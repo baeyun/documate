@@ -121,31 +121,47 @@ main#main-content > div.content.active {
 <body>
   <nav id="navbar">
     <ul>
-<li><a href="/__/public/partials/KbjfOY77uSn4RzbL.html">Introduction</a></li>
-<li><a href="/__/public/partials/lSAqdOH3xboSpUTl.html">Getting Started</a></li>
+<li><a href="/__/public/partials/mt0bOOsP27BUaB8l.html">Introduction</a></li>
+<li><a href="/__/public/partials/xwbvXt9fBpx1VyL1.html">Getting Started</a></li>
+<li><a href="/__/public/partials/O9e7XPqLjYqLraDM.html">PKG Availability Tool</a></li>
 </ul>
   </nav>
   <main id="main-content">
-    
-    <h1 id="introduction">Introduction</h1>
+    <div id="mt0bOOsP27BUaB8l" class="content active">
+  <h1 id="introduction">Introduction</h1>
 <p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
 professional site.</p>
 <h1 id="history">History</h1>
-    
-    
+  
+</div>
+
   </main>
 
   <script>document.querySelectorAll('#navbar a').forEach(function (el) {
   el.onclick = function (e) {
     e.preventDefault();
+    var activeContent = document.querySelector('#main-content > div.content.active');
+    var requestedPartialID = el.href.match(/partials\/(.+).html/)[1];
+    var cachedPartial = document.getElementById(requestedPartialID); // do nothing if already active
+
+    if (requestedPartialID == activeContent.id) return;
+
+    if (!!cachedPartial) {
+      activeContent.classList.remove('active');
+      cachedPartial.classList.add('active');
+      return;
+    }
+
     fetch(el.href, {
       method: 'GET'
     }).then(function (res) {
       return res.text();
     }).then(function (partial) {
-      document.querySelector('#main-content').innerHTML = partial;
-      document.querySelectorAll('#main-content .highlight-langs').forEach(function (hiddenSpan) {
-        // console.log(hiddenSpan.getAttribute('data-src'))
+      activeContent.classList.remove('active');
+      var temp = document.createElement('div');
+      temp.innerHTML = partial;
+      document.getElementById('main-content').appendChild(temp.children[0]);
+      document.querySelectorAll('#main-content > div#' + requestedPartialID + ' > .highlight-langs').forEach(function (hiddenSpan) {
         fetch(hiddenSpan.getAttribute('data-src')).then(function (data) {
           return data.text();
         }).then(function (scriptText) {
@@ -158,7 +174,7 @@ professional site.</p>
         });
       });
     }).catch(function (e) {
-      document.getElementById('main-content').innerHTML = "<h1>Error: Unable to obtain document.</h1>";
+      console.log("<h1>Error: Unable to obtain document.</h1>");
     });
   };
 });</script>

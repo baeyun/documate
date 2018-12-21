@@ -48,10 +48,11 @@ navContent.split('\n').filter(l => l.trim() !== '')
     .map(lang => 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/' + lang + '.min.js')
     .map(mappedLink => '<span hidden="true" class="highlight-langs" data-src="' + mappedLink + '"></span>')
     .join('\n')
-  let partialHTML = `
-    ${converterInstance.makeHtml(partial)}
-    ${codeLinks}
-    `
+  let partialHTML = `<div id="${id}" class="content active">
+  ${converterInstance.makeHtml(partial)}
+  ${codeLinks}
+</div>
+`
   
   if (i === 0)
     initialPartial = partialHTML
