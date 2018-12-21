@@ -27,7 +27,7 @@ navContent.split('\n').filter(l => l.trim() !== '')
   let link = line.match(/\([\.\/]*(.+)\)/i)
   let id = uniqider()
   let partial = converterInstance.makeHtml(
-    readFileSync('./documate/' + link[1]).toString()
+    `<div id="${id}" class="content active">${readFileSync('./documate/' + link[1]).toString()}</div>`
   )
   
   if (i === 0)

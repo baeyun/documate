@@ -32,9 +32,7 @@ ${styles}
     ${nav}
   </nav>
   <main id="main-content">
-    <div class="content active">
-      ${defaultPartial}
-    </div>
+    ${defaultPartial}
   </main>
 
   <script type="text/javascript">

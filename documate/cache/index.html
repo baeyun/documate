@@ -129,18 +129,21 @@ main#main-content > div.content.active {
 <body>
   <nav id="navbar">
     <ul>
-<li><a href="../public/partials/gYXRgLCVLlWU2pkj.html">Introduction</a></li>
-<li><a href="../public/partials/6YL3azSXkndYVSlE.html">Getting Started</a></li>
+<li><a href="../public/partials/jHEKRKxuWPv_04aa.html">Introduction</a></li>
+<li><a href="../public/partials/VmX8_lXbcMWtub2G.html">Getting Started</a></li>
+<li><a href="../public/partials/yYrOb3YLmdj8zwGU.html">APIs</a></li>
 </ul>
   </nav>
   <main id="main-content">
-    <div class="content active">
-      <h1 id="introduction">Introduction</h1>
-<p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
-professional site.</p>
-<h1 id="history">History</h1>
+    <div id="jHEKRKxuWPv_04aa" class="content active"># Introduction
+
+Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
+professional site.
+
+# History
+
 <!-- Static  -->
-    </div>
+</div>
   </main>
 
   <script type="text/javascript">
@@ -148,17 +151,29 @@ document.querySelectorAll('#navbar a').forEach(function(el) {
 	el.onclick = function(e) {
 		e.preventDefault();
 
+		var activeContent = document.querySelector('#main-content > div.content.active');
+		var requestedPartialID = el.href.match(/partials\/(.+).html/)[1];
+		var cachedPartial = document.getElementById(requestedPartialID);
+
+		// do nothing if already active
+		if (requestedPartialID == activeContent.id) return;
+
+		if (!!cachedPartial) {
+			activeContent.classList.remove('active');
+			cachedPartial.classList.add('active');
+
+			return;
+		}
+
 		fetch(el.href, {method: 'GET'})
 		.then(function(res) {
       return res.text();
     })
 		.then(function(partial) {
-			document.querySelector('#main-content > div.content.active').classList.remove('active');
-
-			var contentDiv = document.createElement('div');
-			contentDiv.className = 'content active';
-			contentDiv.innerHTML = partial;
-			document.getElementById('main-content').appendChild(contentDiv);
+			activeContent.classList.remove('active');
+			var temp = document.createElement('div');
+			temp.innerHTML = partial;
+			document.getElementById('main-content').appendChild(temp.children[0]);
 			
 			// highlight only if contains code
 			let regex = new RegExp('\<\/code\>');
