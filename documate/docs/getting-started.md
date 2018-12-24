@@ -18,7 +18,7 @@ $ yarn add documate --global
 
 The basic commands include:
 
-```shell
+```
 # Create an empty project
 $ documate init my-cool-docs
 

@@ -14,11 +14,12 @@ understanding of Markdown and some of its flavors, such as GitHub.
 
 ### Buttons
 
-<button>Default</button>
-<button class="btn-primary">Primary</button>
-<button class="btn-success">Success</button>
-<button class="btn-warning">Warning</button>
-<button class="btn-danger">Danger</button>
+<button class="button button-default">Default</button>
+<button class="button button-primary">Primary</button>
+<button class="button button-secondary">Secondary</button>
+<button class="button button-danger">Danger</button>
+<button class="button button-text">Text</button>
+<button class="button button-link">Link</button>
 
 ### Code Sweets
 
@@ -70,5 +71,3 @@ namespace sign {
   }
 }
 ```
-
-

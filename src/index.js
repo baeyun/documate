@@ -11,9 +11,6 @@ const uniqider = require('uniqider')
 const { Converter } = require('showdown')
 const htmlTemplate = require('./index-template')
 const converterInstance = new Converter()
-// const generateTokensScript =`
-// <script type="text/javascript">hljs.initHighlighting();</script>
-// `
 
 let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
@@ -26,12 +23,23 @@ else
     './documate/public/partials/*'
   )
 
-navContent.split('\n').filter(l => l.trim() !== '')
+let [, topnavContent, sidenavContent] = navContent.split(/\<\!\-\-\s*(?:TOPNAV|SIDENAV)\s*\-\-\>/)
+
+const topnavContentHTML = converterInstance.makeHtml(topnavContent)
+  .match(/\<ul\>((.|\n)*)\<\/ul\>/)[1].trim()
+
+// Sidenav
+sidenavContent.split('\n').filter(l => l.trim() !== '')
 .map((line, i) => {
   // FIXME: `*` not appropriate
   let link = line.match(/\([\.\/]*(.+)\)/i)
   let id = uniqider()
   let partial = readFileSync('./documate/' + link[1]).toString()
+
+  sidenavContent = sidenavContent.replace(
+    line.trim(),
+    line.trim().split('](')[0] + `](../public/partials/${id}.html)`
+  )
 
   // Match partial string before load to avoid
   // unnecessary DOM calls then highlight only
@@ -61,20 +69,13 @@ navContent.split('\n').filter(l => l.trim() !== '')
     `./documate/public/partials/${id}.html`,
     partialHTML
   )
-
-  try {
-    navContent = navContent.replace(
-      line.trim(),
-      line.trim().split('](')[0] + `](../public/partials/${id}.html)`
-    )
-  } catch(e) {}
 })
 
-const nav = converterInstance.makeHtml(navContent)
+const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
 
 writeFileSync(
   './documate/cache/index.html',
-  htmlTemplate(nav, initialPartial)
+  htmlTemplate(topnavContentHTML, sidenavContentHTML, initialPartial)
 )
 
 const thread = exec(

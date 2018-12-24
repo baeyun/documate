@@ -1,8 +1,8 @@
-document.querySelectorAll('#navbar a').forEach(function(el) {
+document.querySelectorAll('#sidenav a').forEach(function(el) {
 	el.onclick = function(e) {
 		e.preventDefault();
 
-		document.querySelectorAll('#navbar a').forEach(function(a) {
+		document.querySelectorAll('#sidenav a').forEach(function(a) {
 			a.classList.remove('active');
 		});
 		el.classList.add('active');

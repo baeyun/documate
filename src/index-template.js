@@ -3,11 +3,12 @@ const {
 } = require('fs')
 
 const resetStyles = readFileSync('./src/assets/reset.css').toString()
+const baseStyles = readFileSync('./src/assets/css/base.css').toString()
 const codeTheme = readFileSync('./src/assets/code-theme.min.css').toString()
 const styles = readFileSync('./src/assets/styles.css').toString()
 const script = readFileSync('./src/assets/script.js').toString()
 
-module.exports = (nav, defaultPartial = '') => `<!DOCTYPE html>
+module.exports = (topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,21 +16,31 @@ module.exports = (nav, defaultPartial = '') => `<!DOCTYPE html>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Documate</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-  <style type="text/css">
+  <style data-lib-type="reset" type="text/css">
 ${resetStyles}
   </style>
-  <style type="text/css">
-${codeTheme}
+  <style data-lib-type="base" type="text/css">
+${baseStyles}
   </style>
-  <style type="text/css">
+  <style data-lib-type="documate" type="text/css">
 ${styles}
+  </style>
+  <style data-lib-type="highlight" type="text/css">
+${codeTheme}
   </style>
 </head>
 <body>
-  <nav id="navbar">
-    ${nav}
-  </nav>
+  <aside id="sidenav">
+    ${sidenav}
+  </aside>
   <main id="main-content">
+    <nav id="topnav" class="navbar-container navbar-transparent" navbar>
+      <div class="navbar-right">
+        <ul class="navbar-nav">
+          ${topnav}
+        </ul>
+      </div>
+    </nav>
     ${defaultPartial}
   </main>
 

@@ -4,3 +4,5 @@ Welcome to Documate v0.1.0. We'll run you through a brief history then show you 
 professional site.
 
 # History
+
+<button class="button button-primary">Button</button>
