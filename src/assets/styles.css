@@ -8,6 +8,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   font-size: 17px !important;
   color: #222831;
+  overflow: hidden;
 }
 
 a {
@@ -37,43 +38,91 @@ pre * {
   font-weight: normal !important;
 }
 
-pre > code {
-  background-color: #f2f2f2 !important;
-  color: inherit;
-  background: inherit;
-  border-radius: 0;
-  padding: 0;
-}
-
 nav#topnav {
-  position: fixed;
-  top: 0;
-  right: 0;
   height: 50px;
-  width:  calc(100% - 300px);
+  width: 100%;
   max-width: unset !important;
-  background-color:  #fff;
+  background-color: #222831;
   box-shadow: 0 1px 1px 1px rgba(34, 41, 50, 0.06);
-  padding: 0 20px;
+  padding: 0 0 0 50px;
 }
 
-nav#topnav > div {
+nav#topnav > div.navbar-right {
   float: right;
 }
 
 nav#topnav a {
   min-height: unset;
   height: 50px;
+  border-style: solid;
+  border-bottom-width: 4px;
+  border-color: #222831;
+  padding-top: 6px;
+}
+
+nav#topnav a:hover,
+nav#topnav a:active,
+nav#topnav a.active {
+  border-color: #1e87f0;
+}
+
+nav#topnav #search {
+  float: right;
+  height: 50px;
+  min-width: 50px;
+  display: flex;
+}
+
+nav#topnav.search-active #search {
+  width: 100%;
+}
+
+nav#topnav.search-active #search > input {
+  display: flex;
+}
+
+nav#topnav.search-active > div.navbar-right {
+  display: none;
+}
+
+nav#topnav #search > input {
+  display: none;
+  background-color: #222831;
+  border: none;
+  flex: 1;
+  font-size: 20px;
+  padding: 4px 0 0 20px;
+  color: #ddd;
+}
+
+nav#topnav #search > a {
+  width: 50px;
+  padding: 12px 13px;
+  height: 50px;
+}
+
+nav#topnav svg:hover g {
+  fill: #999 !important;
+}
+
+nav#topnav #menu-link {
+  display: none;
+  position: absolute;
+  padding: 1px 13px !important;
+  left: 0px;
+  width: 50px;
+  height: 50px;
 }
 
 aside#sidenav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
   width: 300px;
-  padding: 20px;
-  background-color: #222831;
+  padding: 20px 0;
+  background-color: #f5f5f5;
+  border-right: 1px solid #eceaea;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1;
 }
 
 aside#sidenav li {
@@ -85,23 +134,32 @@ aside#sidenav li ul {
 }
 
 aside#sidenav a {
-  color: #f9f9f9;
-  padding: 8px 10px;
+  color: #777777;
+  padding: 10px 10px 7px;
   width: fit-content;
   border-radius: 5px;
 }
 
+aside#sidenav > ul > li > a {
+  font-weight: bold;
+}
+
 aside#sidenav a:hover,
 aside#sidenav a.active {
-  background-color: #f9f9f9;
+  background-color: #eceaea;
   color: #222831;
 }
 
 main#main-content {
-  margin: 0 auto;
+  background-color: #fff;
   width: calc(100% - 300px);
-  float: right;
-  padding: 90px 40px 40px;
+  padding: 40px 40px 40px;
+  height: calc(100vh - 50px);
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
 
 main#main-content > * {
@@ -119,22 +177,44 @@ main#main-content > div.content.active {
 
 @media only screen and (max-width: 850px) {
   aside#sidenav {
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 60px;
+    transform: translateX(-100%);
+    transition: transform 0.1s ease-in-out;
+    box-shadow: inset -3px 0 5px 2px rgba(34, 41, 50, 0.06);
+  }
+
+  body.sidenav-active aside#sidenav {
+    transform: translateX(0);
+  }
+
+  nav#topnav > div.navbar-right {
+    max-width: calc( 100% - 55px) !important;
     overflow-x: auto;
   }
 
-  aside#sidenav li {
-    display: inline;
-  }
-
-  #main-content {
-    margin: 60px auto !important;
+  main#main-content {
     width: 100% !important;
     float: left !important;
-    padding: 20px !important;
+    padding: 20px;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  body.sidenav-active main#main-content {
+    transform: translateX(300px);
+  }
+
+  main#main-content > nav#topnav {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  nav#topnav #menu-link {
+    display: inherit;
+    background-color: #222831;
+    box-shadow: 2px 0 17px 0px rgba(0, 0, 0, 0.72);
+  }
+
+  nav#topnav #menu-link svg {
+    position: relative;
+    bottom: -8px;
   }
 }

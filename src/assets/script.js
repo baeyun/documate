@@ -1,3 +1,32 @@
+var sidenav = document.querySelector('#sidenav');
+
+document.querySelector('#menu-link').onclick = function(e) {
+	e.preventDefault();
+
+	if (String(document.body.getAttribute('class')).indexOf('sidenav-active') > -1) {
+		document.body.classList.remove('sidenav-active');
+	} else {
+		document.body.classList.add('sidenav-active');
+	}
+
+	return;
+};
+
+document.querySelector('nav#topnav #search > a').onclick = function(e) {
+	e.preventDefault();
+
+	var topnav = document.getElementById('topnav');
+
+	if (String(topnav.getAttribute('class')).indexOf('search-active') > -1) {
+		topnav.classList.remove('search-active');
+	} else {
+		topnav.classList.add('search-active');
+	}
+
+	return;
+};
+
+// Sidenav links
 document.querySelectorAll('#sidenav a').forEach(function(el) {
 	el.onclick = function(e) {
 		e.preventDefault();

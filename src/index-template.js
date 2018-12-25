@@ -15,6 +15,7 @@ module.exports = (topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Documate</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
   <style data-lib-type="reset" type="text/css">
 ${resetStyles}
@@ -30,22 +31,34 @@ ${codeTheme}
   </style>
 </head>
 <body>
+  <nav id="topnav" class="navbar-container navbar-transparent" navbar>
+    <a id="menu-link" href="">
+    ${readFileSync('./src/assets/menu-icon.svg').toString()}
+    </a>
+    <div id="search">
+      <input type="search" placeholder="Search docs..." />
+      <a href="">
+        ${readFileSync('./src/assets/search-icon.svg').toString()}
+      </a>
+    </div>
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        ${topnav}
+      </ul>
+    </div>
+  </nav>
   <aside id="sidenav">
     ${sidenav}
   </aside>
   <main id="main-content">
-    <nav id="topnav" class="navbar-container navbar-transparent" navbar>
-      <div class="navbar-right">
-        <ul class="navbar-nav">
-          ${topnav}
-        </ul>
-      </div>
-    </nav>
     ${defaultPartial}
   </main>
 
-  <script type="text/javascript">
+  <script data-lib-type="base" type="text/javascript">
 ${script}
+  </script>
+  <script data-lib-type="base-icons" type="text/javascript">
+${readFileSync('./src/assets/js/uikit-icons.min.js').toString()}
   </script>
 </body>
 </html>`
