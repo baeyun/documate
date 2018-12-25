@@ -8,6 +8,6 @@
 
 <!-- SIDENAV -->
 
-- [Introduction](./introduction.md)
 - [Getting Started](./docs/getting-started.md)
+- [Introduction](./introduction.md)
 - [Components](./docs/components.md)

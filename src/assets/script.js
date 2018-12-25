@@ -1,3 +1,4 @@
+var topnav = document.getElementById('topnav');
 var sidenav = document.querySelector('#sidenav');
 
 document.querySelector('#menu-link').onclick = function(e) {
@@ -15,12 +16,11 @@ document.querySelector('#menu-link').onclick = function(e) {
 document.querySelector('nav#topnav #search > a').onclick = function(e) {
 	e.preventDefault();
 
-	var topnav = document.getElementById('topnav');
-
 	if (String(topnav.getAttribute('class')).indexOf('search-active') > -1) {
 		topnav.classList.remove('search-active');
 	} else {
 		topnav.classList.add('search-active');
+		document.querySelector('nav#topnav #search > input').focus();
 	}
 
 	return;

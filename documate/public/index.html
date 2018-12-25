@@ -11956,26 +11956,34 @@ nav#topnav.search-active #search {
   width: 100%;
 }
 
+nav#topnav #search > input {
+  display: none;
+  background-color: #222831;
+  border-style: solid;
+  border-width: 0 0 4px 0;
+  border-color: #222831;
+  flex: 1;
+  font-size: 20px;
+  padding: 8px 0 0 20px;
+  color: #ddd;
+  width: 100px;
+}
+
 nav#topnav.search-active #search > input {
   display: flex;
+}
+
+nav#topnav.search-active #search > input:focus {
+  border-color: #1e87f0;
 }
 
 nav#topnav.search-active > div.navbar-right {
   display: none;
 }
 
-nav#topnav #search > input {
-  display: none;
-  background-color: #222831;
-  border: none;
-  flex: 1;
-  font-size: 20px;
-  padding: 4px 0 0 20px;
-  color: #ddd;
-}
-
 nav#topnav #search > a {
   width: 50px;
+  min-width: 50px;
   padding: 12px 13px;
   height: 50px;
 }
@@ -12126,24 +12134,53 @@ main#main-content > div.content.active {
   </nav>
   <aside id="sidenav">
     <ul>
-<li><a href="/__/public/partials/d85UeLYztTsSTrR4.html">Introduction</a></li>
-<li><a href="/__/public/partials/rl_kVcUxn0mcMSkG.html">Getting Started</a></li>
-<li><a href="/__/public/partials/O-VfbbdRF0oBMMpG.html">Components</a></li>
+<li><a href="/__/public/partials/z2-oRUF8zEngfAGr.html">Getting Started</a></li>
+<li><a href="/__/public/partials/CX9fFG48v-teHtA8.html">Introduction</a></li>
+<li><a href="/__/public/partials/DsZH5mha-SXVoPyo.html">Components</a></li>
 </ul>
   </aside>
   <main id="main-content">
-    <div id="d85UeLYztTsSTrR4" class="content active">
-  <h1 id="introduction">Introduction</h1>
-<p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
-professional site.</p>
-<h1 id="history">History</h1>
-<p><button class="button button-primary">Button</button></p>
+    <div id="z2-oRUF8zEngfAGr" class="content active">
+  <h1 id="z2-oRUF8zEngfAGr-gettingstarted">Getting Started</h1>
+<p>Documate is a simple <em>static documentation generator</em> that renders your Markdown files
+into a beautiful HTML site that you could then deploy to a server or some serverless
+cloud.</p>
+<h1 id="z2-oRUF8zEngfAGr-installation">Installation</h1>
+<p>To be able to use Documate, you just have to install it globally:</p>
+<pre><code>$ npm install -g documate
+  # or
+$ yarn add documate --global
+</code></pre>
+<h1 id="z2-oRUF8zEngfAGr-usage">Usage</h1>
+<p>The basic commands include:</p>
+<pre><code># Create an empty project
+$ documate init my-cool-docs
+
+# Run your awesome docs (run from project root)
+$ documate start
+
+# Build your docs (run from project root)
+$ documate build
+</code></pre>
+<p>Your docs should appear in the <code>./documate/</code> folder. You can reference any Markdown file to
+include in your docs. Just don't edit any file/folder that is created during runtime.</p>
+<h2 id="z2-oRUF8zEngfAGr-thenavmdfile">The <code>nav.md</code> file</h2>
+<p>Okay. So this is your main file you'll be referencing quite much. It is so simple to say that it's
+just but a tweakable (fully-responsive) navbar that is docked to the left side of your screen. It's
+a list of Markdown links that could point to any given URL in your site. Sweet right?</p>
+<p>Furthermore, only links that have been interacted with will load particular content (we call <em>partials</em> - long story why we called it such) at a time. If your user's browser is smart enough to cache fetched content, they are gonna have an excellent experience.</p>
+<h2 id="z2-oRUF8zEngfAGr-offlinecapabilitiespwastrategiesserviceworkersetc">Offline capabilities? (PWA strategies, service workers, etc)</h2>
+<p>Implementing <code>ServiceWorker</code> is a priceless feature we will be adding soon. Keep up with the updates and
+your site will be given offline support (on user-prompt included as well)!</p>
+<h2 id="z2-oRUF8zEngfAGr-deploying">Deploying</h2>
+<p>This feature is yet to come. Please support us to have this feature ready in sooner.</p>
   
 </div>
 
   </main>
 
-  <script data-lib-type="base">var sidenav = document.querySelector('#sidenav');
+  <script data-lib-type="base">var topnav = document.getElementById('topnav');
+var sidenav = document.querySelector('#sidenav');
 
 document.querySelector('#menu-link').onclick = function (e) {
   e.preventDefault();
@@ -12159,12 +12196,12 @@ document.querySelector('#menu-link').onclick = function (e) {
 
 document.querySelector('nav#topnav #search > a').onclick = function (e) {
   e.preventDefault();
-  var topnav = document.getElementById('topnav');
 
   if (String(topnav.getAttribute('class')).indexOf('search-active') > -1) {
     topnav.classList.remove('search-active');
   } else {
     topnav.classList.add('search-active');
+    document.querySelector('nav#topnav #search > input').focus();
   }
 
   return;

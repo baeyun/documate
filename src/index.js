@@ -12,6 +12,7 @@ const { Converter } = require('showdown')
 const htmlTemplate = require('./index-template')
 const converterInstance = new Converter()
 
+let searchables = []
 let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
 let initialPartial = ''
@@ -61,6 +62,11 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   ${codeLinks}
 </div>
 `
+
+  // Append unique partial ID to all permalinks
+  partialHTML.match(/\<h[1-6]\s*id\=\"\w+\"\>/gim).map(match => {
+    partialHTML = partialHTML.replace(match, match.split('id="').join(`id="${id}-`))
+  })
   
   if (i === 0)
     initialPartial = partialHTML
