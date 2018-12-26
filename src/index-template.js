@@ -8,7 +8,7 @@ const codeTheme = readFileSync('./src/assets/code-theme.min.css').toString()
 const styles = readFileSync('./src/assets/styles.css').toString()
 const script = readFileSync('./src/assets/script.js').toString()
 
-module.exports = (searchables, topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
+module.exports = (urlRewriteMap, searchables, topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -54,9 +54,10 @@ ${codeTheme}
   <main id="main-content">
     ${defaultPartial}
   </main>
-
-  <script type="text/javascript">
-  var searchables = ${JSON.stringify(searchables)};
+  
+  <script data-lib-type="base" type="text/javascript">
+var urlRewriteMap = ${JSON.stringify(urlRewriteMap)};
+var searchables = ${JSON.stringify(searchables)};
   </script>
   <script data-lib-type="base" type="text/javascript">
 ${script}

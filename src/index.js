@@ -12,6 +12,7 @@ const { Converter } = require('showdown')
 const htmlTemplate = require('./index-template')
 const converterInstance = new Converter()
 
+let urlRewriteMap = {}
 let searchables = []
 let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
@@ -52,9 +53,11 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
     partial = partial.replace(match, `<h${headerTagNumber} id="${permalink}">${title}</h${headerTagNumber}>`)
   })
 
+  urlRewriteMap['/' + link[1].replace(/\.md$/, '')] = id
+
   sidenavContent = sidenavContent.replace(
     line.trim(),
-    line.trim().split('](')[0] + `](../public/partials/${id}.html)`
+    line.trim().split('](')[0] + `](${'/' + link[1].replace(/\.md$/, '')})`
   )
 
   // Match partial string before load to avoid
@@ -91,7 +94,7 @@ const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
 
 writeFileSync(
   './documate/cache/index.html',
-  htmlTemplate(searchables, topnavContentHTML, sidenavContentHTML, initialPartial)
+  htmlTemplate(urlRewriteMap, searchables, topnavContentHTML, sidenavContentHTML, initialPartial)
 )
 
 const thread = exec(
