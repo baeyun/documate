@@ -24,7 +24,7 @@ function urlStateChange(e) {
 		hashLink = hashLink.split('~')[0];
 	}
 
-	console.log('Hash link after permalink: ' + hashLink);
+	// console.log('Hash link after permalink: ' + hashLink);
 	
 	if (!(hashLink in urlRewriteMap)) {
 		return;

@@ -37,27 +37,29 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   let link = line.match(/\([\.\/]*(.+)\)/i)
   let id = uniqider()
   let partial = readFileSync('./documate/' + link[1]).toString()
+  let urlPath = link[1].replace(/\.md$/, '').trim()
 
   // Append unique partial ID to all permalinks,
   // then append info to searchables array
-  partial.match(/\#{1,6}\s*.+/gim).map(match => {
+  partial.match(/^\#{1,6}\s*.+/gim).map(match => {
     let headerTagNumber = match.match(/\#/g).length
     let title = match.substring(headerTagNumber).trim()
-    let permalink = id + '~' + title
+    let titleSlug = title
       .replace(/[^a-zA-Z0-9_\s]+/g, '')
       .replace(/\s+/g, '-')
       .toLowerCase()
+    let permalink = urlPath + '~' + titleSlug
     
     searchables.push({title, permalink})
     
-    partial = partial.replace(match, `<h${headerTagNumber} id="${permalink}">${title}</h${headerTagNumber}>`)
+    partial = partial.replace(match, `<h${headerTagNumber} data-path="/${permalink}">${title}</h${headerTagNumber}>`)
   })
 
-  urlRewriteMap['/' + link[1].replace(/\.md$/, '')] = id
+  urlRewriteMap[urlPath] = id
 
   sidenavContent = sidenavContent.replace(
     line.trim(),
-    line.trim().split('](')[0] + `](${'/' + link[1].replace(/\.md$/, '')})`
+    line.trim().split('](')[0] + `](${urlPath})`
   )
 
   // Match partial string before load to avoid
