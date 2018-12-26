@@ -4,9 +4,9 @@ Documate is a simple _static documentation generator_ that renders your Markdown
 into a beautiful HTML site that you could then deploy to a server or some serverless
 cloud.
 
-- [Components](#/docs/components)
-- [Introduction](#/introduction)
-- [Getting Started](#/docs/getting-started~deploying)
+- [Components](#docs/components)
+- [Introduction](#introduction)
+- [Getting Started](#docs/getting-started~deploying)
 
 # Installation
 

@@ -12196,10 +12196,10 @@ main#main-content > div.content.active {
 </ul>
   </aside>
   <main id="main-content">
-    <div id="yS0vTUGR5dESZL7n" class="content active">
+    <div id="OcDjPrjOhye5qto8" class="content active">
   <h1 data-path="/introduction~introduction">Introduction</h1>
 <p style="text-align: center;">
-  <img src="/assets/-3AnDNAhmoba81tT.png" alt="Logo" title="Logo">
+  <img src="/assets/3sXFNYTHZdv7Rovy.png" alt="Logo" title="Logo">
 </p>
 <p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
 professional site.</p>
@@ -12211,182 +12211,226 @@ professional site.</p>
   </main>
   
   <script data-lib-type="base" type="text/javascript">
-var urlRewriteMap = {"introduction":"yS0vTUGR5dESZL7n","docs/getting-started":"PJySMGMu-y07Mrhi","docs/components":"Ttv6ICS-YNGDLOt5"};
+var urlRewriteMap = {"introduction":"OcDjPrjOhye5qto8","docs/getting-started":"bbxsvD_sqMmQ1f_3","docs/components":"mzHiFsrpMU-N1MKE"};
 var searchables = [{"title":"Introduction","permalink":"introduction~introduction"},{"title":"History","permalink":"introduction~history"},{"title":"Getting Started","permalink":"docs/getting-started~getting-started"},{"title":"Installation","permalink":"docs/getting-started~installation"},{"title":"Usage","permalink":"docs/getting-started~usage"},{"title":"Create an empty project","permalink":"docs/getting-started~create-an-empty-project"},{"title":"Run your awesome docs (run from project root)","permalink":"docs/getting-started~run-your-awesome-docs-run-from-project-root"},{"title":"Build your docs (run from project root)","permalink":"docs/getting-started~build-your-docs-run-from-project-root"},{"title":"The `nav.md` file","permalink":"docs/getting-started~the-navmd-file"},{"title":"Offline capabilities? (PWA strategies, service workers, etc)","permalink":"docs/getting-started~offline-capabilities-pwa-strategies-service-workers-etc"},{"title":"Deploying","permalink":"docs/getting-started~deploying"},{"title":"Components","permalink":"docs/components~components"},{"title":"Typography","permalink":"docs/components~typography"},{"title":"Heading 1","permalink":"docs/components~heading-1"},{"title":"Heading 2","permalink":"docs/components~heading-2"},{"title":"Heading 3","permalink":"docs/components~heading-3"},{"title":"Heading 4","permalink":"docs/components~heading-4"},{"title":"Heading 5","permalink":"docs/components~heading-5"},{"title":"Heading 6","permalink":"docs/components~heading-6"},{"title":"Buttons","permalink":"docs/components~buttons"},{"title":"Code Sweets","permalink":"docs/components~code-sweets"},{"title":"Code Blocks","permalink":"docs/components~code-blocks"},{"title":"![crate_type = \"dylib\"]","permalink":"docs/components~crate_type-dylib"},{"title":"![feature(std_misc)]","permalink":"docs/components~featurestd_misc"},{"title":"[allow(non_snake_case)] // C++ plugin","permalink":"docs/components~allownon_snake_case-c-plugin"},{"title":"[no_mangle]","permalink":"docs/components~no_mangle"},{"title":"[allow(non_snake_case)]","permalink":"docs/components~allownon_snake_case"}];
   </script>
   <script data-lib-type="base" type="text/javascript">
-// Check 'hashchange' on window load as well
-window.onload = urlStateChange;
+;(function(window) {
+  // Check 'hashchange' on window load as well
+window.addEventListener("load", urlStateChange);
 
 function urlStateChange(e) {
-	if (!location.hash) {
-		return; // Handle appropriately
-	}
+  if (!location.hash) {
+    return; // Handle appropriately
+  }
 
-	var hashLink = location.hash.split('#')[1];
-	
-	// Permalinks
-	if (hashLink.indexOf('~') > -1) {
-		var permalinkElements = document.querySelectorAll('[data-path]');
+  var hashLink = location.hash.split("#")[1];
 
-		permalinkElements.forEach(function(permalinkElement) {
-			if (permalinkElement.getAttribute('data-path') === hashLink) {
-				permalinkElement.scrollIntoView();
-			}
-		});
+  // Permalink Routing
+  if (hashLink.indexOf("~") > -1) {
+    // Make its partial active first
+    var partialID =
+      urlRewriteMap[
+        hashLink
+          .split("~")[0]
+          .split("")
+          .splice(1)
+          .join("")
+      ];
 
-		// Reset original hashlink (without permalink)
-		// to get accurate link from urlRewriteMap
-		// without the permalink part
-		hashLink = hashLink.split('~')[0];
-	}
+    if (document.getElementById(partialID)) {
+      document
+        .querySelector("#main-content > div.content.active")
+        .classList.remove("active");
+      document.getElementById(partialID).classList.add("active");
+    }
+    // else {
+    // 	return;
+    // }
 
-	// console.log('Hash link after permalink: ' + hashLink);
-	
-	if (!(hashLink in urlRewriteMap)) {
-		return;
-	}
+    var permalinkElements = document.querySelectorAll("[data-path]");
 
-	// On URL change, if requested URL is defined in one of the
-	// links in the sidenav
-	var sidenavLinks = document.querySelectorAll('#sidenav a');
+    permalinkElements.forEach(function(permalinkElement) {
+      if (permalinkElement.getAttribute("data-path") === hashLink) {
+        permalinkElement.scrollIntoView();
+      }
+    });
 
-	if (!!sidenavLinks) {
-		sidenavLinks.forEach(function(link) {
-			if (link.getAttribute('href') === hashLink) {
-				link.classList.add('active');
-			} else {
-				link.classList.remove('active');
-			}
-		});
-	}
+    // Reset original hashlink (without permalink)
+    // to get accurate link from urlRewriteMap
+    // without the permalink part
+    hashLink = hashLink.split("~")[0];
+  }
 
-	var activeContent = document.querySelector('#main-content > div.content.active');
-	var requestedPartialID = urlRewriteMap[hashLink];
-	var cachedPartial = document.getElementById(requestedPartialID);
+  if (!(hashLink in urlRewriteMap)) {
+    return;
+  }
 
-	// Do nothing if already active
-	if (requestedPartialID == activeContent.id) return;
+  // On URL change, if requested URL is defined in one of the
+  // links in the sidenav
+  var sidenavLinks = document.querySelectorAll("#sidenav a");
 
-	if (!!cachedPartial) {
-		activeContent.classList.remove('active');
-		cachedPartial.classList.add('active');
+  if (!!sidenavLinks) {
+    sidenavLinks.forEach(function(link) {
+      if (link.getAttribute("href") === hashLink) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
 
-		return;
-	}
+  // TODO: Abstract this section
+  var requestedPartialID = urlRewriteMap[hashLink];
+  var activeContent = document.querySelector(
+    "main#main-content > div.content.active"
+  );
+  var cachedPartial = document.getElementById(requestedPartialID);
 
-	fetch(location.origin + '/partials/' + requestedPartialID + '.html', {method: 'GET'})
-	.then(function(res) {
-		return res.text();
-	})
-	.then(function(partial) {
-		activeContent.classList.remove('active');
-		var temp = document.createElement('div');
-		temp.innerHTML = partial;
-		document.getElementById('main-content').appendChild(temp.children[0]);
+  // Do nothing if already active
+  if (activeContent && activeContent.getAttribute("id") == requestedPartialID)
+    return;
 
-		// FIXME: Highlight not working
-		document.querySelectorAll('#main-content > div#' + requestedPartialID + ' > .highlight-langs')
-			.forEach(function(hiddenSpan) {
-				fetch(hiddenSpan.getAttribute('data-src'))
-				.then(function(data) { return data.text(); })
-				.then(function(scriptText) {
-					hiddenSpan.remove();
+  if (cachedPartial) {
+    activeContent.classList.remove("active");
+    cachedPartial.classList.add("active");
 
-					let script = document.createElement('script');
-					script.type = 'text/javascript';
-					script.innerHTML = scriptText;
-					document.body.appendChild(script);
-					hljs.initHighlighting();
-				});
-			});
-		})
-		.catch(function(e) {
-			console.log("<h1>Error: Unable to obtain document.</h1>");
-		});
+    return;
+  }
+
+  fetchPartial(requestedPartialID);
 }
 
-window.addEventListener('hashchange', urlStateChange);
+function fetchPartial(id) {
+  fetch(location.origin + "/partials/" + id + ".html", { method: "GET" })
+    .then(function(res) {
+      return res.text();
+    })
+    .then(function(partial) {
+      document
+        .querySelector("#main-content > div.content.active")
+        .classList.remove("active");
+      var temp = document.createElement("div");
+      temp.innerHTML = partial;
+      document.getElementById("main-content").appendChild(temp.children[0]);
 
-var topnav = document.getElementById('topnav');
-var sidenav = document.querySelector('#sidenav');
+      // FIXME: Highlight not working
+      document
+        .querySelectorAll("#main-content > div#" + id + " > .highlight-langs")
+        .forEach(function(hiddenSpan) {
+          fetch(hiddenSpan.getAttribute("data-src"))
+            .then(function(data) {
+              return data.text();
+            })
+            .then(function(scriptText) {
+              hiddenSpan.remove();
+
+              let script = document.createElement("script");
+              script.type = "text/javascript";
+              script.innerHTML = scriptText;
+              document.body.appendChild(script);
+              hljs.initHighlighting();
+            });
+        });
+    })
+    .catch(function(e) {
+      console.log("<h1>Error: Unable to obtain document.</h1>");
+    });
+}
+
+window.addEventListener("hashchange", urlStateChange);
+
+var topnav = document.getElementById("topnav");
+var sidenav = document.querySelector("#sidenav");
 
 // Menu link click (mobile)
-document.querySelector('#menu-link').onclick = function(e) {
-	e.preventDefault();
+document.querySelector("#menu-link").onclick = function(e) {
+  e.preventDefault();
 
-	if (String(document.body.getAttribute('class')).indexOf('sidenav-active') > -1) {
-		document.body.classList.remove('sidenav-active');
-	} else {
-		document.body.classList.add('sidenav-active');
-	}
+  if (
+    String(document.body.getAttribute("class")).indexOf("sidenav-active") > -1
+  ) {
+    document.body.classList.remove("sidenav-active");
+  } else {
+    document.body.classList.add("sidenav-active");
+  }
 
-	return;
+  return;
 };
 
-document.querySelector('nav#topnav #search > input').oninput = function(e) {
-	var inputVal = e.target.value;
-	var searchListContainer = document.getElementById('search-results');
+document.querySelector("nav#topnav #search > input").oninput = function(e) {
+  var inputVal = e.target.value;
+  var searchListContainer = document.getElementById("search-results");
 
-	if (inputVal !== '' && inputVal.length > 1) {
-		searchListContainer.classList.add('active');
-	} else {		
-		searchListContainer.classList.remove('active');
-		return;
-	}
+  if (inputVal !== "" && inputVal.length > 1) {
+    searchListContainer.classList.add("active");
+  } else {
+    searchListContainer.classList.remove("active");
+    return;
+  }
 
-	var matches = window.searchables.filter(function(searchableObj) {
-		return searchableObj.title.toLowerCase().indexOf(inputVal) > -1;
-	});
+  var matches = window.searchables.filter(function(searchableObj) {
+    return searchableObj.title.toLowerCase().indexOf(inputVal) > -1;
+  });
 
-	if (matches.length < 1) {
-		searchListContainer.innerHTML = '<a href="#"><span>No results found.</span></a>';
-		return;
-	}
-	
-	var listHTML = '';
-	
-	for (let i = 0; i < matches.length; i++) {
-		var match = matches[i];
-		var title = match.title;
-		var re = new RegExp(inputVal, 'gi');
-		var toBold = title.match(re)[0];
-		var boldenTitle = title.replace(toBold, '<b>'+toBold+'</b>');
-		
-		listHTML += '<a href="/#/'+match.permalink+'"><span>'+boldenTitle+'</span><small>'+match.permalink+'</small></a>';
-	}
+  if (matches.length < 1) {
+    searchListContainer.innerHTML =
+      '<a href="#"><span>No results found.</span></a>';
+    return;
+  }
 
-	searchListContainer.innerHTML = listHTML;
+  var listHTML = "";
+
+  for (let i = 0; i < matches.length; i++) {
+    var match = matches[i];
+    var title = match.title;
+    var re = new RegExp(inputVal, "gi");
+    var toBold = title.match(re)[0];
+    var boldenTitle = title.replace(toBold, "<b>" + toBold + "</b>");
+
+    // Changed from '/#/' to '#/'. Same.
+    listHTML +=
+      '<a href="#/' +
+      match.permalink +
+      '"><span>' +
+      boldenTitle +
+      "</span><small>" +
+      match.permalink +
+      "</small></a>";
+  }
+
+  searchListContainer.innerHTML = listHTML;
 };
 
-document.querySelector('nav#topnav #search > a').onclick = function(e) {
-	e.preventDefault();
+document.querySelector("nav#topnav #search > a").onclick = function(e) {
+  e.preventDefault();
 
-	if (String(topnav.getAttribute('class')).indexOf('search-active') > -1) {
-		topnav.classList.remove('search-active');
-	} else {
-		topnav.classList.add('search-active');
-		document.querySelector('nav#topnav #search > input').focus();
-	}
+  if (String(topnav.getAttribute("class")).indexOf("search-active") > -1) {
+    topnav.classList.remove("search-active");
+  } else {
+    topnav.classList.add("search-active");
+    document.querySelector("nav#topnav #search > input").focus();
+  }
 
-	return;
+  return;
 };
 
 // Sidenav links
-document.querySelectorAll('#sidenav a').forEach(function(el) {
-	el.onclick = function(e) {
-		e.preventDefault();
+document.querySelectorAll("#sidenav a").forEach(function(el) {
+  el.onclick = function(e) {
+    e.preventDefault();
 
-		// Set hash path
-		location.hash = el.getAttribute('href');
+    // Set hash path
+    location.hash = el.getAttribute("href");
 
-		document.querySelectorAll('#sidenav a').forEach(function(a) {
-			a.classList.remove('active');
-		});
-		el.classList.add('active');
-	}
+    document.querySelectorAll("#sidenav a").forEach(function(a) {
+      a.classList.remove("active");
+    });
+    el.classList.add("active");
+  };
 });
 
+})(window);
   </script>
   <script data-lib-type="base-icons" type="text/javascript">
 /*! UIkit 3.0.0-rc.25 | http://www.getuikit.com | (c) 2014 - 2018 YOOtheme | MIT License */
