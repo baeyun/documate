@@ -60,7 +60,9 @@ var urlRewriteMap = ${JSON.stringify(urlRewriteMap)};
 var searchables = ${JSON.stringify(searchables)};
   </script>
   <script data-lib-type="base" type="text/javascript">
-${script}
+;(function(window) {
+  ${script}
+})(window);
   </script>
   <script data-lib-type="base-icons" type="text/javascript">
 ${readFileSync('./src/assets/js/uikit-icons.min.js').toString()}
