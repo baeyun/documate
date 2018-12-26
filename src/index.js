@@ -1,12 +1,12 @@
 const {
   readFileSync,
   writeFileSync,
-  mkdirSync,
-  existsSync
+  createReadStream,
+  createWriteStream
 } = require('fs')
 const { exec } = require('child_process')
 
-const rimraf = require('rimraf')
+const { createCleanDirectory } = require('./utils')
 const uniqider = require('uniqider')
 const { Converter } = require('showdown')
 const htmlTemplate = require('./index-template')
@@ -18,12 +18,10 @@ let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
 let initialPartial = ''
 
-if (!existsSync('./documate/public/partials/'))
-  mkdirSync('./documate/public/partials/')
-else
-  rimraf.sync(
-    './documate/public/partials/*'
-  )
+createCleanDirectory('./documate-site/')
+createCleanDirectory('./documate-site/cache/')
+createCleanDirectory('./documate-site/cache/assets/')
+createCleanDirectory('./documate-site/partials/')
 
 let [, topnavContent, sidenavContent] = navContent.split(/\<\!\-\-\s*(?:TOPNAV|SIDENAV)\s*\-\-\>/)
 
@@ -35,9 +33,36 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
 .map((line, i) => {
   // FIXME: `*` not appropriate
   let link = line.match(/\([\.\/]*(.+)\)/i)
+
+  if (!link) return;
+
   let id = uniqider()
   let partial = readFileSync('./documate/' + link[1]).toString()
   let urlPath = link[1].replace(/\.md$/, '').trim()
+
+  // Handle images
+  // @todo add markdown style images: ![Logo](./img/logo.png "Logo")
+  let imgMatches = partial.match(/\<img.+\/?\>/gim)
+  if (imgMatches) {
+    imgMatches.map(match => {
+      let imgPath = match.match(/src\=\"[\.\/]*(.[^\"]+)\"/i)[1]
+      let newImgName = uniqider() + imgPath.match(/(\.\w+)$/)[1]
+
+      // Copy to ./documate-site/cache/assets/
+      createReadStream('./documate/' + imgPath).pipe(
+        createWriteStream('./documate-site/cache/assets/' + newImgName)
+      )
+
+      // Update img with new src path
+      partial = partial.replace(
+        match,
+        match.replace(
+          new RegExp('[\.\/]*' + imgPath),
+          '/assets/' + newImgName
+        )
+      )
+    })
+  }
 
   // Append unique partial ID to all permalinks,
   // then append info to searchables array
@@ -87,7 +112,7 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
     initialPartial = partialHTML
 
   writeFileSync(
-    `./documate/public/partials/${id}.html`,
+    `./documate-site/partials/${id}.html`,
     partialHTML
   )
 })
@@ -95,12 +120,12 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
 const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
 
 writeFileSync(
-  './documate/cache/index.html',
+  './documate-site/cache/index.html',
   htmlTemplate(urlRewriteMap, searchables, topnavContentHTML, sidenavContentHTML, initialPartial)
 )
 
 const thread = exec(
-  'parcel ./documate/cache/index.html --out-dir ./documate/public --port 1234 --no-cache'
+  'parcel ./documate-site/cache/index.html --out-dir ./documate-site --port 1234 --no-cache'
 )
 
 thread.stdout.on('data', data => {

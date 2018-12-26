@@ -71,6 +71,8 @@ nav#topnav #search {
   height: 50px;
   min-width: 50px;
   display: flex;
+  max-width: 947px;
+  position: relative;
 }
 
 nav#topnav.search-active #search {
