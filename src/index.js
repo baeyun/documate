@@ -12,6 +12,7 @@ const { Converter } = require('showdown')
 const htmlTemplate = require('./index-template')
 const converterInstance = new Converter()
 
+let urlRewriteMap = {}
 let searchables = []
 let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
@@ -37,9 +38,11 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   let id = uniqider()
   let partial = readFileSync('./documate/' + link[1]).toString()
 
+  urlRewriteMap['/' + link[1].replace(/\.md$/, '')] = id
+
   sidenavContent = sidenavContent.replace(
     line.trim(),
-    line.trim().split('](')[0] + `](../public/partials/${id}.html)`
+    line.trim().split('](')[0] + `](${'/' + link[1].replace(/\.md$/, '')})`
   )
 
   // Match partial string before load to avoid
@@ -65,7 +68,7 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
 
   // Append unique partial ID to all permalinks
   partialHTML.match(/\<h[1-6]\s*id\=\"\w+\"\>/gim).map(match => {
-    partialHTML = partialHTML.replace(match, match.split('id="').join(`id="${id}-`))
+    partialHTML = partialHTML.replace(match, match.split('id="').join(`data-path="${'/' + link[1].replace(/\.md$/, '')}~`))
   })
   
   if (i === 0)
@@ -81,7 +84,7 @@ const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
 
 writeFileSync(
   './documate/cache/index.html',
-  htmlTemplate(topnavContentHTML, sidenavContentHTML, initialPartial)
+  htmlTemplate(urlRewriteMap, topnavContentHTML, sidenavContentHTML, initialPartial)
 )
 
 const thread = exec(

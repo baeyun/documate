@@ -12134,24 +12134,29 @@ main#main-content > div.content.active {
   </nav>
   <aside id="sidenav">
     <ul>
-<li><a href="/__/public/partials/z2-oRUF8zEngfAGr.html">Getting Started</a></li>
-<li><a href="/__/public/partials/CX9fFG48v-teHtA8.html">Introduction</a></li>
-<li><a href="/__/public/partials/DsZH5mha-SXVoPyo.html">Components</a></li>
+<li><a href="/docs/getting-started">Getting Started</a></li>
+<li><a href="/introduction">Introduction</a></li>
+<li><a href="/docs/components">Components</a></li>
 </ul>
   </aside>
   <main id="main-content">
-    <div id="z2-oRUF8zEngfAGr" class="content active">
-  <h1 id="z2-oRUF8zEngfAGr-gettingstarted">Getting Started</h1>
+    <div id="pL9PjlF0k-oqrB93" class="content active">
+  <h1 data-path="/docs/getting-started~gettingstarted">Getting Started</h1>
 <p>Documate is a simple <em>static documentation generator</em> that renders your Markdown files
 into a beautiful HTML site that you could then deploy to a server or some serverless
 cloud.</p>
-<h1 id="z2-oRUF8zEngfAGr-installation">Installation</h1>
+<ul>
+<li><a href="#/docs/components">Components</a></li>
+<li><a href="#/introduction">Introduction</a></li>
+<li><a href="#/docs/getting-started~deploying">Getting Started</a></li>
+</ul>
+<h1 data-path="/docs/getting-started~installation">Installation</h1>
 <p>To be able to use Documate, you just have to install it globally:</p>
 <pre><code>$ npm install -g documate
   # or
 $ yarn add documate --global
 </code></pre>
-<h1 id="z2-oRUF8zEngfAGr-usage">Usage</h1>
+<h1 data-path="/docs/getting-started~usage">Usage</h1>
 <p>The basic commands include:</p>
 <pre><code># Create an empty project
 $ documate init my-cool-docs
@@ -12164,23 +12169,111 @@ $ documate build
 </code></pre>
 <p>Your docs should appear in the <code>./documate/</code> folder. You can reference any Markdown file to
 include in your docs. Just don't edit any file/folder that is created during runtime.</p>
-<h2 id="z2-oRUF8zEngfAGr-thenavmdfile">The <code>nav.md</code> file</h2>
+<h2 data-path="/docs/getting-started~thenavmdfile">The <code>nav.md</code> file</h2>
 <p>Okay. So this is your main file you'll be referencing quite much. It is so simple to say that it's
 just but a tweakable (fully-responsive) navbar that is docked to the left side of your screen. It's
 a list of Markdown links that could point to any given URL in your site. Sweet right?</p>
 <p>Furthermore, only links that have been interacted with will load particular content (we call <em>partials</em> - long story why we called it such) at a time. If your user's browser is smart enough to cache fetched content, they are gonna have an excellent experience.</p>
-<h2 id="z2-oRUF8zEngfAGr-offlinecapabilitiespwastrategiesserviceworkersetc">Offline capabilities? (PWA strategies, service workers, etc)</h2>
+<h2 data-path="/docs/getting-started~offlinecapabilitiespwastrategiesserviceworkersetc">Offline capabilities? (PWA strategies, service workers, etc)</h2>
 <p>Implementing <code>ServiceWorker</code> is a priceless feature we will be adding soon. Keep up with the updates and
 your site will be given offline support (on user-prompt included as well)!</p>
-<h2 id="z2-oRUF8zEngfAGr-deploying">Deploying</h2>
+<h2 data-path="/docs/getting-started~deploying">Deploying</h2>
 <p>This feature is yet to come. Please support us to have this feature ready in sooner.</p>
   
 </div>
 
   </main>
+  
+  <script data-lib-type="base">var urlRewriteMap = {
+  "/docs/getting-started": "pL9PjlF0k-oqrB93",
+  "/introduction": "MtFgjlI7xrnxYYea",
+  "/docs/components": "J_a4zZBwQ3YYCoi2"
+};</script>
+  <script data-lib-type="base">// Check 'hashchange' on window load as well
+window.onload = urlStateChange;
 
-  <script data-lib-type="base">var topnav = document.getElementById('topnav');
-var sidenav = document.querySelector('#sidenav');
+function urlStateChange(e) {
+  if (!location.hash) {
+    return; // Handle appropriately
+  }
+
+  var hashLink = location.hash.split('#')[1]; // Permalinks
+
+  if (hashLink.indexOf('~') > -1) {
+    var permalinkElements = document.querySelectorAll('[data-path]');
+    permalinkElements.forEach(function (permalinkElement) {
+      if (permalinkElement.getAttribute('data-path') === hashLink) {
+        permalinkElement.scrollIntoView();
+      }
+    }); // Reset original hashlink (without permalink)
+    // to get accurate link from urlRewriteMap
+    // without the permalink part
+
+    hashLink = hashLink.split('~')[0];
+  }
+
+  console.log('Hash link after permalink: ' + hashLink);
+
+  if (!(hashLink in urlRewriteMap)) {
+    return;
+  } // On URL change, if requested URL is defined in one of the
+  // links in the sidenav
+
+
+  var sidenavLinks = document.querySelectorAll('#sidenav a');
+
+  if (!!sidenavLinks) {
+    sidenavLinks.forEach(function (link) {
+      if (link.getAttribute('href') === hashLink) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  var activeContent = document.querySelector('#main-content > div.content.active');
+  var requestedPartialID = urlRewriteMap[hashLink];
+  var cachedPartial = document.getElementById(requestedPartialID); // Do nothing if already active
+
+  if (requestedPartialID == activeContent.id) return;
+
+  if (!!cachedPartial) {
+    activeContent.classList.remove('active');
+    cachedPartial.classList.add('active');
+    return;
+  }
+
+  fetch(location.origin + '/partials/' + requestedPartialID + '.html', {
+    method: 'GET'
+  }).then(function (res) {
+    return res.text();
+  }).then(function (partial) {
+    activeContent.classList.remove('active');
+    var temp = document.createElement('div');
+    temp.innerHTML = partial;
+    document.getElementById('main-content').appendChild(temp.children[0]); // FIXME: Highlight not working
+
+    document.querySelectorAll('#main-content > div#' + requestedPartialID + ' > .highlight-langs').forEach(function (hiddenSpan) {
+      fetch(hiddenSpan.getAttribute('data-src')).then(function (data) {
+        return data.text();
+      }).then(function (scriptText) {
+        hiddenSpan.remove();
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.innerHTML = scriptText;
+        document.body.appendChild(script);
+        hljs.initHighlighting();
+      });
+    });
+  }).catch(function (e) {
+    console.log("<h1>Error: Unable to obtain document.</h1>");
+  });
+}
+
+window.addEventListener('hashchange', urlStateChange);
+var topnav = document.getElementById('topnav');
+var sidenav = document.querySelector('#sidenav'); // Menu link click (mobile)
 
 document.querySelector('#menu-link').onclick = function (e) {
   e.preventDefault();
@@ -12210,47 +12303,13 @@ document.querySelector('nav#topnav #search > a').onclick = function (e) {
 
 document.querySelectorAll('#sidenav a').forEach(function (el) {
   el.onclick = function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Set hash path
+
+    location.hash = el.getAttribute('href');
     document.querySelectorAll('#sidenav a').forEach(function (a) {
       a.classList.remove('active');
     });
     el.classList.add('active');
-    var activeContent = document.querySelector('#main-content > div.content.active');
-    var requestedPartialID = el.href.match(/partials\/(.+).html/)[1];
-    var cachedPartial = document.getElementById(requestedPartialID); // do nothing if already active
-
-    if (requestedPartialID == activeContent.id) return;
-
-    if (!!cachedPartial) {
-      activeContent.classList.remove('active');
-      cachedPartial.classList.add('active');
-      return;
-    }
-
-    fetch(el.href, {
-      method: 'GET'
-    }).then(function (res) {
-      return res.text();
-    }).then(function (partial) {
-      activeContent.classList.remove('active');
-      var temp = document.createElement('div');
-      temp.innerHTML = partial;
-      document.getElementById('main-content').appendChild(temp.children[0]);
-      document.querySelectorAll('#main-content > div#' + requestedPartialID + ' > .highlight-langs').forEach(function (hiddenSpan) {
-        fetch(hiddenSpan.getAttribute('data-src')).then(function (data) {
-          return data.text();
-        }).then(function (scriptText) {
-          hiddenSpan.remove();
-          var script = document.createElement('script');
-          script.type = 'text/javascript';
-          script.innerHTML = scriptText;
-          document.body.appendChild(script);
-          hljs.initHighlighting();
-        });
-      });
-    }).catch(function (e) {
-      console.log("<h1>Error: Unable to obtain document.</h1>");
-    });
   };
 });</script>
   <script data-lib-type="base-icons">var define;

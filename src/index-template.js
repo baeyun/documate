@@ -8,7 +8,7 @@ const codeTheme = readFileSync('./src/assets/code-theme.min.css').toString()
 const styles = readFileSync('./src/assets/styles.css').toString()
 const script = readFileSync('./src/assets/script.js').toString()
 
-module.exports = (topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
+module.exports = (urlRewriteMap, topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -53,7 +53,10 @@ ${codeTheme}
   <main id="main-content">
     ${defaultPartial}
   </main>
-
+  
+  <script data-lib-type="base" type="text/javascript">
+var urlRewriteMap = ${JSON.stringify(urlRewriteMap)};
+  </script>
   <script data-lib-type="base" type="text/javascript">
 ${script}
   </script>

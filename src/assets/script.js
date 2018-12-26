@@ -1,6 +1,100 @@
+// Check 'hashchange' on window load as well
+window.onload = urlStateChange;
+
+function urlStateChange(e) {
+	if (!location.hash) {
+		return; // Handle appropriately
+	}
+
+	var hashLink = location.hash.split('#')[1];
+	
+	// Permalinks
+	if (hashLink.indexOf('~') > -1) {
+		var permalinkElements = document.querySelectorAll('[data-path]');
+
+		permalinkElements.forEach(function(permalinkElement) {
+			if (permalinkElement.getAttribute('data-path') === hashLink) {
+				permalinkElement.scrollIntoView();
+			}
+		});
+
+		// Reset original hashlink (without permalink)
+		// to get accurate link from urlRewriteMap
+		// without the permalink part
+		hashLink = hashLink.split('~')[0];
+	}
+
+	console.log('Hash link after permalink: ' + hashLink);
+	
+	if (!(hashLink in urlRewriteMap)) {
+		return;
+	}
+
+	// On URL change, if requested URL is defined in one of the
+	// links in the sidenav
+	var sidenavLinks = document.querySelectorAll('#sidenav a');
+
+	if (!!sidenavLinks) {
+		sidenavLinks.forEach(function(link) {
+			if (link.getAttribute('href') === hashLink) {
+				link.classList.add('active');
+			} else {
+				link.classList.remove('active');
+			}
+		});
+	}
+
+	var activeContent = document.querySelector('#main-content > div.content.active');
+	var requestedPartialID = urlRewriteMap[hashLink];
+	var cachedPartial = document.getElementById(requestedPartialID);
+
+	// Do nothing if already active
+	if (requestedPartialID == activeContent.id) return;
+
+	if (!!cachedPartial) {
+		activeContent.classList.remove('active');
+		cachedPartial.classList.add('active');
+
+		return;
+	}
+
+	fetch(location.origin + '/partials/' + requestedPartialID + '.html', {method: 'GET'})
+	.then(function(res) {
+		return res.text();
+	})
+	.then(function(partial) {
+		activeContent.classList.remove('active');
+		var temp = document.createElement('div');
+		temp.innerHTML = partial;
+		document.getElementById('main-content').appendChild(temp.children[0]);
+
+		// FIXME: Highlight not working
+		document.querySelectorAll('#main-content > div#' + requestedPartialID + ' > .highlight-langs')
+			.forEach(function(hiddenSpan) {
+				fetch(hiddenSpan.getAttribute('data-src'))
+				.then(function(data) { return data.text(); })
+				.then(function(scriptText) {
+					hiddenSpan.remove();
+
+					let script = document.createElement('script');
+					script.type = 'text/javascript';
+					script.innerHTML = scriptText;
+					document.body.appendChild(script);
+					hljs.initHighlighting();
+				});
+			});
+		})
+		.catch(function(e) {
+			console.log("<h1>Error: Unable to obtain document.</h1>");
+		});
+}
+
+window.addEventListener('hashchange', urlStateChange);
+
 var topnav = document.getElementById('topnav');
 var sidenav = document.querySelector('#sidenav');
 
+// Menu link click (mobile)
 document.querySelector('#menu-link').onclick = function(e) {
 	e.preventDefault();
 
@@ -31,51 +125,12 @@ document.querySelectorAll('#sidenav a').forEach(function(el) {
 	el.onclick = function(e) {
 		e.preventDefault();
 
+		// Set hash path
+		location.hash = el.getAttribute('href');
+
 		document.querySelectorAll('#sidenav a').forEach(function(a) {
 			a.classList.remove('active');
 		});
 		el.classList.add('active');
-
-		var activeContent = document.querySelector('#main-content > div.content.active');
-		var requestedPartialID = el.href.match(/partials\/(.+).html/)[1];
-		var cachedPartial = document.getElementById(requestedPartialID);
-
-		// do nothing if already active
-		if (requestedPartialID == activeContent.id) return;
-
-		if (!!cachedPartial) {
-			activeContent.classList.remove('active');
-			cachedPartial.classList.add('active');
-
-			return;
-		}
-
-		fetch(el.href, {method: 'GET'})
-		.then(function(res) {
-      return res.text();
-    })
-		.then(function(partial) {
-			activeContent.classList.remove('active');
-			var temp = document.createElement('div');
-			temp.innerHTML = partial;
-			document.getElementById('main-content').appendChild(temp.children[0]);
-			document.querySelectorAll('#main-content > div#' + requestedPartialID + ' > .highlight-langs')
-				.forEach(function(hiddenSpan) {
-					fetch(hiddenSpan.getAttribute('data-src'))
-					.then(function(data) { return data.text(); })
-					.then(function(scriptText) {
-						hiddenSpan.remove();
-
-						let script = document.createElement('script');
-						script.type = 'text/javascript';
-						script.innerHTML = scriptText;
-						document.body.appendChild(script);
-						hljs.initHighlighting();
-					});
-				});
-  	  })
-			.catch(function(e) {
-				console.log("<h1>Error: Unable to obtain document.</h1>");
-			});
 	}
 });
