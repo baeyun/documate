@@ -102,6 +102,49 @@ nav#topnav.search-active > div.navbar-right {
   display: none;
 }
 
+nav#topnav div#search-results {
+  display: none;
+  position: absolute;
+  top: 60px;
+  width: 85%;
+  min-height: 50px;
+  background-color: #fff;
+  z-index: 2;
+  border-radius: 3px;
+  box-shadow: 0 0 34px 10px rgba(34, 41, 50, 0.3);
+  padding: 6px 0;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+nav#topnav.search-active div#search-results.active {
+  display: block;
+}
+
+nav#topnav.search-active div#search-results > a {
+  width: 100%;
+  display: inline-block;
+  border: none;
+  padding: 17px 20px 13px;
+  height: auto;
+  color: #333;
+  font-size: 18px;
+}
+
+nav#topnav.search-active div#search-results > a:hover {
+  background-color: #f1f1f1;
+}
+
+nav#topnav.search-active div#search-results > a:nth-child(2n) {
+  background-color: #f5f5f5;
+}
+
+nav#topnav.search-active div#search-results > a > small {
+  margin-left: 12px;
+  vertical-align: middle;
+  color: #888;
+}
+
 nav#topnav #search > a {
   width: 50px;
   min-width: 50px;

@@ -13,6 +13,41 @@ document.querySelector('#menu-link').onclick = function(e) {
 	return;
 };
 
+document.querySelector('nav#topnav #search > input').oninput = function(e) {
+	var inputVal = e.target.value;
+	var searchListContainer = document.getElementById('search-results');
+
+	if (inputVal !== '' && inputVal.length > 1) {
+		searchListContainer.classList.add('active');
+	} else {		
+		searchListContainer.classList.remove('active');
+		return;
+	}
+
+	var matches = window.searchables.filter(function(searchableObj) {
+		return searchableObj.title.toLowerCase().indexOf(inputVal) > -1;
+	});
+
+	if (matches.length < 1) {
+		searchListContainer.innerHTML = '<a href="#"><span>No results found.</span></a>';
+		return;
+	}
+	
+	var listHTML = '';
+	
+	for (let i = 0; i < matches.length; i++) {
+		var match = matches[i];
+		var title = match.title;
+		var re = new RegExp(inputVal, 'gi');
+		var toBold = title.match(re)[0];
+		var boldenTitle = title.replace(toBold, '<b>'+toBold+'</b>');
+		
+		listHTML += '<a href="/#/'+match.permalink+'"><span>'+boldenTitle+'</span><small>'+match.permalink+'</small></a>';
+	}
+
+	searchListContainer.innerHTML = listHTML;
+};
+
 document.querySelector('nav#topnav #search > a').onclick = function(e) {
 	e.preventDefault();
 

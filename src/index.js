@@ -37,6 +37,21 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   let id = uniqider()
   let partial = readFileSync('./documate/' + link[1]).toString()
 
+  // Append unique partial ID to all permalinks,
+  // then append info to searchables array
+  partial.match(/\#{1,6}\s*.+/gim).map(match => {
+    let headerTagNumber = match.match(/\#/g).length
+    let title = match.substring(headerTagNumber).trim()
+    let permalink = id + '~' + title
+      .replace(/[^a-zA-Z0-9_\s]+/g, '')
+      .replace(/\s+/g, '-')
+      .toLowerCase()
+    
+    searchables.push({title, permalink})
+    
+    partial = partial.replace(match, `<h${headerTagNumber} id="${permalink}">${title}</h${headerTagNumber}>`)
+  })
+
   sidenavContent = sidenavContent.replace(
     line.trim(),
     line.trim().split('](')[0] + `](../public/partials/${id}.html)`
@@ -62,11 +77,6 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   ${codeLinks}
 </div>
 `
-
-  // Append unique partial ID to all permalinks
-  partialHTML.match(/\<h[1-6]\s*id\=\"\w+\"\>/gim).map(match => {
-    partialHTML = partialHTML.replace(match, match.split('id="').join(`id="${id}-`))
-  })
   
   if (i === 0)
     initialPartial = partialHTML
@@ -81,7 +91,7 @@ const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
 
 writeFileSync(
   './documate/cache/index.html',
-  htmlTemplate(topnavContentHTML, sidenavContentHTML, initialPartial)
+  htmlTemplate(searchables, topnavContentHTML, sidenavContentHTML, initialPartial)
 )
 
 const thread = exec(

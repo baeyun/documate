@@ -8,7 +8,7 @@ const codeTheme = readFileSync('./src/assets/code-theme.min.css').toString()
 const styles = readFileSync('./src/assets/styles.css').toString()
 const script = readFileSync('./src/assets/script.js').toString()
 
-module.exports = (topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
+module.exports = (searchables, topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -40,6 +40,7 @@ ${codeTheme}
       <a href="">
         ${readFileSync('./src/assets/search-icon.svg').toString()}
       </a>
+      <div id="search-results"></div>
     </div>
     <div class="navbar-right">
       <ul class="navbar-nav">
@@ -54,6 +55,9 @@ ${codeTheme}
     ${defaultPartial}
   </main>
 
+  <script type="text/javascript">
+  var searchables = ${JSON.stringify(searchables)};
+  </script>
   <script data-lib-type="base" type="text/javascript">
 ${script}
   </script>
