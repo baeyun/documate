@@ -47,10 +47,6 @@ pre * {
   font-weight: normal !important;
 }
 
-<<<<<<< HEAD
-.hljs {
-  background: inherit !important;
-=======
 a#logo {
   border: none !important;
   margin-left: 10px;
@@ -60,7 +56,6 @@ a#logo > img {
   height: 50px !important;
   position: relative;
   width: 50px;
->>>>>>> 026d738b23fea8c0e262360257e27af3c66f363b
 }
 
 nav#topnav {
@@ -203,13 +198,6 @@ aside#sidenav {
   z-index: 1;
 }
 
-<<<<<<< HEAD
-aside#sidenav li {
-  margin: 25px 0;
-}
-
-=======
->>>>>>> 026d738b23fea8c0e262360257e27af3c66f363b
 aside#sidenav li ul {
   padding-left: 15px;
 }
@@ -277,11 +265,7 @@ main#main-content > div.content.active {
   }
 
   nav#topnav > div.navbar-right {
-<<<<<<< HEAD
-    max-width: calc(100% - 55px) !important;
-=======
     max-width: calc( 100% - 100px) !important;
->>>>>>> 026d738b23fea8c0e262360257e27af3c66f363b
     overflow-x: auto;
   }
 
