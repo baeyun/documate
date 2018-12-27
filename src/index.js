@@ -99,7 +99,7 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   }
 
   let codeLinks = codeLanguages
-    .map(lang => 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/' + lang + '.min.js')
+    .map(lang => 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/' + lang.trim() + '.min.js')
     .map(mappedLink => '<span hidden="true" class="highlight-langs" data-src="' + mappedLink + '"></span>')
     .join('\n')
   let partialHTML = `<div id="${id}" class="content active">

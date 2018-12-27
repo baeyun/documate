@@ -1,0 +1,63 @@
+<div id="GXfFX0nXbHPJm2So" class="content active">
+  <h1 data-path="/introduction~introduction">Introduction</h1>
+<pre><code class="bash language-bash">&lt;h2 data-path="/introduction~run-check"&gt;Run check&lt;/h2&gt;
+if [$NODE_ENV.production ~= !]
+  return true;
+else
+  echo 'Production ready'
+  exit
+</code></pre>
+<pre><code class="c language-c">&lt;h1 data-path="/introduction~includestdioh"&gt;include&lt;stdio.h&gt;&lt;/h1&gt;
+&lt;h1 data-path="/introduction~includejsx_pragmah"&gt;include&lt;jsx_pragma.h&gt;&lt;/h1&gt;
+
+Jsx_scope&lt;int&gt; render() {
+  Jsx_Element.span(rndint()).content();
+}
+</code></pre>
+<pre><code class="rust language-rust">// Packem module bundler plugin
+&lt;h1 data-path="/introduction~crate_type-dylib"&gt;![crate_type = "dylib"]&lt;/h1&gt;
+&lt;h1 data-path="/introduction~featurestd_misc"&gt;![feature(std_misc)]&lt;/h1&gt;
+
+use std::ffi::CString;
+
+&lt;h1 data-path="/introduction~allownon_snake_case-c-plugin"&gt;[allow(non_snake_case)] // C++ plugin&lt;/h1&gt;
+extern "stdcall" {
+    fn packem_run(hWnd: u32, lpText: *const i8, lpCaption: *const i8, uType: u32) -&gt; u32;
+}
+
+&lt;h1 data-path="/introduction~no_mangle"&gt;[no_mangle]&lt;/h1&gt;
+&lt;h1 data-path="/introduction~allownon_snake_case"&gt;[allow(non_snake_case)]&lt;/h1&gt;
+pub unsafe extern "run" fn PackemPlugin(devserver_ptr: u32)
+{
+    let info_str = format!("MyPlugin created: {}!", devserver_ptr.instance.time());
+    let caption = CString::new("Hello from my Packem plugin!").unwrap();
+    packem_run(0, info_str.as_ptr(), caption.as_ptr(), 0);
+}
+</code></pre>
+<pre><code class="javascript language-javascript">export default arr =&gt; arr.reduce((acc, cv) =&gt; acc.splice(cv))
+</code></pre>
+<pre><code class="typescript language-typescript">// This is some TypeScript
+
+namespace sign {
+  export interface detached {
+    (msg: Uint8Array, secretKey: Uint8Array): Uint8Array;
+    verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
+  }
+
+  export interface keyPair {
+    (): SignKeyPair;
+    fromSecretKey(secretKey: Uint8Array): SignKeyPair;
+    fromSeed(secretKey: Uint8Array): SignKeyPair;
+  }
+}
+</code></pre>
+<p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
+professional site.</p>
+<h2 data-path="/introduction~history">History</h2>
+<p><button class="button button-primary">Button</button></p>
+  <span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/bash.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/c.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/rust.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/javascript.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/typescript.min.js"></span>
+</div>

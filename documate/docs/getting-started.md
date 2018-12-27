@@ -8,7 +8,7 @@ cloud.
 - [Introduction](#introduction)
 - [Getting Started](#docs/getting-started~deploying)
 
-# Installation
+## Installation
 
 To be able to use Documate, you just have to install it globally:
 
@@ -18,7 +18,7 @@ $ npm install -g documate
 $ yarn add documate --global
 ```
 
-# Usage
+## Usage
 
 The basic commands include:
 

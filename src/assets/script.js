@@ -2,8 +2,11 @@
 window.addEventListener("load", urlStateChange);
 
 function urlStateChange(e) {
+  hljs.initHighlighting();
+
   if (!location.hash) {
-    return; // Handle appropriately
+    // Handle appropriately
+    return;
   }
 
   var hashLink = location.hash.split("#")[1];
@@ -20,6 +23,45 @@ function urlStateChange(e) {
           .join("")
       ];
 
+    // If partial not active, fetch it
+    if (!document.getElementById(partialID)) {
+      var partialLink = hashLink
+        .split("~")[0]
+        .split("")
+        .splice(1)
+        .join("");
+
+      fetchPartial(urlRewriteMap[partialLink]);
+
+      // @undefinedbuddy still working on making
+      // permalinks scroll into view on page load
+      window.CHECK_PARTIAL_LOADED = setInterval(function() {
+        var currentPartial = document.getElementById(
+          urlRewriteMap[partialLink]
+        );
+
+        if (currentPartial) {
+          var permalinkElements = currentPartial.querySelectorAll(
+            "[data-path]"
+          );
+
+          document
+            .querySelector("#main-content > div.content.active")
+            .classList.remove("active");
+          currentPartial.classList.add("active");
+
+          permalinkElements.forEach(function(permalinkElement) {
+            if (permalinkElement.getAttribute("data-path") === hashLink) {
+              permalinkElement.scrollIntoView();
+            }
+          });
+
+          clearInterval(window.CHECK_PARTIAL_LOADED);
+        }
+      }, 60); // 60 FPS
+    }
+
+    // Make relevant partial active
     if (document.getElementById(partialID)) {
       document
         .querySelector("#main-content > div.content.active")
@@ -95,8 +137,12 @@ function fetchPartial(id) {
       var temp = document.createElement("div");
       temp.innerHTML = partial;
       document.getElementById("main-content").appendChild(temp.children[0]);
+      
+      var script = document.createElement("script");
+      var resolvedScripts = []
 
-      // FIXME: Highlight not working
+      script.type = "text/javascript";
+      script.async = true;
       document
         .querySelectorAll("#main-content > div#" + id + " > .highlight-langs")
         .forEach(function(hiddenSpan) {
@@ -107,13 +153,21 @@ function fetchPartial(id) {
             .then(function(scriptText) {
               hiddenSpan.remove();
 
-              let script = document.createElement("script");
-              script.type = "text/javascript";
-              script.innerHTML = scriptText;
-              document.body.appendChild(script);
-              hljs.initHighlighting();
+              resolvedScripts.push(scriptText);
+              
+              return Promise.all(resolvedScripts);
+            })
+            .then(function(finalScript) {
+              script.innerHTML += finalScript.pop();
+              highlightScriptsReady();
             });
-        });
+          });
+        
+        function highlightScriptsReady() {
+          script.innerHTML += ';document.querySelectorAll("pre > code").forEach(function(b) {hljs.initHighlighting(b)});';
+          document.body.appendChild(script);
+          hljs.initHighlighting();
+        }
     })
     .catch(function(e) {
       console.log("<h1>Error: Unable to obtain document.</h1>");
@@ -135,17 +189,34 @@ document.querySelector("#menu-link").onclick = function(e) {
     document.body.classList.remove("sidenav-active");
   } else {
     document.body.classList.add("sidenav-active");
+    document.getElementById("topnav").classList.remove("search-active");
+
+    // document.body.onclick = function(e) {
+    //   if (!e.target.id || e.target.id !== "sidenav" || e.target.id !== "menu-link") {
+    //     document.body.classList.remove("sidenav-active");
+    //   } else {
+    //     document.body.onclick = null;
+    //   }
+    // };
   }
 
   return;
 };
 
+// Search capabilities
 document.querySelector("nav#topnav #search > input").oninput = function(e) {
   var inputVal = e.target.value;
   var searchListContainer = document.getElementById("search-results");
 
   if (inputVal !== "" && inputVal.length > 1) {
     searchListContainer.classList.add("active");
+
+    // document.body.addEventListener('click', function(e) {
+    //   e.preventDefault();
+    //   if (!e.target.id || e.target.id !== "search-results" || e.target.id !== "search") {
+    //     document.getElementById("topnav").classList.remove("search-active");
+    //   }
+    // });
   } else {
     searchListContainer.classList.remove("active");
     return;
