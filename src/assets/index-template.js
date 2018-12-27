@@ -8,7 +8,14 @@ const codeTheme = readFileSync('./src/assets/code-theme.min.css').toString()
 const styles = readFileSync('./src/assets/styles.css').toString()
 const script = readFileSync('./src/assets/script.js').toString()
 
-module.exports = (urlRewriteMap, searchables, topnav, sidenav, defaultPartial = '') => `<!DOCTYPE html>
+module.exports = ({
+  urlRewriteMap,
+  searchables,
+  logoBase64,
+  topnavContentHTML: topnav,
+  sidenavContentHTML: sidenav,
+  initialPartial
+}) => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -32,6 +39,9 @@ ${codeTheme}
 </head>
 <body>
   <nav id="topnav" class="navbar-container navbar-transparent" navbar>
+    <a id="logo" href="/">
+      <img src="${logoBase64}" />
+    </a>
     <a id="menu-link" href="">
     ${readFileSync('./src/assets/menu-icon.svg').toString()}
     </a>
@@ -52,7 +62,7 @@ ${codeTheme}
     ${sidenav}
   </aside>
   <main id="main-content">
-    ${defaultPartial}
+    ${initialPartial}
   </main>
   
   <script data-lib-type="base" type="text/javascript">

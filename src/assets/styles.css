@@ -38,13 +38,23 @@ pre * {
   font-weight: normal !important;
 }
 
+a#logo {
+  border: none !important;
+  margin-left: 10px;
+}
+
+a#logo > img {
+  height: 50px !important;
+  position: relative;
+  width: 50px;
+}
+
 nav#topnav {
   height: 50px;
   width: 100%;
   max-width: unset !important;
   background-color: #222831;
   box-shadow: 0 1px 1px 1px rgba(34, 41, 50, 0.06);
-  padding: 0 0 0 50px;
 }
 
 nav#topnav > div.navbar-right {
@@ -229,6 +239,10 @@ main#main-content > div.content.active {
 }
 
 @media only screen and (max-width: 850px) {
+  a#logo {
+    display: none;
+  }
+  
   aside#sidenav {
     transform: translateX(-100%);
     transition: transform 0.1s ease-in-out;
@@ -240,7 +254,7 @@ main#main-content > div.content.active {
   }
 
   nav#topnav > div.navbar-right {
-    max-width: calc( 100% - 55px) !important;
+    max-width: calc( 100% - 100px) !important;
     overflow-x: auto;
   }
 

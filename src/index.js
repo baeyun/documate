@@ -2,14 +2,15 @@ const {
   readFileSync,
   writeFileSync,
   createReadStream,
-  createWriteStream
+  createWriteStream,
+  existsSync
 } = require('fs')
 const { exec } = require('child_process')
 
 const { createCleanDirectory } = require('./utils')
 const uniqider = require('uniqider')
 const { Converter } = require('showdown')
-const htmlTemplate = require('./index-template')
+const htmlTemplate = require('./assets/index-template')
 const converterInstance = new Converter()
 
 let urlRewriteMap = {}
@@ -17,6 +18,11 @@ let searchables = []
 let codeLanguages = []
 let navContent = readFileSync('./documate/nav.md').toString()
 let initialPartial = ''
+
+// handle logo
+const logoBase64 = existsSync('./documate/logo.png')
+  ? 'data:image/png;base64,' + readFileSync('./documate/logo.png', 'base64')
+  : 'data:image/png;base64,' + readFileSync('./src/assets/img/documate-logo.png', 'base64')
 
 createCleanDirectory('./documate-site/')
 createCleanDirectory('./documate-site/cache/')
@@ -118,10 +124,18 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
 })
 
 const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
+const htmlTempConfig = {
+  urlRewriteMap,
+  searchables,
+  logoBase64,
+  topnavContentHTML,
+  sidenavContentHTML,
+  initialPartial
+}
 
 writeFileSync(
   './documate-site/cache/index.html',
-  htmlTemplate(urlRewriteMap, searchables, topnavContentHTML, sidenavContentHTML, initialPartial)
+  htmlTemplate(htmlTempConfig)
 )
 
 const thread = exec(

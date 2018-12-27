@@ -11923,13 +11923,23 @@ pre * {
   font-weight: normal !important;
 }
 
+a#logo {
+  border: none !important;
+  margin-left: 10px;
+}
+
+a#logo > img {
+  height: 50px !important;
+  position: relative;
+  width: 50px;
+}
+
 nav#topnav {
   height: 50px;
   width: 100%;
   max-width: unset !important;
   background-color: #222831;
   box-shadow: 0 1px 1px 1px rgba(34, 41, 50, 0.06);
-  padding: 0 0 0 50px;
 }
 
 nav#topnav > div.navbar-right {
@@ -12114,6 +12124,10 @@ main#main-content > div.content.active {
 }
 
 @media only screen and (max-width: 850px) {
+  a#logo {
+    display: none;
+  }
+  
   aside#sidenav {
     transform: translateX(-100%);
     transition: transform 0.1s ease-in-out;
@@ -12125,7 +12139,7 @@ main#main-content > div.content.active {
   }
 
   nav#topnav > div.navbar-right {
-    max-width: calc( 100% - 55px) !important;
+    max-width: calc( 100% - 100px) !important;
     overflow-x: auto;
   }
 
@@ -12164,6 +12178,9 @@ main#main-content > div.content.active {
 </head>
 <body>
   <nav id="topnav" class="navbar-container navbar-transparent" navbar>
+    <a id="logo" href="/">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAA8hJREFUeJzl21uoVFUcx/GPYdiVOtRDHCroHpFBF8PsKSojkAIJoQuREl0geqpIxKCwRCqq1yApCitCosuDZpZiF4iuGPQSFMdCy4KgrIhuD8vKc5w5e+/5//eeMb9PM7PW/7J+s9be/71mzQwBjl/5wyBmazCBuyOxq5hYemStfjPbTKIHa7Fw9+uN2NBx/L04oKM4R+Bt/w0eXsMJHcXvSxcCzMVWzOvR9hZmdZBDX9oW4D68i+P6tI/jjZZzmJa2BDgR72F5jb7z8ERLeVTShgAXKlN+TgObJbijhVwqyRZgrrKuDxnA9kEsyE2nmkwBxrEl6OMVnJ6QS20yBVgvp67YYrAZNBBZAtyOM5N8HY3NSb4qyRDgIDyU4GdPzsMzyT57kiHATTgwwc9UrsWyFvxOIkOAWxN89GOFyeVzOlEBTtH+VXstZrflPCrAxSlZVLMZ9Z5vGxIV4OyULKoZ09KdISrASSlZ1OMsvJDtNCrAeEoW9bkK92Y6jAowlpJFM+7B1VnOogIcnJJFc9bg3AxHUQG62lLrxSalbA4RHcBv0QQCHCbhzhAVYFc0gSBn4KWIg6gAPwbtM7gCqwY1jgrwc9A+i7uweBDDqAC/Bu0zWY0Lmhr9nwSAN3FME4N9+S7Qi1nKltqhdQ2iAvwetG+Dk7GubufoJuYoCrAJj9XtHBXgj6B9JjuULbTVTYyiS+CvoH0Wjyq7U40Gz74/AzYqBy3eH9RBdAb8GbQflO1K4XOJwOCJCzAjaD8IjyjT/ckMZ10fkYnwOu7Ex5lOh/k8X5evcD0ulTx44gK0PYMexql4uq0Ao7oENijT/ZO2A41aHbAN12C+DgbPaO0JrlKm+7OJPiuJLoGMJbRO2dDYmuCrMcNcAhPK/v7lhjR4hncbXKlM9+eGFP9fur4LvIql+LTjuH3pSoAvlIE/31G82nSxBO7HaUZw8MRnwHQXwZeVR9XPgjFaJToDfunx2edYhCv1H3xn5wCriAqwbcr7FcqZoX4HGS5TDlQuCcZNI2tb/J8jrsvtvUt0FG7DB0rRMx/fB+OmEb0GvIOb8XiPtjnKrs11OHxK25fBuGlEBZj6n5+Zyvq/ERdNY/dtMG4aWXXA+cq3vQDHVvTdhW+S4obJEmAMt9TsuxM/JcUNk1UIrVe++Y9q9P0uKWYKmZXg1zhH9Vm+nYkxw7RRCi/CA9O0j8wFkPaeBZbhhj5t+4UA8JTyD7KpRc9+IwClUJqND/f4bEfLMRvRxePwduVU54u73w/7aN0kutwSW6j8jD0yNQD8DUyWic5kezD3AAAAAElFTkSuQmCC" />
+    </a>
     <a id="menu-link" href="">
     <?xml version="1.0"?>
 <svg width="25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 224 224" width="32px" height="32px"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,224v-224h224v224z" fill="none"/><g fill="#cccccc"><g id="surface1"><path d="M28,49v14h168v-14zM28,105v14h168v-14zM28,161v14h168v-14z"/></g></g></g></svg>
@@ -12196,11 +12213,8 @@ main#main-content > div.content.active {
 </ul>
   </aside>
   <main id="main-content">
-    <div id="5oi8aOsLGk7dl5Jh" class="content active">
+    <div id="N68wknn1XRmO8uE8" class="content active">
   <h1 data-path="/introduction~introduction">Introduction</h1>
-<p style="text-align: center;">
-  <img src="/assets/UiSKnSWAZkFyBiZn.png" alt="Logo" title="Logo">
-</p>
 <p>Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
 professional site.</p>
 <h2 data-path="/introduction~history">History</h2>
@@ -12211,7 +12225,7 @@ professional site.</p>
   </main>
   
   <script data-lib-type="base" type="text/javascript">
-var urlRewriteMap = {"introduction":"5oi8aOsLGk7dl5Jh","docs/getting-started":"3V9spw9vO063B8Id","docs/components":"aqEBgOtvW6Uy60D2"};
+var urlRewriteMap = {"introduction":"N68wknn1XRmO8uE8","docs/getting-started":"72j72C1C4Tf3C4Qx","docs/components":"XPy12L9lCp5PiQKl"};
 var searchables = [{"title":"Introduction","permalink":"introduction~introduction"},{"title":"History","permalink":"introduction~history"},{"title":"Getting Started","permalink":"docs/getting-started~getting-started"},{"title":"Installation","permalink":"docs/getting-started~installation"},{"title":"Usage","permalink":"docs/getting-started~usage"},{"title":"Create an empty project","permalink":"docs/getting-started~create-an-empty-project"},{"title":"Run your awesome docs (run from project root)","permalink":"docs/getting-started~run-your-awesome-docs-run-from-project-root"},{"title":"Build your docs (run from project root)","permalink":"docs/getting-started~build-your-docs-run-from-project-root"},{"title":"The `nav.md` file","permalink":"docs/getting-started~the-navmd-file"},{"title":"Offline capabilities? (PWA strategies, service workers, etc)","permalink":"docs/getting-started~offline-capabilities-pwa-strategies-service-workers-etc"},{"title":"Deploying","permalink":"docs/getting-started~deploying"},{"title":"Components","permalink":"docs/components~components"},{"title":"Typography","permalink":"docs/components~typography"},{"title":"Heading 1","permalink":"docs/components~heading-1"},{"title":"Heading 2","permalink":"docs/components~heading-2"},{"title":"Heading 3","permalink":"docs/components~heading-3"},{"title":"Heading 4","permalink":"docs/components~heading-4"},{"title":"Heading 5","permalink":"docs/components~heading-5"},{"title":"Heading 6","permalink":"docs/components~heading-6"},{"title":"Buttons","permalink":"docs/components~buttons"},{"title":"Code Sweets","permalink":"docs/components~code-sweets"},{"title":"Code Blocks","permalink":"docs/components~code-blocks"},{"title":"![crate_type = \"dylib\"]","permalink":"docs/components~crate_type-dylib"},{"title":"![feature(std_misc)]","permalink":"docs/components~featurestd_misc"},{"title":"[allow(non_snake_case)] // C++ plugin","permalink":"docs/components~allownon_snake_case-c-plugin"},{"title":"[no_mangle]","permalink":"docs/components~no_mangle"},{"title":"[allow(non_snake_case)]","permalink":"docs/components~allownon_snake_case"}];
   </script>
   <script data-lib-type="base" type="text/javascript">
