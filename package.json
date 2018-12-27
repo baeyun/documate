@@ -3,6 +3,28 @@
   "scripts": {
     "start": "node ./src/index.js"
   },
+  "bin": {
+    "documate": "./scripts/cli.js"
+  },
+  "description": "",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bukharim96/documate.git"
+  },
+  "keywords": [
+    "documentation",
+    "docs",
+    "github-docs",
+    "markdown"
+  ],
+  "author": "bukharim96@gmail.com, alimohamuda@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bukharim96/documate/issues"
+  },
+  "homepage": "https://github.com/bukharim96/documate#readme",
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
@@ -10,8 +32,8 @@
     "showdown": "^1.9.0"
   },
   "dependencies": {
+    "chalk": "^2.4.1",
     "rimraf": "^2.6.2",
-    "uniqider": "^2.0.1",
-    "write": "^1.0.3"
+    "uniqider": "^2.0.1"
   }
 }
