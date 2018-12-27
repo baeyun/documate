@@ -5,29 +5,41 @@ const {
   createWriteStream,
   existsSync
 } = require('fs')
+const { sep: pathSeperator } = require('path')
 const { exec } = require('child_process')
+const chalk = require('chalk')
 
 const { createCleanDirectory } = require('./utils')
 const uniqider = require('uniqider')
 const { Converter } = require('showdown')
 const htmlTemplate = require('./assets/index-template')
 const converterInstance = new Converter()
+const dir = __dirname + pathSeperator
+const cwd = process.cwd() + pathSeperator
+
+if (!existsSync(cwd + 'package.json')) {
+  // console.log('\033[2J');
+  console.warn(`\n    ${chalk.red("Documate requires project to have a valid package.json file")}\n`)
+  process.exit(0)
+}
+
+let projectName = require(cwd + 'package.json')['name']
 
 let urlRewriteMap = {}
 let searchables = []
 let codeLanguages = []
-let navContent = readFileSync('./documate/nav.md').toString()
+let navContent = readFileSync(cwd + 'documate/nav.md').toString()
 let initialPartial = ''
 
 // handle logo
-const logoBase64 = existsSync('./documate/logo.png')
-  ? 'data:image/png;base64,' + readFileSync('./documate/logo.png', 'base64')
-  : 'data:image/png;base64,' + readFileSync('./src/assets/img/documate-logo.png', 'base64')
+const logoBase64 = existsSync(cwd + 'documate/logo.png')
+  ? 'data:image/png;base64,' + readFileSync(cwd + 'documate/logo.png', 'base64')
+  : 'data:image/png;base64,' + readFileSync(dir + 'assets/img/documate-logo.png', 'base64')
 
-createCleanDirectory('./documate-site/')
-createCleanDirectory('./documate-site/cache/')
-createCleanDirectory('./documate-site/cache/assets/')
-createCleanDirectory('./documate-site/partials/')
+createCleanDirectory(cwd + projectName + '-site/')
+createCleanDirectory(cwd + projectName + '-site/cache/')
+createCleanDirectory(cwd + projectName + '-site/cache/assets/')
+createCleanDirectory(cwd + projectName + '-site/partials/')
 
 let [, topnavContent, sidenavContent] = navContent.split(/\<\!\-\-\s*(?:TOPNAV|SIDENAV)\s*\-\-\>/)
 
@@ -43,7 +55,7 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
   if (!link) return;
 
   let id = uniqider()
-  let partial = readFileSync('./documate/' + link[1]).toString()
+  let partial = readFileSync(cwd + 'documate/' + link[1]).toString()
   let urlPath = link[1].replace(/\.md$/, '').trim()
 
   // Handle images
@@ -54,9 +66,9 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
       let imgPath = match.match(/src\=\"[\.\/]*(.[^\"]+)\"/i)[1]
       let newImgName = uniqider() + imgPath.match(/(\.\w+)$/)[1]
 
-      // Copy to ./documate-site/cache/assets/
-      createReadStream('./documate/' + imgPath).pipe(
-        createWriteStream('./documate-site/cache/assets/' + newImgName)
+      // Copy to ./<PROJECT_NAME>-site/cache/assets/
+      createReadStream(cwd + 'documate/' + imgPath).pipe(
+        createWriteStream(cwd + projectName + '-site/cache/assets/' + newImgName)
       )
 
       // Update img with new src path
@@ -72,19 +84,21 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
 
   // Append unique partial ID to all permalinks,
   // then append info to searchables array
-  partial.match(/^\#{1,6}\s*.+/gim).map(match => {
-    let headerTagNumber = match.match(/\#/g).length
-    let title = match.substring(headerTagNumber).trim()
-    let titleSlug = title
-      .replace(/[^a-zA-Z0-9_\s]+/g, '')
-      .replace(/\s+/g, '-')
-      .toLowerCase()
-    let permalink = urlPath + '~' + titleSlug
-    
-    searchables.push({title, permalink})
-    
-    partial = partial.replace(match, `<h${headerTagNumber} data-path="/${permalink}">${title}</h${headerTagNumber}>`)
-  })
+  let headers = partial.match(/^\#{1,6}\s*.+/gim)
+  if (headers)
+    headers.map(match => {
+      let headerTagNumber = match.match(/\#/g).length
+      let title = match.substring(headerTagNumber).trim()
+      let titleSlug = title
+        .replace(/[^a-zA-Z0-9_\s]+/g, '')
+        .replace(/\s+/g, '-')
+        .toLowerCase()
+      let permalink = urlPath + '~' + titleSlug
+      
+      searchables.push({title, permalink})
+      
+      partial = partial.replace(match, `<h${headerTagNumber} data-path="/${permalink}">${title}</h${headerTagNumber}>`)
+    })
 
   urlRewriteMap[urlPath] = id
 
@@ -118,7 +132,7 @@ sidenavContent.split('\n').filter(l => l.trim() !== '')
     initialPartial = partialHTML
 
   writeFileSync(
-    `./documate-site/partials/${id}.html`,
+    `${cwd + projectName}-site/partials/${id}.html`,
     partialHTML
   )
 })
@@ -127,6 +141,7 @@ const sidenavContentHTML = converterInstance.makeHtml(sidenavContent)
 const htmlTempConfig = {
   urlRewriteMap,
   searchables,
+  projectName,
   logoBase64,
   topnavContentHTML,
   sidenavContentHTML,
@@ -134,22 +149,22 @@ const htmlTempConfig = {
 }
 
 writeFileSync(
-  './documate-site/cache/index.html',
+  cwd + projectName + '-site/cache/index.html',
   htmlTemplate(htmlTempConfig)
 )
 
-const thread = exec(
-  'parcel ./documate-site/cache/index.html --out-dir ./documate-site --port 1234 --no-cache'
-)
+const cmd = process.env.NODE_ENV === 'production'
+  ? `parcel build ${cwd + projectName}-site/cache/index.html --out-dir ${cwd + projectName}-site`
+  : `parcel ${cwd + projectName}-site/cache/index.html --out-dir ${cwd + projectName}-site --port 3000 --no-cache`
+const thread = exec(cmd)
 
 thread.stdout.on('data', data => {
   console.log(data.toString())
 })
-
 thread.stderr.on('data', data => {
   console.log(data.toString())
 })
-
 thread.on('exit', code => {
-  console.log(`Child exited with code ${code}`)
+  if (process.env.NODE_ENV === 'production')
+    console.log(`Done.`)
 })

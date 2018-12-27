@@ -12,21 +12,22 @@ switch(args[0]) {
    * documate init example-app
    */
   case 'init':
-    // require('./init')(cwd, args[1] || null)
+    require('../src/init')
     break
   
   /**
    * documate start
    */
   case 'start':
-    // require('./start')(cwd, args[1] || null)
+    require('../src/')
     break
 
   /**
    * documate build
    */
   case 'build':
-    // require('./build')(cwd)
+    process.env.NODE_ENV = 'production'
+    require('../src/')
     break
 
   /**

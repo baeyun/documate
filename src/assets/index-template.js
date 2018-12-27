@@ -1,27 +1,36 @@
 const {
   readFileSync
 } = require('fs')
+const { sep: pathSeperator } = require('path')
 
-const resetStyles = readFileSync('./src/assets/reset.css').toString()
-const baseStyles = readFileSync('./src/assets/css/base.css').toString()
-const codeTheme = readFileSync('./src/assets/code-theme.min.css').toString()
-const styles = readFileSync('./src/assets/styles.css').toString()
-const script = readFileSync('./src/assets/script.js').toString()
+const dir = __dirname + pathSeperator
+const resetStyles = readFileSync(dir + 'reset.css').toString()
+const baseStyles = readFileSync(dir + 'css/base.css').toString()
+const codeTheme = readFileSync(dir + 'code-theme.min.css').toString()
+const styles = readFileSync(dir + 'styles.css').toString()
+const script = readFileSync(dir + 'script.js').toString()
+const menuIcon = readFileSync(dir + 'menu-icon.svg').toString()
+const searchIcon = readFileSync(dir + 'search-icon.svg').toString()
+const uikitIcons = readFileSync(dir + 'js/uikit-icons.min.js').toString()
 
 module.exports = ({
   urlRewriteMap,
   searchables,
+  projectName: title,
   logoBase64,
   topnavContentHTML: topnav,
   sidenavContentHTML: sidenav,
   initialPartial
-}) => `<!DOCTYPE html>
+}) => {
+  title = title[0].toUpperCase() + title.slice(1)
+  
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Documate</title>
+  <title>${title}</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
   <style data-lib-type="reset" type="text/css">
@@ -43,12 +52,12 @@ ${codeTheme}
       <img src="${logoBase64}" />
     </a>
     <a id="menu-link" href="">
-    ${readFileSync('./src/assets/menu-icon.svg').toString()}
+    ${menuIcon}
     </a>
     <div id="search">
       <input type="search" placeholder="Search docs..." />
       <a href="">
-        ${readFileSync('./src/assets/search-icon.svg').toString()}
+        ${searchIcon}
       </a>
       <div id="search-results"></div>
     </div>
@@ -75,7 +84,8 @@ var searchables = ${JSON.stringify(searchables)};
 })(window);
   </script>
   <script data-lib-type="base-icons" type="text/javascript">
-${readFileSync('./src/assets/js/uikit-icons.min.js').toString()}
+${uikitIcons}
   </script>
 </body>
 </html>`
+}
