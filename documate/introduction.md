@@ -1,70 +1,24 @@
-# Introduction
+# Welcome to Documate v0.1.0
 
-```bash
-## Run check
-if [$NODE_ENV.production ~= !]
-  return true;
-else
-  echo 'Production ready'
-  exit
-```
+Documate is a minimal static site generator for docs that takes your Markdown-based code and
+outputs a beautiful site (like this). The reason for using Markdown is simply because HTML-based
+docs (JSX, EJS, etc as well) seem to be cluttery with all the unnecessary tags that remove
+brevity and make readability a pain.
 
-```c
-#include<stdio.h>
-#include<jsx_pragma.h>
+Another bonus of using Markdown is that any GitHub docs of your previous projects (in Markdown)
+can be put into a site with Documate. All you need is to run two commands and then you deploy.
+Although Documate can't deploy your builds for you, your builds are made production-ready and
+your readers can enjoy reading along.
 
-Jsx_scope<int> render() {
-  Jsx_Element.span(rndint()).content();
-}
-```
+## Features
 
-```rust
+- **Markdown-only** - You can embed HTML content in your Markdown files as usual
+- **Minimal** - Documate is not opinionated about how you lay out or format your docs. In any case,
+it knows how to transpile your Markdown 1-1 to HTML.
+- **Responsive** - Your site will look stunningly responsive and immersive across different viewports
+- **Blazing fast serving** - Run `documate start` and view your docs locally in no time
+- **Production-ready builds** - Your builds are minified and scripts uglified. Thanks to [ParcelJS](https://parceljs.org/)
 
-// Packem module bundler plugin
-#![crate_type = "dylib"]
-#![feature(std_misc)]
+Without much further to say, [let's get started](/getting-started)!
 
-use std::ffi::CString;
-
-#[allow(non_snake_case)] // C++ plugin
-extern "stdcall" {
-    fn packem_run(hWnd: u32, lpText: *const i8, lpCaption: *const i8, uType: u32) -> u32;
-}
-
-#[no_mangle]
-#[allow(non_snake_case)]
-pub unsafe extern "run" fn PackemPlugin(devserver_ptr: u32)
-{
-    let info_str = format!("MyPlugin created: {}!", devserver_ptr.instance.time());
-    let caption = CString::new("Hello from my Packem plugin!").unwrap();
-    packem_run(0, info_str.as_ptr(), caption.as_ptr(), 0);
-}
-```
-
-```javascript
-export default arr => arr.reduce((acc, cv) => acc.splice(cv))
-```
-
-```typescript
-// This is some TypeScript
-
-namespace sign {
-  export interface detached {
-    (msg: Uint8Array, secretKey: Uint8Array): Uint8Array;
-    verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
-  }
-
-  export interface keyPair {
-    (): SignKeyPair;
-    fromSecretKey(secretKey: Uint8Array): SignKeyPair;
-    fromSeed(secretKey: Uint8Array): SignKeyPair;
-  }
-}
-```
-
-Welcome to Documate v0.1.0. We'll run you through a brief history then show you how to create your own
-professional site.
-
-## History
-
-<button class="button button-primary">Button</button>
+Made with ❤ by [@bukharim96](https://twitter.com/bukharim96) and [@undefinedbuddy](https://twitter.com/undefinedbuddy).

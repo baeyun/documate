@@ -50,7 +50,7 @@ const topnavContentHTML = converterInstance.makeHtml(topnavContent)
 sidenavContent.split('\n').filter(l => l.trim() !== '')
 .map((line, i) => {
   // FIXME: `*` not appropriate
-  let link = line.match(/\([\.\/]*(.+)\)/i)
+  let link = line.match(/\]\([\.\/]*(.+)\)/)
 
   if (!link) return;
 
@@ -166,5 +166,5 @@ thread.stderr.on('data', data => {
 })
 thread.on('exit', code => {
   if (process.env.NODE_ENV === 'production')
-    console.log(`Done.`)
+    console.log(`Done!`)
 })

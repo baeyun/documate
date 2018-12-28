@@ -1,15 +1,19 @@
 * {
   box-sizing: border-box;
   outline: none;
+  font-family: "Open Sans" !important;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 17px !important;
   color: #222831;
   overflow: hidden;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-weight: 100 !important;
 }
 
 a {
@@ -19,6 +23,15 @@ a {
 p {
   line-height: 27px;
   margin: 10px 0;
+}
+
+li {
+  margin: 17px 0;
+  line-height: 27px;
+}
+
+ul {
+  padding-left: 20px;
 }
 
 em {
@@ -47,15 +60,26 @@ pre * {
   font-weight: normal !important;
 }
 
+:not(pre) > code, :not(pre) > kbd, :not(pre) > samp {
+  font-size: inherit !important;
+}
+
+blockquote {
+  border-left: 4px solid #1f87f0;
+  padding: 2px 14px 11px;
+  background: #E3F2FD;
+}
+
 a#logo {
   border: none !important;
   margin-left: 10px;
 }
 
 a#logo > img {
-  height: 50px !important;
+  height: 40px !important;
   position: relative;
-  width: 50px;
+  width: 40px;
+  margin-top: 5px;
 }
 
 nav#topnav {
@@ -64,6 +88,12 @@ nav#topnav {
   max-width: unset !important;
   background-color: #222831;
   box-shadow: 0 1px 1px 1px rgba(34, 41, 50, 0.06);
+}
+
+/* Temporarily fix the padding issue */
+nav#topnav li {
+  position:  relative;
+  top: -17px;
 }
 
 nav#topnav > div.navbar-right {
@@ -198,6 +228,13 @@ aside#sidenav {
   z-index: 1;
 }
 
+aside#sidenav li {
+  margin: unset;
+  line-height: unset;
+}
+
+aside#sidenav ul {padding: 0 10px;}
+
 aside#sidenav li ul {
   padding-left: 15px;
 }
@@ -222,6 +259,14 @@ aside#sidenav a:hover,
 aside#sidenav a.active {
   background-color: #eceaea;
   color: #222831;
+}
+
+aside#sidenav a code {
+  background-color: transparent;
+  color: #777777;
+  font-weight: bold;
+  padding: 0;
+  font-size: 16px;
 }
 
 main#main-content {
