@@ -1,6 +1,5 @@
 const { existsSync, writeFileSync } = require('fs')
 const { sep: pathSeperator } = require('path')
-const dir = __dirname + pathSeperator
 const cwd = process.cwd() + pathSeperator
 const { createCleanDirectory } = require('./utils')
 const chalk = require('chalk')

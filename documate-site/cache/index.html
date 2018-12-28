@@ -12259,43 +12259,28 @@ main#main-content > div.content.active {
   </nav>
   <aside id="sidenav">
     <ul>
-<li><a href="introduction">Introduction</a></li>
-<li><a href="docs/changelog">What's new</a></li>
-<li><a href="docs/getting-started">Getting Started</a></li>
-<li><a href="docs/changelog">Components</a></li>
-<li><a href="docs/contributing">Contributing</a></li>
+<li><a href="welcome">Welcome</a></li>
 </ul>
   </aside>
   <main id="main-content">
-    <div id="eqn3Bu7QttaVZXB5" class="content active">
-  <h1 data-path="/introduction~welcome-to-documate-v010">Welcome to Documate v0.1.0</h1>
-<p>Documate is a minimal static site generator for docs that takes your Markdown-based code and
-outputs a beautiful site (like this). The reason for using Markdown is simply because HTML-based
-docs (JSX, EJS, etc as well) seem to be cluttery with all the unnecessary tags that remove
-brevity and make readability a pain.</p>
-<p>Another bonus of using Markdown is that any GitHub docs of your previous projects (in Markdown)
-can be put into a site with Documate. All you need is to run two commands and then you deploy.
-Although Documate can't deploy your builds for you, your builds are made production-ready and
-your readers can enjoy reading along.</p>
-<h2 data-path="/introduction~features">Features</h2>
-<ul>
-<li><strong>Markdown-only</strong> - You can embed HTML content in your Markdown files as usual</li>
-<li><strong>Minimal</strong> - Documate is not opinionated about how you lay out or format your docs. In any case,
-it knows how to transpile your Markdown 1-1 to HTML.</li>
-<li><strong>Responsive</strong> - Your site will look stunningly responsive and immersive across different viewports</li>
-<li><strong>Blazing fast serving</strong> - Run <code>documate start</code> and view your docs locally in no time</li>
-<li><strong>Production-ready builds</strong> - Your builds are minified and scripts uglified. Thanks to <a href="https://parceljs.org/">ParcelJS</a></li>
-</ul>
-<p>Without much further to say, <a href="/getting-started">let's get started</a>!</p>
-<p>Made with ❤ by <a href="https://twitter.com/bukharim96">@bukharim96</a> and <a href="https://twitter.com/undefinedbuddy">@undefinedbuddy</a>.</p>
+    <div id="qjLI17I_FPFTyvtn" class="content active">
+  <h1 data-path="/welcome~welcome-to-documate">Welcome to Documate</h1>
+<p>Hi, and welcome to Documate, the tool that'll make creating sites for your projects docs a lot easier.</p>
+<h2 data-path="/welcome~getting-started">Getting started</h2>
+<p>Start by editing this file in <code>./documate/welcome.md</code> in your project's root directory. Control your site routes from <code>./documate/nav.md</code>.</p>
+<h2 data-path="/welcome~learn-more">Learn more...</h2>
+<p>For more info on getting started, visit our <a href="http://documate.github.io">docs</a> that's been built with Documate too.</p>
+<p>Enjoy writing docs with documate. Made with ❤ by <a href="https://twitter.com/bukharim96">@bukharim96</a> and <a href="https://twitter.com/undefinedbuddy">@undefinedbuddy</a>.</p>
+<pre><code>&lt;h1 data-path="/welcome~another-header-or-so-you-think"&gt;another header, or so you think?&lt;/h1&gt;
+</code></pre>
   
 </div>
 
   </main>
   
   <script data-lib-type="base" type="text/javascript">
-var urlRewriteMap = {"introduction":"eqn3Bu7QttaVZXB5","docs/changelog":"sMXCm3jokuEs5ULK","docs/getting-started":"Z9JG0XPwk0CrM9VX","docs/contributing":"6xwYYiP8EjKgPFNU"};
-var searchables = [{"title":"Welcome to Documate v0.1.0","permalink":"introduction~welcome-to-documate-v010"},{"title":"Features","permalink":"introduction~features"},{"title":"What's New","permalink":"docs/changelog~whats-new"},{"title":"v0.1.0","permalink":"docs/changelog~v010"},{"title":"Getting Started","permalink":"docs/getting-started~getting-started"},{"title":"Installation (CLI)","permalink":"docs/getting-started~installation-cli"},{"title":"Using npm","permalink":"docs/getting-started~using-npm"},{"title":"or with Yarn","permalink":"docs/getting-started~or-with-yarn"},{"title":"Creating your first Documate project","permalink":"docs/getting-started~creating-your-first-documate-project"},{"title":"To initialize a basic/empty project","permalink":"docs/getting-started~to-initialize-a-basicempty-project"},{"title":"To serve your docs","permalink":"docs/getting-started~to-serve-your-docs"},{"title":"To build your docs","permalink":"docs/getting-started~to-build-your-docs"},{"title":"What's New","permalink":"docs/changelog~whats-new"},{"title":"v0.1.0","permalink":"docs/changelog~v010"},{"title":"Contributing Guide","permalink":"docs/contributing~contributing-guide"},{"title":"Pull Request Process","permalink":"docs/contributing~pull-request-process"},{"title":"Code of Conduct","permalink":"docs/contributing~code-of-conduct"},{"title":"Our Pledge","permalink":"docs/contributing~our-pledge"},{"title":"Our Standards","permalink":"docs/contributing~our-standards"},{"title":"Our Responsibilities","permalink":"docs/contributing~our-responsibilities"},{"title":"Scope","permalink":"docs/contributing~scope"},{"title":"Enforcement","permalink":"docs/contributing~enforcement"},{"title":"Attribution","permalink":"docs/contributing~attribution"}];
+var urlRewriteMap = {"welcome":"qjLI17I_FPFTyvtn"};
+var searchables = [{"title":"Welcome to Documate","permalink":"welcome~welcome-to-documate"},{"title":"Getting started","permalink":"welcome~getting-started"},{"title":"Learn more...","permalink":"welcome~learn-more"},{"title":"another header, or so you think?","permalink":"welcome~another-header-or-so-you-think"}];
   </script>
   <script data-lib-type="base" type="text/javascript">
 ;(function(window) {
@@ -12491,17 +12476,25 @@ document.querySelector("#menu-link").onclick = function(e) {
   } else {
     document.body.classList.add("sidenav-active");
     document.getElementById("topnav").classList.remove("search-active");
-
-    // document.body.onclick = function(e) {
-    //   if (!e.target.id || e.target.id !== "sidenav" || e.target.id !== "menu-link") {
-    //     document.body.classList.remove("sidenav-active");
-    //   } else {
-    //     document.body.onclick = null;
-    //   }
-    // };
   }
 
   return;
+};
+
+document.getElementById('main-content').onclick = function(e) {
+  var topnav = document.getElementById('topnav');
+
+  if (
+    String(topnav.getAttribute("class")).indexOf("search-active") > -1
+  ) {
+    topnav.classList.remove('search-active');
+  }
+  
+  if (
+    String(document.body.getAttribute("class")).indexOf("sidenav-active") > -1
+  ) {
+    document.body.classList.remove("sidenav-active");
+  }
 };
 
 // Search capabilities

@@ -190,17 +190,25 @@ document.querySelector("#menu-link").onclick = function(e) {
   } else {
     document.body.classList.add("sidenav-active");
     document.getElementById("topnav").classList.remove("search-active");
-
-    // document.body.onclick = function(e) {
-    //   if (!e.target.id || e.target.id !== "sidenav" || e.target.id !== "menu-link") {
-    //     document.body.classList.remove("sidenav-active");
-    //   } else {
-    //     document.body.onclick = null;
-    //   }
-    // };
   }
 
   return;
+};
+
+document.getElementById('main-content').onclick = function(e) {
+  var topnav = document.getElementById('topnav');
+
+  if (
+    String(topnav.getAttribute("class")).indexOf("search-active") > -1
+  ) {
+    topnav.classList.remove('search-active');
+  }
+  
+  if (
+    String(document.body.getAttribute("class")).indexOf("sidenav-active") > -1
+  ) {
+    document.body.classList.remove("sidenav-active");
+  }
 };
 
 // Search capabilities

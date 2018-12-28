@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
 const { version } = require('../package.json')
-const { sep: pathSeperator } = require('path')
 const chalk = require('chalk')
 
-const cwd = process.cwd() + pathSeperator
 const [,, ...args] = process.argv
 
 switch(args[0]) {
