@@ -6,8 +6,8 @@ const {
   existsSync
 } = require('fs')
 const { sep: pathSeperator } = require('path')
-const { exec } = require('child_process')
 const chalk = require('chalk')
+const { exec } = require('child_process')
 
 const { createCleanDirectory } = require('./utils')
 const uniqider = require('uniqider')
@@ -31,16 +31,27 @@ let codeLanguages = []
 let navContent = readFileSync(cwd + 'documate/nav.md').toString()
 let initialPartial = ''
 
-// handle logo
-const logoBase64 = existsSync(cwd + 'documate/logo.png')
-  ? 'data:image/png;base64,' + readFileSync(cwd + 'documate/logo.png', 'base64')
-  : 'data:image/png;base64,' + readFileSync(dir + 'assets/img/documate-logo.png', 'base64')
-
+// create & clean necessary directories
 createCleanDirectory(cwd + projectName + '-site/')
 createCleanDirectory(cwd + projectName + '-site/cache/')
 createCleanDirectory(cwd + projectName + '-site/cache/assets/')
 createCleanDirectory(cwd + projectName + '-site/partials/')
 
+// handle logo
+let logoBase64 = existsSync(cwd + 'documate/logo.png')
+  ? 'data:image/png;base64,' + readFileSync(cwd + 'documate/logo.png', 'base64')
+  : 'data:image/png;base64,' + readFileSync(dir + 'assets/img/documate-logo.png', 'base64')
+
+// handle favicon
+let faviconPath = existsSync(cwd + 'documate/favicon.ico')
+  ? existsSync(cwd + 'documate/favicon.ico')
+  : dir + 'assets/img/favicon.ico'
+
+createReadStream(faviconPath).pipe(
+  createWriteStream(cwd + projectName + '-site/cache/favicon.ico')
+)
+
+// generate docs from nav.md (the starting point)
 let [, topnavContent, sidenavContent] = navContent.split(/\<\!\-\-\s*(?:TOPNAV|SIDENAV)\s*\-\-\>/)
 
 const topnavContentHTML = converterInstance.makeHtml(topnavContent)

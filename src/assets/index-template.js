@@ -32,6 +32,7 @@ module.exports = ({
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>${title}</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" sizes="16x16" type="image/ico">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
   <style data-lib-type="reset" type="text/css">
 ${resetStyles}
