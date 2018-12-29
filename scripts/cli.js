@@ -34,7 +34,7 @@ switch(args[0]) {
   case '--version':
   case 'version':
   case '-v':
-    console.log('\n  Documate Version: ' + chalk.hex('#1e87f0')(version) + '\n')
+    console.log('\n  Documate version: ' + chalk.hex('#1e87f0')(version) + '\n')
     break
   
   /**
@@ -79,7 +79,7 @@ switch(args[0]) {
       These commands coupled with the ${chalk.hex('#1e87f0')('documate')} command
       produce a brief documentation on all available
       Documate commands. For more info, visit our online
-      documention pages via: ${chalk.grey('http://documate.github.io/')}
+      documention pages via: ${chalk.grey('https://documate.netlify.com/')}
     `)
     break
 }
