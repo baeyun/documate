@@ -23,6 +23,6 @@ it knows how to transpile your Markdown 1-1 to HTML.
 - **Blazing fast serving** - Run `documate start` and view your docs locally in no time
 - **Production-ready builds** - Your builds are minified and scripts uglified. Thanks to [ParcelJS](https://parceljs.org/)
 
-For more info, visit the site.
+For more info, [visit the site](https://documate.netlify.com/). Documate is still in its development phase and can be a bit buggy some times. Feel free to contribute.
 
-Made with ❤ by [@bukharim96](https://twitter.com/bukharim96) and [@undefinedbuddy](https://twitter.com/undefinedbuddy). If you liked Documate, please buy me a cup of coffee.
+Made with ❤ by [@bukharim96](https://twitter.com/bukharim96) and [@undefinedbuddy](https://twitter.com/undefinedbuddy). If you liked Documate, consider buying us a cup of coffee.
