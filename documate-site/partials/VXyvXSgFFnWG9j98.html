@@ -1,0 +1,43 @@
+<div id="VXyvXSgFFnWG9j98" class="content active">
+  <h1 data-path="/docs/components~components">Components</h1>
+<p>In this section, all the basic components in a Markdown document are listed. If you wish to have support
+for extra components, feel free to make a fork of Documate and edit the core Markdown converter (<a href="http://showdownjs.com/">ShowdownJS</a>) thereof. You can manage and create custom Showdown plugins to fit your needs which you can integrate flawlessly into Documate to achieve greater flexibility. Such an interface doesn't exist but is on its way.</p>
+<h2 data-path="/docs/components~typography">Typography</h2>
+<h1 data-path="/docs/components~heading-1">Heading 1</h1>
+<h2 data-path="/docs/components~heading-2">Heading 2</h2>
+<h3 data-path="/docs/components~heading-3">Heading 3</h3>
+<h4 data-path="/docs/components~heading-4">Heading 4</h4>
+<h5 data-path="/docs/components~heading-5">Heading 5</h5>
+<h6 data-path="/docs/components~heading-6">Heading 6</h6>
+<h2 data-path="/docs/components~buttons">Buttons</h2>
+<p>Buttons come in 5 different (common?) forms:</p>
+<p><button>Default</button>
+<button class="primary">Primary</button>
+<button class="success">Success</button>
+<button class="warning">Warning</button>
+<button class="danger">Danger</button></p>
+<h2 data-path="/docs/components~blockquotes">Blockquotes</h2>
+<p>And a great deal of quotes:</p>
+<blockquote>
+  <p>"Imagination is more important than knowledge."
+  ~ Albert Einstein</p>
+</blockquote>
+<h2 data-path="/docs/components~code-blocks">Code Blocks</h2>
+<p>Documate uses <a href="https://highlightjs.org">HighlightJS</a> to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn't support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.</p>
+<pre><code class="javascript language-javascript">import documate from 'documate';
+
+const documentOrigin = [...prefix('./documate/index.md')];
+
+export default documate(documentOrigin).reduce((acc, next) =&gt; acc.call(null, next++))
+</code></pre>
+<h2 data-path="/docs/components~code-sweets">Code Sweets</h2>
+<p>These tiny tidbits are so sweet. Just don't overuse 'em:</p>
+<p><code>packem.require('./custom')</code>, <code>UNSAFE_shouldComponentUpdate</code></p>
+<h2 data-path="/docs/components~responsive-tables">Responsive Tables</h2>
+<p>Documate doesn't currently support tables. We know it sounds ridiculous, but bear with us. We are
+working on it.</p>
+  <span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/bash.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/bash.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/bash.min.js"></span>
+<span hidden="true" class="highlight-langs" data-src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/javascript.min.js"></span>
+</div>
