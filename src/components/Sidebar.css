@@ -1,0 +1,152 @@
+/**
+* ----------------------------------------------
+* Demo styles
+* ----------------------------------------------
+**/
+
+.accordion {
+  padding-left: 40px;
+}
+
+.accordion__item--has-icon {
+  position: relative;
+}
+
+/* DO NOT TOUCH */
+.accordion__item {
+  position: relative;
+}
+
+.accordion__item li a:active {
+  border-left: 4px solid #61dafb;
+  font-weight: 700;
+  position: relative;
+}
+
+.accordion__arrow {
+  display: inline-block;
+  width: 24px;
+  height: 12px;
+  position: absolute;
+  top: 40px;
+  right: 15px;
+  margin-top: -6px;
+}
+
+/* #endregion */
+
+.accordion__title {
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.accordion__body {
+  padding: 20px;
+  display: block;
+}
+
+.accordion__body--hidden {
+  display: none;
+  opacity: 0;
+}
+
+.accordion__title > *:last-child,
+.accordion__body > *:last-child {
+  margin-bottom: 0;
+}
+
+.accordion__arrow {
+  display: inline-block;
+  width: 24px;
+  height: 12px;
+  position: relative;
+  top: 14%;
+  right: 0;
+  left: 10px;
+}
+
+.accordion__arrow::after,
+.accordion__arrow::before {
+  display: block;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 2px;
+  background-color: rgb(109, 109, 109);
+  content: "";
+}
+
+.accordion__arrow::before {
+  left: 4px;
+  transform: rotate(45deg);
+}
+
+[aria-expanded="true"] .accordion__arrow::before,
+[aria-selected="true"] .accordion__arrow::before {
+  transform: rotate(-45deg);
+}
+
+.accordion__arrow::after {
+  right: 7px;
+  transform: rotate(-45deg);
+}
+
+[aria-expanded="true"] .accordion__arrow::after,
+[aria-selected="true"] .accordion__arrow::after {
+  transform: rotate(45deg);
+}
+
+.accordion__arrow::before,
+.accordion__arrow::after {
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+
+/* -------------------------------------------------- */
+/* ---------------- Animation part ------------------ */
+/* -------------------------------------------------- */
+
+@keyframes move-down {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(5px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move-up {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-5px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.accordion__title--animated:hover .accordion__arrow {
+  animation-name: move-down;
+  animation-duration: 1.5s;
+}
+
+.accordion__title--animated[aria-expanded="true"]:hover .accordion__arrow {
+  animation-name: move-up;
+  animation-duration: 1.5s;
+}
