@@ -1,0 +1,20 @@
+{
+  "TOPNAV": {
+    "Home": "./index.html",
+    "About": "./about.html"
+  },
+  "SIDENAV": {
+    "Introduction": "./docs/some/path/introduction.md",
+    "What's new": "./docs/latest/changelog.md",
+    "Getting Started": "./docs/getting-started.md",
+    "Components": "./docs/components.md",
+    "Contributing": "./docs/contributing.md",
+    "Advanced Guide": {
+      "Routes": "./docs/advanced/routes.md",
+      "Props": "./docs/advanced/routes.md",
+      "Context": "./docs/advanced/routes.md",
+      "More Stuff": "./docs/advanced/routes.md",
+      "Hell Yeah!": "./docs/advanced/routes.md"
+    }
+  }
+}

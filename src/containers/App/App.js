@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
 import Navbar from "../../components/Navbar";
@@ -8,15 +9,23 @@ import Footer from "../../components/Footer";
 
 import "./App.css";
 
+// Get nav.json
+const { TOPNAV, SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
+  "/documate/nav.json");
+
+console.log(TOPNAV, SIDENAV);
+
 class App extends Component {
   render() {
     return (
-      <div id="app">
-        <Navbar />
-        <Main />
-        <Sidebar />
-        <Footer />
-      </div>
+      <Router>
+        <div id="app">
+          <Navbar />
+          <Route path="/" component={Main} />
+          <Sidebar nav={SIDENAV} />
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }
