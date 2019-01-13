@@ -29,6 +29,8 @@ export default class DocumateNavbar extends React.Component {
   }
 
   render() {
+    let { nav: navItems } = this.props;
+
     return (
       <Navbar
         fixed
@@ -46,12 +48,14 @@ export default class DocumateNavbar extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav id="navbar-links-left" navbar>
-              <NavItem>
-                <NavLink href="#">Docs</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#">About</NavLink>
-              </NavItem>
+              {Object.keys(navItems).map((navitem, i) => (
+                <NavItem key={"nav-item-" + i}>
+                  <NavLink
+                    href={navItems[navitem]}
+                    children={navitem}
+                  />
+                </NavItem>
+              ))}
             </Nav>
             {/* Right */}
             <Nav className="ml-auto" navbar>

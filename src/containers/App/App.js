@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Router>
         <div id="app">
-          <Navbar />
+          <Navbar nav={TOPNAV} />
           <Route path="/" exact component={Main} />
           {possibleDocPaths.map((path, i) => (
             <Route key={"doc-paths-" + i} path={path} component={Main} />
