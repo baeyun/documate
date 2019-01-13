@@ -19,6 +19,7 @@ export default class Main extends Component {
   }
 
   componentWillMount() {
+    console.log("mounting...")
     const {
       location: { pathname }
     } = this.props;
@@ -30,7 +31,10 @@ export default class Main extends Component {
 
     fetch(contentPath)
       .then(d => d.text())
-      .then(t => this.setState({ content: t }));
+      .then(t => {
+        this.setState({ content: t })
+        console.log(t)
+      }).catch(e => console.error(e));
   }
 
   render() {

@@ -13,13 +13,20 @@ import "./App.css";
 const { TOPNAV, SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
   "/documate/nav.json");
 
+let possibleDocPaths = Object.keys(
+  JSON.parse(process.env.REACT_APP_DOCUMATE_PATHTOSOURCEMAP)
+);
+
 class App extends Component {
   render() {
     return (
       <Router>
         <div id="app">
           <Navbar />
-          <Route path="/" component={Main} />
+          <Route path="/" exact component={Main} />
+          {possibleDocPaths.map((path, i) => (
+            <Route key={"doc-paths-" + i} path={path} component={Main} />
+          ))}
           <Sidebar nav={SIDENAV} />
           <Footer />
         </div>
