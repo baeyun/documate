@@ -5,27 +5,29 @@ const chalk = require('chalk')
 
 const [,, ...args] = process.argv
 
+// Set global Documate env vars
+process.env.REACT_APP_DOCUMATE_CWD = process.cwd();
+
 switch(args[0]) {
   /**
    * documate init example-app
    */
   case 'init':
-    require('../src/init')
+    // require('../src/init')
     break
   
   /**
    * documate start
    */
   case 'start':
-    require('../src/')
+    require('./start')
     break
 
   /**
    * documate build
    */
   case 'build':
-    process.env.NODE_ENV = 'production'
-    require('../src/')
+    require('./build')
     break
 
   /**
