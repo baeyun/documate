@@ -8,14 +8,9 @@ import {
   AccordionItemBody
 } from "react-accessible-accordion";
 
-import "./Sidebar.css";
+import { pathToUri } from "../utils";
 
-// @todo handle errors
-function pathToUri(path) {
-  // let match = path.match(/[\.]?[\/]?(.*)\/\w+\.\w+$/);
-  let match = path.match(/[\.]?[\/]?(.*)\.\w+$/);
-  return match && match[1] ? "/" + match[1] : "/";
-}
+import "./Sidebar.css";
 
 function navWalker(title, nav, accord = true) {
   return nav.constructor == Object ? (
@@ -65,8 +60,13 @@ export default ({ nav }) => {
       md="4"
     >
       <Accordion>
-        {Object.keys(nav).map(title => {
-          return <AccordionItem children={navWalker(title, nav[title])} />;
+        {Object.keys(nav).map((title, i) => {
+          return (
+            <AccordionItem
+              key={`navitem-${i}`}
+              children={navWalker(title, nav[title])}
+            />
+          );
         })}
       </Accordion>
     </Col>

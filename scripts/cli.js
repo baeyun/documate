@@ -1,71 +1,94 @@
 #!/usr/bin/env node
 
-const { version } = require('../package.json')
-const chalk = require('chalk')
+const { version } = require("../package.json");
+const { existsSync } = require("fs");
+const chalk = require("chalk");
 
-const [,, ...args] = process.argv
+const [, , ...args] = process.argv;
+const CWD = process.cwd();
+
+if (!existsSync(CWD + "/documate/nav.json")) {
+  console.error("Documate requires a nav.json present in documate folder");
+  process.kill(0);
+}
+
+const siteNav = require(CWD + "/documate/nav.json");
 
 // Set global Documate env vars
-process.env.REACT_APP_DOCUMATE_CWD = process.cwd();
+process.env.REACT_APP_DOCUMATE_CWD = CWD;
 
-switch(args[0]) {
+switch (args[0]) {
   /**
    * documate init example-app
    */
-  case 'init':
+  case "init":
     // require('../src/init')
-    break
-  
+    break;
+
   /**
    * documate start
    */
-  case 'start':
-    require('./start')
-    break
+  case "start":
+    const { createCleanDirectory } = require("../src/utils");
+    const outputPath = `${CWD}/documate/public/partials`;
+    createCleanDirectory(outputPath);
+    const pathToSourceMap = require("./generateDocs").generateDocs(
+      siteNav.SIDENAV,
+      outputPath
+    );
+    process.env.REACT_APP_DOCUMATE_PATHTOSOURCEMAP = JSON.stringify(
+      pathToSourceMap
+    );
+    require("./start");
+    break;
 
   /**
    * documate build
    */
-  case 'build':
-    require('./build')
-    break
+  case "build":
+    require("./build");
+    break;
 
   /**
    * documate version
    */
-  case '--version':
-  case 'version':
-  case '-v':
-    console.log('\n  Documate version: ' + chalk.hex('#1e87f0')(version) + '\n')
-    break
-  
+  case "--version":
+  case "version":
+  case "-v":
+    console.log(
+      "\n  Documate version: " + chalk.hex("#1e87f0")(version) + "\n"
+    );
+    break;
+
   /**
    * documate version
    */
-  case '--help':
-  case 'help':
-  case '-h':
+  case "--help":
+  case "help":
+  case "-h":
   default:
     console.log(`
-  Welcome to Documate ${chalk.grey('- Version: ' + version)}
+  Welcome to Documate ${chalk.grey("- Version: " + version)}
 
-    Command usage: ${chalk.hex('#1e87f0')('documate')} <command>
+    Command usage: ${chalk.hex("#1e87f0")("documate")} <command>
   
   AVAILABLE COMMANDS:
     
-    ${chalk.hex('#1e87f0')('init')}
-      Creates a ${chalk.grey("/documate")} folder with a ${chalk.grey("/documate/nav.md")}
+    ${chalk.hex("#1e87f0")("init")}
+      Creates a ${chalk.grey("/documate")} folder with a ${chalk.grey(
+      "/documate/nav.md"
+    )}
       file in the folder where it's run. This is where
       your documentation files should live.
 
-    ${chalk.hex('#1e87f0')('start')}
+    ${chalk.hex("#1e87f0")("start")}
       Converts all ${chalk.grey(".md")} (markdown) files into valid
       HTML which is then formed into a static website
       in ${chalk.grey("./<PROJECT_NAME>-site")} in the directory where
       it's run. This site is then served with
       ${chalk.grey("parcel-bundler")}. This is useful for development.
 
-    ${chalk.hex('#1e87f0')('build')}
+    ${chalk.hex("#1e87f0")("build")}
       Creates a static website out of the documentation
       in the ${chalk.grey("/documate")} folder which it then outputs
       to ${chalk.grey("./<PROJECT_NAME>-site")} in the directory where
@@ -73,15 +96,17 @@ switch(args[0]) {
       you please, be it on github pages, netlify, zeit,
       custom host, etc.
 
-    ${chalk.hex('#1e87f0')('--version | version | -v')}
+    ${chalk.hex("#1e87f0")("--version | version | -v")}
       These commands simply return the current version
       of Documate that you are running.
 
-    ${chalk.hex('#1e87f0')('--help | help | -h')}
-      These commands coupled with the ${chalk.hex('#1e87f0')('documate')} command
+    ${chalk.hex("#1e87f0")("--help | help | -h")}
+      These commands coupled with the ${chalk.hex("#1e87f0")(
+        "documate"
+      )} command
       produce a brief documentation on all available
       Documate commands. For more info, visit our online
-      documention pages via: ${chalk.grey('https://documate.netlify.com/')}
-    `)
-    break
+      documention pages via: ${chalk.grey("https://documate.netlify.com/")}
+    `);
+    break;
 }
