@@ -3,18 +3,22 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 
 import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
-import Main from "../../components/Main";
+import Page from "../../components/Page";
+import Document from "../../components/Document";
 import Footer from "../../components/Footer";
 
 import "./App.css";
 
-// Get nav.json
-const { TOPNAV, SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
+// Get TOPNAV
+const { TOPNAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
   "/documate/nav.json");
 
+let possibleTopnavPaths = Object.keys(
+  JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP)
+);
+
 let possibleDocPaths = Object.keys(
-  JSON.parse(process.env.REACT_APP_DOCUMATE_PATHTOSOURCEMAP)
+  JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
 
 class App extends Component {
@@ -23,11 +27,21 @@ class App extends Component {
       <Router>
         <div id="app">
           <Navbar nav={TOPNAV} />
-          <Route path="/" exact component={Main} />
-          {possibleDocPaths.map((path, i) => (
-            <Route key={"doc-paths-" + i} path={path} component={Main} />
+          
+          {/* ROUTES */}
+          <Route path="/" exact component={Page} />
+          {possibleTopnavPaths.map((path, i) => (
+            <Route
+              key={"nav-paths-" + i}
+              path={path}
+              component={Page}
+            />
           ))}
-          <Sidebar nav={SIDENAV} />
+          <Route path="/docs" exact component={Document} />
+          {possibleDocPaths.map((path, i) => (
+            <Route key={"doc-paths-" + i} path={path} component={Document} />
+          ))}
+          
           <Footer />
         </div>
       </Router>

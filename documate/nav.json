@@ -1,7 +1,8 @@
 {
   "TOPNAV": {
     "Home": "./index.html",
-    "About": "./about.html"
+    "About": "./about.html",
+    "Contact": "./contact.html"
   },
   "SIDENAV": {
     "Introduction": "./docs/introduction.md",

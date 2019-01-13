@@ -12,6 +12,8 @@ import {
 } from "reactstrap";
 import { EntypoLink, EntypoMagnifyingGlass } from "react-entypo";
 
+import { pathToUri } from "../utils";
+
 export default class DocumateNavbar extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +53,7 @@ export default class DocumateNavbar extends React.Component {
               {Object.keys(navItems).map((navitem, i) => (
                 <NavItem key={"nav-item-" + i}>
                   <NavLink
-                    href={navItems[navitem]}
+                    href={pathToUri(navItems[navitem])}
                     children={navitem}
                   />
                 </NavItem>

@@ -12,8 +12,6 @@ if (!existsSync(CWD + "/documate/nav.json")) {
   process.kill(0);
 }
 
-const siteNav = require(CWD + "/documate/nav.json");
-
 // Set global Documate env vars
 process.env.REACT_APP_DOCUMATE_CWD = CWD;
 
@@ -29,16 +27,7 @@ switch (args[0]) {
    * documate start
    */
   case "start":
-    const { createCleanDirectory } = require("../src/utils");
-    const outputPath = `${CWD}/documate/public/partials`;
-    createCleanDirectory(outputPath);
-    const pathToSourceMap = require("./generateDocs").generateDocs(
-      siteNav.SIDENAV,
-      outputPath
-    );
-    process.env.REACT_APP_DOCUMATE_PATHTOSOURCEMAP = JSON.stringify(
-      pathToSourceMap
-    );
+    require('./documateStart')
     require("./start");
     break;
 
