@@ -13,8 +13,6 @@ import "./App.css";
 const { TOPNAV, SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
   "/documate/nav.json");
 
-console.log(TOPNAV, SIDENAV);
-
 class App extends Component {
   render() {
     return (
