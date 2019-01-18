@@ -82,6 +82,13 @@ code {
 
 /* Links left */
 
+.collapse.show.navbar-collapse {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
 #navbar-links-left a {
   padding: 5px 20px;
   border-radius: 0;
@@ -153,6 +160,10 @@ input#navbar-search:focus {
 }
 
 /* Main */
+
+#main-content {
+  min-height: calc(100vh - 49px);
+}
 
 #main-content a {
   text-decoration: none;
@@ -236,6 +247,10 @@ input#navbar-search:focus {
   border-bottom: none !important;
   position: relative;
   top: -66px;
+  display: none;
+}
+
+#sidebar-fab {
   display: none;
 }
 
@@ -323,6 +338,7 @@ input#navbar-search:focus {
     opacity: 1;
   }
   #sidebar-fab {
+    display: inline-block;
     z-index: 2;
     position: fixed;
     bottom: 40px;

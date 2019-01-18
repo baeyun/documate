@@ -94,7 +94,13 @@ export default class DocumateNavbar extends React.Component {
               </NavItem>
             </Nav>
             {/* Right */}
-            <Nav className="ml-auto" navbar>
+            <Nav
+              style={{
+                alignItems: "center"
+              }}
+              className="ml-auto"
+              navbar
+            >
               <NavItem>
                 <Input
                   type="search"

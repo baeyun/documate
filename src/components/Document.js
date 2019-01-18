@@ -49,6 +49,18 @@ export default class Document extends Component {
           />
         </Container>
         <Sidebar nav={SIDENAV} />
+        <button
+          onClick={() => {
+            let sidebar = document.getElementById("sidebar");
+
+            if (!Array.from(sidebar.classList).includes("active-mobile"))
+              sidebar.classList.add("active-mobile");
+            else sidebar.classList.remove("active-mobile");
+          }}
+          id="sidebar-fab"
+        >
+          S
+        </button>
       </>
     );
   }
