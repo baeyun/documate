@@ -8,11 +8,39 @@ import {
   AccordionItemBody
 } from "react-accessible-accordion";
 
+import { pathToUri } from "../utils";
+
 import "./Sidebar.css";
 
-function pathToUri(path) {
-  let match = path.match(/[\.]?[\/]?(.*)\/\w+\.\w+$/);
-  return match && match[1] ? "/" + match[1] : false;
+function navWalker(title, nav, accord = true) {
+  return nav.constructor == Object ? (
+    <>
+      {(accord && (
+        <AccordionItemTitle>
+          <span className="acc-item-title" children={title} />
+          <div className="accordion__arrow" role="presentation" />
+        </AccordionItemTitle>
+      )) || <span className="acc-item-title" children={title} />}
+      <AccordionItemBody>
+        <ul>
+          {Object.keys(nav).map(
+            subNavTitle =>
+              (nav[subNavTitle].constructor == Object &&
+                navWalker(subNavTitle, nav[subNavTitle], false)) || (
+                <li>
+                  <Link
+                    to={pathToUri(nav[subNavTitle])}
+                    children={subNavTitle}
+                  />
+                </li>
+              )
+          )}
+        </ul>
+      </AccordionItemBody>
+    </>
+  ) : (
+    <Link to={pathToUri(nav)} className="acc-item-title" children={title} />
+  );
 }
 
 export default ({ nav }) => {
@@ -32,40 +60,12 @@ export default ({ nav }) => {
       md="4"
     >
       <Accordion>
-        {Object.keys(nav).map(title => {
-          let pathSlashSubs = nav[title];
-
+        {Object.keys(nav).map((title, i) => {
           return (
-            <AccordionItem>
-              <AccordionItemTitle>
-                {(pathSlashSubs.constructor == Object && (
-                  <>
-                    <span className="acc-item-title" children={title} />
-                    <div className="accordion__arrow" role="presentation" />
-                  </>
-                )) || (
-                  <Link
-                    to={pathToUri(pathSlashSubs) || "/"}
-                    className="acc-item-title"
-                    children={title}
-                  />
-                )}
-              </AccordionItemTitle>
-              {pathSlashSubs.constructor == Object && (
-                <AccordionItemBody>
-                  <ul>
-                    {Object.keys(pathSlashSubs).map(subTitle => (
-                      <li>
-                        <Link
-                          to={pathToUri(pathSlashSubs[subTitle]) || "/"}
-                          children={subTitle}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionItemBody>
-              )}
-            </AccordionItem>
+            <AccordionItem
+              key={`navitem-${i}`}
+              children={navWalker(title, nav[title])}
+            />
           );
         })}
       </Accordion>

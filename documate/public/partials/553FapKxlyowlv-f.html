@@ -1,0 +1,36 @@
+<h1 id="components">Components</h1>
+<p>In this section, all the basic components in a Markdown document are listed. If you wish to have support
+for extra components, feel free to make a fork of Documate and edit the core Markdown converter (<a href="http://showdownjs.com/">ShowdownJS</a>) thereof. You can manage and create custom Showdown plugins to fit your needs which you can integrate flawlessly into Documate to achieve greater flexibility. Such an interface doesn&#39;t exist but is on its way.</p>
+<h2 id="typography">Typography</h2>
+<h1 id="heading-1">Heading 1</h1>
+<h2 id="heading-2">Heading 2</h2>
+<h3 id="heading-3">Heading 3</h3>
+<h4 id="heading-4">Heading 4</h4>
+<h5 id="heading-5">Heading 5</h5>
+<h6 id="heading-6">Heading 6</h6>
+<h2 id="buttons">Buttons</h2>
+<p>Buttons come in 5 different (common?) forms:</p>
+<p><button>Default</button>
+<button class="primary">Primary</button>
+<button class="success">Success</button>
+<button class="warning">Warning</button>
+<button class="danger">Danger</button></p>
+<h2 id="blockquotes">Blockquotes</h2>
+<p>And a great deal of quotes:</p>
+<blockquote>
+<p>&quot;Imagination is more important than knowledge.&quot;
+~ Albert Einstein</p>
+</blockquote>
+<h2 id="code-blocks">Code Blocks</h2>
+<p>Documate uses <a href="https://highlightjs.org">HighlightJS</a> to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn&#39;t support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.</p>
+<pre><code class="language-javascript">import documate from &#39;documate&#39;;
+
+const documentOrigin = [...prefix(&#39;./documate/index.md&#39;)];
+
+export default documate(documentOrigin).reduce((acc, next) =&gt; acc.call(null, next++))</code></pre>
+<h2 id="code-sweets">Code Sweets</h2>
+<p>These tiny tidbits are so sweet. Just don&#39;t overuse &#39;em:</p>
+<p><code>packem.require(&#39;./custom&#39;)</code>, <code>UNSAFE_shouldComponentUpdate</code></p>
+<h2 id="responsive-tables">Responsive Tables</h2>
+<p>Documate doesn&#39;t currently support tables. We know it sounds ridiculous, but bear with us. We are
+working on it.</p>

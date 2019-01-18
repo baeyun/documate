@@ -11,6 +11,8 @@ import {
   Input
 } from "reactstrap";
 
+import { pathToUri } from "../utils";
+
 export default class DocumateNavbar extends React.Component {
   state = {
     revealMobileSearch: false
@@ -28,6 +30,8 @@ export default class DocumateNavbar extends React.Component {
   }
 
   render() {
+    let { nav: navItems } = this.props;
+
     return (
       <Navbar
         fixed
@@ -49,12 +53,14 @@ export default class DocumateNavbar extends React.Component {
           </NavbarBrand>
           <Collapse isOpen={true} navbar>
             <Nav id="navbar-links-left" navbar>
-              <NavItem>
-                <NavLink href="#">Docs</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#">About</NavLink>
-              </NavItem>
+              {Object.keys(navItems).map((navitem, i) => (
+                <NavItem key={"nav-item-" + i}>
+                  <NavLink
+                    href={pathToUri(navItems[navitem])}
+                    children={navitem}
+                  />
+                </NavItem>
+              ))}
               <NavItem
                 id="navbar-mobile-search-item"
                 style={{
