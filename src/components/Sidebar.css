@@ -17,12 +17,6 @@
   position: relative;
 }
 
-.accordion__item li a:active {
-  border-left: 4px solid #61dafb;
-  font-weight: 700;
-  position: relative;
-}
-
 .accordion__arrow {
   display: inline-block;
   width: 24px;

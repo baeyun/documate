@@ -19,6 +19,22 @@ it knows how to transpile your Markdown 1-1 to HTML.
 - **Blazing fast serving** - Run `documate start` and view your docs locally in no time
 - **Production-ready builds** - Your builds are minified and scripts uglified. Thanks to [ParcelJS](https://parceljs.org/)
 
+>
+> Note
+>
+> Documate doesn't generate docs or static content from code comments. Instead, you can copy and paste your docs into Markdown with a few tweaks and your site should be ready in no time.
+>
+
+## Code Demo
+
+The demo below tries to show how cool [Documate](/) code tags appear. We use [HighlightJS](/)
+
+```typescript
+const rem = px(16)
+
+root.defineProp<CSSProps.fontSize>(rem)
+```
+
 Without much further to say, [let's get started](/getting-started)!
 
 Made with ❤ by [@bukharim96](https://twitter.com/bukharim96) and [@undefinedbuddy](https://twitter.com/undefinedbuddy).

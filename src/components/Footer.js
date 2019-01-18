@@ -8,7 +8,7 @@ class Footer extends Component {
         <Container>
           <Col md="9" style={{ paddingTop: 53 }}>
             <Row>
-              <Col md="3">
+              <Col md="3" sm="12" xs="12">
                 <a className="oss-logo" href="javascript:void(0)">
                   <img
                     src="https://facebook.github.io/create-react-app/img/oss_logo.png"
@@ -16,7 +16,7 @@ class Footer extends Component {
                   />
                 </a>
               </Col>
-              <Col md="3">
+              <Col md="3" sm="12" xs="12">
                 <span className="section-label">Guide</span>
                 <ul>
                   <li>
@@ -33,7 +33,7 @@ class Footer extends Component {
                   </li>
                 </ul>
               </Col>
-              <Col md="3">
+              <Col md="3" sm="12" xs="12">
                 <span className="section-label">Docs</span>
                 <ul>
                   <li>
