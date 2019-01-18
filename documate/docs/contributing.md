@@ -1,6 +1,6 @@
 # Contributing Guide
 
-This section covers all the necessary details to be able to contribute to Macron as an individual or team. Please make sure to cover this section at least once before actively contributing to Macron.
+This section covers all the necessary details to be able to contribute to Documate as an individual or team. Please make sure to cover this section at least once before actively contributing to Documate.
 
 When contributing to this project, please first discuss the change you wish to make via issue, email, or any other method with the owners of this project before making a change.
 

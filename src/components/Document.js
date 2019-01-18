@@ -29,7 +29,7 @@ export default class Document extends Component {
         ? SidenavSourceMap[Object.keys(SidenavSourceMap)[0]]
         : SidenavSourceMap[pathname];
 
-    console.log(pathname);
+    document.body.scrollIntoView();
 
     fetch(contentPath)
       .then(d => d.text())
