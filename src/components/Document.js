@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Col } from "reactstrap";
 
 import Sidebar from "./Sidebar";
+import "./mobile-menu.css";
 
 const SidenavSourceMap = JSON.parse(
   process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP
@@ -18,6 +19,14 @@ export default class Document extends Component {
     this.state = {
       content: ""
     };
+  }
+
+  componentDidMount() {
+    var wrapperMenu = document.querySelector(".wrapper-menu");
+
+    wrapperMenu.addEventListener("click", function() {
+      wrapperMenu.classList.toggle("open");
+    });
   }
 
   componentWillMount() {
@@ -40,7 +49,7 @@ export default class Document extends Component {
   render() {
     return (
       <>
-        <Container style={{ paddingTop: 53 }}>
+        <Container id="main-content-wrapper" style={{ paddingTop: 53 }}>
           <Col
             id="main-content"
             style={{ paddingTop: 90 }}
@@ -59,7 +68,11 @@ export default class Document extends Component {
           }}
           id="sidebar-fab"
         >
-          S
+          <div class="wrapper-menu">
+            <div class="line-menu half start" />
+            <div class="line-menu" />
+            <div class="line-menu half end" />
+          </div>
         </button>
       </>
     );

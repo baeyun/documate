@@ -1,0 +1,37 @@
+<h1 id="welcome-to-documate-v010">Welcome to Documate v0.1.0</h1>
+<p>Documate is a minimal static site generator for docs that takes your Markdown-based code and
+outputs a beautiful site (like this). The reason for using Markdown is simply because HTML-based
+docs (JSX, EJS, etc as well) seem to be cluttery with all the unnecessary tags that remove
+brevity and make readability a pain.</p>
+<p>Another bonus of using Markdown is that any GitHub docs of your previous projects (in Markdown)
+can be put into a site with Documate. All you need is to run two commands and then you deploy.
+Although Documate can&#39;t deploy your builds for you, your builds are made production-ready and
+your readers can enjoy reading along.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Markdown-only</strong> - You can embed HTML content in your Markdown files as usual</li>
+<li><strong>Minimal</strong> - Documate is not opinionated about how you lay out or format your docs. In any case,
+it knows how to transpile your Markdown 1-1 to HTML.</li>
+<li><strong>Responsive</strong> - Your site will look stunningly responsive and immersive across different viewports</li>
+<li><strong>Blazing fast serving</strong> - Run <code>documate start</code> and view your docs locally in no time</li>
+<li><strong>Production-ready builds</strong> - Your builds are minified and scripts uglified. Thanks to <a href="https://parceljs.org/">ParcelJS</a></li>
+</ul>
+<blockquote>
+<p>Note</p>
+<p>Documate doesn&#39;t generate docs or static content from code comments. Instead, you can copy and paste your docs into Markdown with a few tweaks and your site should be ready in no time.</p>
+</blockquote>
+<h2 id="code-demo">Code Demo</h2>
+<p>The demo below tries to show how cool <a href="/">Documate</a> code tags appear. We use <a href="/">HighlightJS</a></p>
+<pre><code class="language-javascript">function tick() {
+  const element = (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;h2&gt;It is {new Date().toLocaleTimeString()}.&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+  ReactDOM.render(element, document.getElementById(&#39;root&#39;));
+}
+
+setInterval(tick, 1000);</code></pre>
+<p>Without much further to say, <a href="/getting-started">let&#39;s get started</a>!</p>
+<p>Made with ❤ by <a href="https://twitter.com/bukharim96">@bukharim96</a> and <a href="https://twitter.com/undefinedbuddy">@undefinedbuddy</a>.</p>

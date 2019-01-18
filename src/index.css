@@ -1,5 +1,5 @@
 * {
-  outline: none;
+  outline: none !important;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -144,6 +144,6 @@ body {
 }
 
 code {
-  font-family: "Dank Mono", source-code-pro, Menlo, Monaco, Consolas,
+  font-family: source-code-pro, Menlo, Monaco, Consolas,
     "Courier New", monospace !important;
 }

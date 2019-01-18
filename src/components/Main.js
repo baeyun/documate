@@ -24,7 +24,7 @@ export default class Main extends Component {
           }}
           id="sidebar-fab"
         >
-          S
+          M
         </button>
       </Container>
     );

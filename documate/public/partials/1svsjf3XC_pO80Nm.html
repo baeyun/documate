@@ -22,8 +22,16 @@ it knows how to transpile your Markdown 1-1 to HTML.</li>
 </blockquote>
 <h2 id="code-demo">Code Demo</h2>
 <p>The demo below tries to show how cool <a href="/">Documate</a> code tags appear. We use <a href="/">HighlightJS</a></p>
-<pre><code class="language-typescript">const rem = px(16)
+<pre><code class="language-javascript">function tick() {
+  const element = (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;h2&gt;It is {new Date().toLocaleTimeString()}.&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+  ReactDOM.render(element, document.getElementById(&#39;root&#39;));
+}
 
-root.defineProp&lt;CSSProps.fontSize&gt;(rem)</code></pre>
+setInterval(tick, 1000);</code></pre>
 <p>Without much further to say, <a href="/getting-started">let&#39;s get started</a>!</p>
 <p>Made with ❤ by <a href="https://twitter.com/bukharim96">@bukharim96</a> and <a href="https://twitter.com/undefinedbuddy">@undefinedbuddy</a>.</p>

@@ -43,6 +43,18 @@ code {
   word-break: break-word;
 }
 
+pre {
+  width: 100%;
+  overflow-x: auto;
+  background: #eee;
+  padding: 10px;
+}
+
+pre code {
+  color: #333;
+  background: none;
+}
+
 #navbar {
   position: fixed;
   top: 0;
@@ -257,6 +269,9 @@ input#navbar-search:focus {
 /* Override default Bootstrap mobile styles */
 
 @media only screen and (max-width: 860px) {
+  .accordion__arrow {
+    display: none;
+  }
   #navbar {
     height: 40px;
   }
@@ -326,23 +341,33 @@ input#navbar-search:focus {
     right: 0;
     overflow-y: auto;
     z-index: 1;
-    padding-top: 10px;
+    padding-top: 0 !important;
+    transform: translateY(50px);
     opacity: 0;
-    transform: translateY(500em);
-    opacity: 0;
-    transition: transform 0.3s;
-    transition: opacity .5s;
+    transition: all 0.2s ease-in-out;
   }
   #sidebar.active-mobile {
     transform: translateY(0);
     opacity: 1;
   }
   #sidebar-fab {
-    display: inline-block;
-    z-index: 2;
+    display: flex;
+    justify-content: center;
     position: fixed;
-    bottom: 40px;
+    bottom: 44px;
     right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: #20232a;
+    color: #61dafb;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+  #main-content-wrapper {
+    padding: 0;
   }
   #main-content {
     padding: 20px 0 0 0 !important;
