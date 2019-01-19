@@ -175,6 +175,10 @@ input#navbar-search:focus {
   min-height: calc(100vh - 49px);
 }
 
+#main-content img {
+  max-width: 100%;
+}
+
 #main-content a {
   text-decoration: none;
   background-color: rgba(187, 239, 253, 0.30196078431372547);

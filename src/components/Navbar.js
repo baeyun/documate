@@ -34,9 +34,9 @@ export default class DocumateNavbar extends React.Component {
 
     return (
       <Navbar
-        fixed
         style={{
-          backgroundColor: "#20232a"
+          backgroundColor: "#20232a",
+          position: "fixed"
         }}
         id="navbar"
         dark
@@ -59,7 +59,9 @@ export default class DocumateNavbar extends React.Component {
                 return (
                   <NavItem key={"nav-item-" + i}>
                     <NavLink
-                      className={path === window.location.pathname && "active"}
+                      className={
+                        path === window.location.pathname ? "active" : ""
+                      }
                       href={path}
                       children={navitem}
                     />
