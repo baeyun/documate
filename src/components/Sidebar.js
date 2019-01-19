@@ -17,7 +17,9 @@ function navWalker(title, nav, accord = true) {
     <>
       {(accord && (
         <AccordionItemTitle>
-          <span className="acc-item-title" children={title} />
+          <span className="acc-item-title" style={{
+            marginLeft: 6
+          }} children={title} />
           <div className="accordion__arrow" role="presentation" />
         </AccordionItemTitle>
       )) || <span className="acc-item-title" children={title} />}

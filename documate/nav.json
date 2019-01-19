@@ -1,6 +1,6 @@
 {
   "TOPNAV": {
-    "Docs": "./docs/introduction.md",
+    "Home": "./index.html",
     "About": "./about.html",
     "Contact": "./contact.html"
   },

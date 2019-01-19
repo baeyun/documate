@@ -15,6 +15,7 @@
 /* DO NOT TOUCH */
 .accordion__item {
   position: relative;
+  width: fit-content;
 }
 
 .accordion__arrow {
@@ -35,7 +36,7 @@
 }
 
 .accordion__body {
-  padding: 20px;
+  padding: 5px 10px 20px;
   display: block;
 }
 

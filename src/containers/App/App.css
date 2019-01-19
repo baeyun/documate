@@ -321,18 +321,7 @@ input#navbar-search:focus {
     padding: 6px 10px;
     font-size: 15px;
   }
-  #navbar-search-mobile {
-    display: none;
-    transition: all 0.3s;
-  }
-  #navbar-search-mobile.active {
-    display: inline-block;
-    width: 50%;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-  }
+  #navbar-search {}
   #sidebar {
     position: absolute;
     top: 40px;
