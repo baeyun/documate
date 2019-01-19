@@ -21,12 +21,6 @@ let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
 
-let currentPath = window.location.pathname;
-let previousPath = possibleDocPaths.indexOf(currentPath) - 1;
-let nextPath = possibleDocPaths.indexOf(currentPath) + 1;
-
-console.log(previousPath, nextPath);
-
 let codeLangs = JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS);
 
 for (let i = 0; i < codeLangs.length; i++) {
