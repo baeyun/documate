@@ -280,6 +280,10 @@ input#navbar-search:focus {
     display: none;
   }
 
+  #navbar #navbar-search {
+    display: block;
+  }
+
   #navbar ul {
     line-height: 1.6; /* Fit scrollbar to navbar bottom, yo! */
   }
