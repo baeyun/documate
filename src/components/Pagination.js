@@ -23,7 +23,7 @@ export default () => {
       <Container>
         <Col md="8">
           <Row>
-            {previousPathLink && (
+            {(previousPathLink && (
               <Col className="page-previous" md="6" sm="6" xs="6">
                 <span
                   style={{
@@ -38,7 +38,7 @@ export default () => {
                   {previousPathLink}
                 </Link>
               </Col>
-            )}
+            )) || <Col className="page-previous" md="6" sm="6" xs="6" />}
             {nextPathLink && (
               <Col
                 className="page-next"
