@@ -9,7 +9,7 @@ module.exports = {
   pathToUri: path => {
     // @todo handle errors
     let match = path.match(/[\.]?[\/]?(.*)\.\w+$/);
-    return match && match[1] ? "/" + match[1] : "/";
+    return match && match[1] && match[1] !== "index" ? "/" + match[1] : "/";
   },
   embedBase64Imgs(htmlContent, srcPath) {
     let imgMatches = htmlContent.match(/\<img.+\/?\>/gim);
@@ -27,10 +27,7 @@ module.exports = {
 
           newHtmlContent = htmlContent.replace(
             match,
-            match.replace(
-              /src\=\"[\.\/]*(.[^\"]+)\"/i,
-              `src="${base64Src}" width="100%"`
-            )
+            match.replace(/src\=\"[\.\/]*(.[^\"]+)\"/i, `src="${base64Src}"`)
           );
         } else {
           console.warn(`DOCUMATE ERR: Unable to find image in: ${srcPath}`);
