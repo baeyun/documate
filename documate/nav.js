@@ -1,7 +1,7 @@
 module.exports = {
   "TOPNAV": {
+    "Home": "./index.html",
     "Docs": "./docs/",
-    "React": "https://reactjs.org/",
     "About": "./about.html",
     "Contact": "./contact.html"
   },

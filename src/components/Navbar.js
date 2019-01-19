@@ -62,7 +62,10 @@ export default class DocumateNavbar extends React.Component {
                   <NavItem key={"nav-item-" + i}>
                     <NavLink
                       className={
-                        window.location.pathname.includes(uri) ? "active" : ""
+                        uri === window.location.pathname ||
+                        (window.location.pathname.includes(uri) && uri !== "/")
+                          ? "active"
+                          : ""
                       }
                       href={uri}
                       children={navitem}
