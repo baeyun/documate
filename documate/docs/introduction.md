@@ -5,6 +5,8 @@ outputs a beautiful site (like this). The reason for using Markdown is simply be
 docs (JSX, EJS, etc as well) seem to be cluttery with all the unnecessary tags that remove
 brevity and make readability a pain.
 
+![Balshazzar](./img/balshazzar.png)
+
 Another bonus of using Markdown is that any GitHub docs of your previous projects (in Markdown)
 can be put into a site with Documate. All you need is to run two commands and then you deploy.
 Although Documate can't deploy your builds for you, your builds are made production-ready and

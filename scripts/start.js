@@ -1,6 +1,7 @@
 const marked = require("marked");
 const uniqider = require("uniqider");
 const {
+  existsSync,
   readFileSync,
   writeFileSync,
   createReadStream,
@@ -22,6 +23,7 @@ function generateDocs(nav, outputPath) {
         let mdDocContent = readFileSync(
           `${CWD}/documate/${pathSlashSub}`
         ).toString();
+        var htmlDocContent = marked(mdDocContent);
 
         // Extract used code languages for code highlighting
         let matches = mdDocContent.match(/^```(\w+)\s*$/gim);
@@ -31,13 +33,40 @@ function generateDocs(nav, outputPath) {
             usedCodeLangs.push(matches[i].substr(3).trim());
           }
 
-        let htmlDocContent = marked(mdDocContent);
-        let newFilename = uniqider() + ".html";
+        // Handle images
+        let imgMatches = htmlDocContent.match(/\<img.+\/?\>/gim);
+        if (imgMatches) {
+          for (let i = 0; i < imgMatches.length; i++) {
+            let match = imgMatches[i];
+            let imgPath =
+              CWD + "/documate/docs/" + match.match(/src\=\"[\.\/]*(.[^\"]+)\"/i)[1];
 
+            // convert to base64 and replace src
+            if (existsSync(imgPath)) {
+              let base64Src =
+                "data:image/png;base64," + readFileSync(imgPath, "base64");
+
+              htmlDocContent = htmlDocContent.replace(
+                match,
+                match.replace(
+                  /src\=\"[\.\/]*(.[^\"]+)\"/i,
+                  `src="${base64Src}" width="100%"`
+                )
+              );
+            } else {
+              console.warn("DOCUMATE ERR: Unable to find image.");
+              process.kill(0);
+            }
+          }
+        }
+
+        // Output
+        let newFilename = uniqider() + ".html";
         writeFileSync(
+          // Output with new filename
           `${outputPath}/${newFilename}`,
           // Markdown to HTML
-          marked(mdDocContent)
+          htmlDocContent
         );
 
         pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newFilename;
