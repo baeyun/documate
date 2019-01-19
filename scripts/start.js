@@ -1,7 +1,6 @@
 const marked = require("marked");
 const uniqider = require("uniqider");
 const {
-  existsSync,
   readFileSync,
   writeFileSync,
   createReadStream,
@@ -9,7 +8,11 @@ const {
 } = require("fs");
 const { normalize } = require("path");
 
-const { pathToUri, createCleanDirectory } = require("../src/utils");
+const {
+  pathToUri,
+  createCleanDirectory,
+  embedBase64Imgs
+} = require("../src/utils");
 
 // Generate docs
 function generateDocs(nav, outputPath) {
@@ -33,43 +36,22 @@ function generateDocs(nav, outputPath) {
             usedCodeLangs.push(matches[i].substr(3).trim());
           }
 
-        // Handle images
-        let imgMatches = htmlDocContent.match(/\<img.+\/?\>/gim);
-        if (imgMatches) {
-          for (let i = 0; i < imgMatches.length; i++) {
-            let match = imgMatches[i];
-            let imgPath =
-              CWD + "/documate/docs/" + match.match(/src\=\"[\.\/]*(.[^\"]+)\"/i)[1];
-
-            // convert to base64 and replace src
-            if (existsSync(imgPath)) {
-              let base64Src =
-                "data:image/png;base64," + readFileSync(imgPath, "base64");
-
-              htmlDocContent = htmlDocContent.replace(
-                match,
-                match.replace(
-                  /src\=\"[\.\/]*(.[^\"]+)\"/i,
-                  `src="${base64Src}" width="100%"`
-                )
-              );
-            } else {
-              console.warn("DOCUMATE ERR: Unable to find image.");
-              process.kill(0);
-            }
-          }
-        }
+        // Embed all images as inline base64
+        htmlDocContent = embedBase64Imgs(
+          htmlDocContent,
+          CWD + "/documate/docs/"
+        );
 
         // Output
-        let newFilename = uniqider() + ".html";
+        let newPartialName = uniqider() + ".html";
         writeFileSync(
           // Output with new filename
-          `${outputPath}/${newFilename}`,
+          `${outputPath}/${newPartialName}`,
           // Markdown to HTML
           htmlDocContent
         );
 
-        pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newFilename;
+        pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newPartialName;
       } else {
         walk(pathSlashSub);
       }
@@ -96,10 +78,22 @@ createCleanDirectory(outputPath);
 // copy to partials dir under new uid name
 let TopnavSourceMap = {};
 Object.keys(TOPNAV).map(k => {
-  let newPartialName = uniqider() + ".html";
+  var htmlContent = readFileSync(
+    normalize(`${CWD}/documate/${TOPNAV[k]}`)
+  ).toString();
 
-  createReadStream(normalize(`${CWD}/documate/${TOPNAV[k]}`)).pipe(
-    createWriteStream(normalize(outputPath + "/" + newPartialName))
+  // Embed all images as inline base64
+  htmlContent = embedBase64Imgs(
+    htmlContent,
+    CWD + "/documate/"
+  );
+
+  // Output
+  let newPartialName = uniqider() + ".html";
+  writeFileSync(
+    // Output with new filename
+    `${outputPath}/${newPartialName}`,
+    htmlContent
   );
 
   TopnavSourceMap[pathToUri(TOPNAV[k])] = "/partials/" + newPartialName;
