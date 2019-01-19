@@ -11,7 +11,7 @@ const SidenavSourceMap = JSON.parse(
 
 // Get SIDENAV
 const { SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
-  "/documate/nav.json");
+  "/documate/nav.js");
 
 export default class Document extends Component {
   constructor(props) {

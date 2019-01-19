@@ -7,8 +7,8 @@ const chalk = require("chalk");
 const [, , ...args] = process.argv;
 const CWD = process.cwd();
 
-if (!existsSync(CWD + "/documate/nav.json")) {
-  console.error("Documate requires a nav.json present in documate folder");
+if (!existsSync(CWD + "/documate/nav.js")) {
+  console.error("Documate requires a nav.js present in documate folder");
   process.kill(0);
 }
 
@@ -27,7 +27,6 @@ switch (args[0]) {
    * documate start
    */
   case "start":
-    require('./documateStart')
     require("./start");
     break;
 

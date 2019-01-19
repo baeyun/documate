@@ -1,117 +1,96 @@
-'use strict';
+const marked = require("marked");
+const uniqider = require("uniqider");
+const {
+  readFileSync,
+  writeFileSync,
+  createReadStream,
+  createWriteStream
+} = require("fs");
+const { normalize } = require("path");
 
-// Do this as the first thing so that any code reading it knows the right env.
-process.env.BABEL_ENV = 'development';
-process.env.NODE_ENV = 'development';
+const { pathToUri, createCleanDirectory } = require("../src/utils");
 
-// Makes the script crash on unhandled rejections instead of silently
-// ignoring them. In the future, promise rejections that are not handled will
-// terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
-  throw err;
+// Generate docs
+function generateDocs(nav, outputPath) {
+  var pathToSourceMap = {};
+  var usedCodeLangs = [];
+
+  const walk = nav => {
+    for (const i in nav) {
+      let pathSlashSub = nav[i];
+      if (pathSlashSub.constructor === String) {
+        let mdDocContent = readFileSync(
+          `${CWD}/documate/${pathSlashSub}`
+        ).toString();
+
+        // Extract used code languages for code highlighting
+        let matches = mdDocContent.match(/^```(\w+)\s*$/gim);
+
+        if (matches)
+          for (let i = 0; i < matches.length; i++) {
+            usedCodeLangs.push(matches[i].substr(3).trim());
+          }
+
+        let htmlDocContent = marked(mdDocContent);
+        let newFilename = uniqider() + ".html";
+
+        writeFileSync(
+          `${outputPath}/${newFilename}`,
+          // Markdown to HTML
+          marked(mdDocContent)
+        );
+
+        pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newFilename;
+      } else {
+        walk(pathSlashSub);
+      }
+    }
+  };
+
+  walk(nav);
+
+  // remove duplicates
+  usedCodeLangs = [...new Set(usedCodeLangs)];
+
+  return { pathToSourceMap, usedCodeLangs };
+}
+
+// Handle navigation & doc/page gen
+const CWD = process.cwd();
+const outputPath = `${CWD}/documate/public/partials`;
+const { TOPNAV, SIDENAV } = require(CWD + "/documate/nav.js");
+
+// Empty dir for partials
+createCleanDirectory(outputPath);
+
+// TOPNAV
+// copy to partials dir under new uid name
+let TopnavSourceMap = {};
+Object.keys(TOPNAV).map(k => {
+  let newPartialName = uniqider() + ".html";
+
+  createReadStream(normalize(`${CWD}/documate/${TOPNAV[k]}`)).pipe(
+    createWriteStream(normalize(outputPath + "/" + newPartialName))
+  );
+
+  TopnavSourceMap[pathToUri(TOPNAV[k])] = "/partials/" + newPartialName;
 });
 
-// Ensure environment variables are read.
-require('../config/env');
+// Set global REACT_APP_DOCUMATE_TOPNAVSOURCEMAP env var
+process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP = JSON.stringify(
+  TopnavSourceMap
+);
 
+// SIDENAV
+const { pathToSourceMap, usedCodeLangs } = generateDocs(SIDENAV, outputPath);
 
-const fs = require('fs');
-const chalk = require('chalk');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const clearConsole = require('react-dev-utils/clearConsole');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const {
-  choosePort,
-  createCompiler,
-  prepareProxy,
-  prepareUrls,
-} = require('react-dev-utils/WebpackDevServerUtils');
-const openBrowser = require('react-dev-utils/openBrowser');
-const paths = require('../config/paths');
-const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
+// Set global REACT_APP_DOCUMATE_SIDENAVSOURCEMAP env var
+process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP = JSON.stringify(
+  pathToSourceMap
+);
 
-const useYarn = fs.existsSync(paths.yarnLockFile);
-const isInteractive = process.stdout.isTTY;
+// Set global REACT_APP_DOCUMATE_CODELANGS env var
+process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
 
-// Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
-  process.exit(1);
-}
-
-// Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
-const HOST = process.env.HOST || '0.0.0.0';
-
-if (process.env.HOST) {
-  console.log(
-    chalk.cyan(
-      `Attempting to bind to HOST environment variable: ${chalk.yellow(
-        chalk.bold(process.env.HOST)
-      )}`
-    )
-  );
-  console.log(
-    `If this was unintentional, check that you haven't mistakenly set it in your shell.`
-  );
-  console.log(
-    `Learn more here: ${chalk.yellow('http://bit.ly/CRA-advanced-config')}`
-  );
-  console.log();
-}
-
-// We require that you explictly set browsers and do not fall back to
-// browserslist defaults.
-const { checkBrowsers } = require('react-dev-utils/browsersHelper');
-checkBrowsers(paths.appPath, isInteractive)
-  .then(() => {
-    // We attempt to use the default port but if it is busy, we offer the user to
-    // run on a different port. `choosePort()` Promise resolves to the next free port.
-    return choosePort(HOST, DEFAULT_PORT);
-  })
-  .then(port => {
-    if (port == null) {
-      // We have not found a port.
-      return;
-    }
-    const config = configFactory('development');
-    const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
-    const appName = require(paths.appPackageJson).name;
-    const urls = prepareUrls(protocol, HOST, port);
-    // Create a webpack compiler that is configured with custom messages.
-    const compiler = createCompiler(webpack, config, appName, urls, useYarn);
-    // Load proxy config
-    const proxySetting = require(paths.appPackageJson).proxy;
-    const proxyConfig = prepareProxy(proxySetting, paths.appPublic);
-    // Serve webpack assets generated by the compiler over a web server.
-    const serverConfig = createDevServerConfig(
-      proxyConfig,
-      urls.lanUrlForConfig
-    );
-    const devServer = new WebpackDevServer(compiler, serverConfig);
-    // Launch WebpackDevServer.
-    devServer.listen(port, HOST, err => {
-      if (err) {
-        return console.log(err);
-      }
-      if (isInteractive) {
-        clearConsole();
-      }
-      console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
-    });
-
-    ['SIGINT', 'SIGTERM'].forEach(function(sig) {
-      process.on(sig, function() {
-        devServer.close();
-        process.exit();
-      });
-    });
-  })
-  .catch(err => {
-    if (err && err.message) {
-      console.log(err.message);
-    }
-    process.exit(1);
-  });
+// Leave the rest to CRA's start script
+require("./craStart");

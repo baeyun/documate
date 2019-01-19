@@ -10,7 +10,7 @@ import "./App.css";
 
 // Get TOPNAV
 const { TOPNAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
-  "/documate/nav.json");
+  "/documate/nav.js");
 
 let possibleTopnavPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP)
@@ -19,6 +19,8 @@ let possibleTopnavPaths = Object.keys(
 let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
+
+console.log(JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS));
 
 class App extends Component {
   render() {
