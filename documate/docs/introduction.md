@@ -6,9 +6,11 @@ docs (JSX, EJS, etc as well) seem to be cluttery with all the unnecessary tags t
 brevity and make readability a pain.
 
 Another bonus of using Markdown is that any GitHub docs of your previous projects (in Markdown)
-can be put into a site with Documate. All you need is to run two commands and then you deploy.
-Although Documate can't deploy your builds for you, your builds are made production-ready and
-your readers can enjoy reading along.
+can be put into a site with Documate.
+
+![Balshazzar](./img/balshazzar.png)
+
+All you need is to run two commands and then you deploy. Although Documate can't deploy your builds for you, your builds are made production-ready and your readers can enjoy reading along.
 
 ## Features
 

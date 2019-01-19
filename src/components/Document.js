@@ -41,7 +41,6 @@ export default class Document extends Component {
     fetch(contentPath)
       .then(d => d.text())
       .then(t => {
-        window['c'] = t
         this.setState({ content: t });
         highlightCode();
       })

@@ -25,10 +25,10 @@ export default class Fab extends Component {
         onClick={this.onFabClick.bind(this)}
         id="sidebar-fab"
       >
-        <div class="wrapper-menu">
-          <div class="line-menu half start" />
-          <div class="line-menu" />
-          <div class="line-menu half end" />
+        <div className="wrapper-menu">
+          <div className="line-menu half start" />
+          <div className="line-menu" />
+          <div className="line-menu half end" />
         </div>
       </button>
     );

@@ -8,7 +8,11 @@ const {
 } = require("fs");
 const { normalize } = require("path");
 
-const { pathToUri, createCleanDirectory } = require("../src/utils");
+const {
+  pathToUri,
+  createCleanDirectory,
+  embedBase64Imgs
+} = require("../src/utils");
 
 // Generate docs
 function generateDocs(nav, outputPath) {
@@ -22,6 +26,7 @@ function generateDocs(nav, outputPath) {
         let mdDocContent = readFileSync(
           `${CWD}/documate/${pathSlashSub}`
         ).toString();
+        var htmlDocContent = marked(mdDocContent);
 
         // Extract used code languages for code highlighting
         let matches = mdDocContent.match(/^```(\w+)\s*$/gim);
@@ -31,16 +36,22 @@ function generateDocs(nav, outputPath) {
             usedCodeLangs.push(matches[i].substr(3).trim());
           }
 
-        let htmlDocContent = marked(mdDocContent);
-        let newFilename = uniqider() + ".html";
-
-        writeFileSync(
-          `${outputPath}/${newFilename}`,
-          // Markdown to HTML
-          marked(mdDocContent)
+        // Embed all images as inline base64
+        htmlDocContent = embedBase64Imgs(
+          htmlDocContent,
+          CWD + "/documate/docs/"
         );
 
-        pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newFilename;
+        // Output
+        let newPartialName = uniqider() + ".html";
+        writeFileSync(
+          // Output with new filename
+          `${outputPath}/${newPartialName}`,
+          // Markdown to HTML
+          htmlDocContent
+        );
+
+        pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newPartialName;
       } else {
         walk(pathSlashSub);
       }
@@ -67,10 +78,22 @@ createCleanDirectory(outputPath);
 // copy to partials dir under new uid name
 let TopnavSourceMap = {};
 Object.keys(TOPNAV).map(k => {
-  let newPartialName = uniqider() + ".html";
+  var htmlContent = readFileSync(
+    normalize(`${CWD}/documate/${TOPNAV[k]}`)
+  ).toString();
 
-  createReadStream(normalize(`${CWD}/documate/${TOPNAV[k]}`)).pipe(
-    createWriteStream(normalize(outputPath + "/" + newPartialName))
+  // Embed all images as inline base64
+  htmlContent = embedBase64Imgs(
+    htmlContent,
+    CWD + "/documate/"
+  );
+
+  // Output
+  let newPartialName = uniqider() + ".html";
+  writeFileSync(
+    // Output with new filename
+    `${outputPath}/${newPartialName}`,
+    htmlContent
   );
 
   TopnavSourceMap[pathToUri(TOPNAV[k])] = "/partials/" + newPartialName;

@@ -41,12 +41,20 @@ class App extends Component {
 
           {/* ROUTES */}
           <Route path="/" exact component={Page} />
-          {possibleTopnavPaths.map((path, i) => (
-            <Route key={"nav-paths-" + i} path={path} component={Page} />
-          ))}
+          {possibleTopnavPaths.map(
+            (path, i) =>
+              path !== "/" && (
+                <Route key={"nav-paths-" + i} path={path} component={Page} />
+              )
+          )}
           <Route path="/docs" exact component={Document} />
           {possibleDocPaths.map((path, i) => (
-            <Route key={"doc-paths-" + i} path={path} component={Document} />
+            <Route
+              key={"doc-paths-" + i}
+              path={path}
+              exact
+              component={Document}
+            />
           ))}
 
           <Footer />

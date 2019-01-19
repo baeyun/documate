@@ -13,36 +13,60 @@ import { pathToUri } from "../utils";
 import "./Sidebar.css";
 
 function navWalker(title, nav, accord = true) {
-  return nav.constructor == Object ? (
-    <>
-      {(accord && (
-        <AccordionItemTitle>
-          <span className="acc-item-title" style={{
-            marginLeft: 6
-          }} children={title} />
-          <div className="accordion__arrow" role="presentation" />
-        </AccordionItemTitle>
-      )) || <span className="acc-item-title" children={title} />}
-      <AccordionItemBody>
-        <ul>
-          {Object.keys(nav).map(
-            subNavTitle =>
-              (nav[subNavTitle].constructor == Object &&
-                navWalker(subNavTitle, nav[subNavTitle], false)) || (
-                <li>
-                  <Link
-                    to={pathToUri(nav[subNavTitle])}
-                    children={subNavTitle}
-                  />
-                </li>
-              )
-          )}
-        </ul>
-      </AccordionItemBody>
-    </>
-  ) : (
-    <Link to={pathToUri(nav)} className="acc-item-title" children={title} />
-  );
+  if (nav.constructor == Object) {
+    return (
+      <>
+        {(accord && (
+          <AccordionItemTitle>
+            <span
+              className="acc-item-title"
+              style={{
+                marginLeft: 6
+              }}
+              children={title}
+            />
+            <div className="accordion__arrow" role="presentation" />
+          </AccordionItemTitle>
+        )) || <span className="acc-item-title" children={title} />}
+        <AccordionItemBody>
+          <ul>
+            {Object.keys(nav).map((subNavTitle, i) => {
+              let path = pathToUri(nav[subNavTitle]);
+
+              return (
+                (nav[subNavTitle].constructor == Object &&
+                  navWalker(subNavTitle, nav[subNavTitle], false)) || (
+                  <li key={"subnav-item-" + i}>
+                    <Link
+                      to={path}
+                      className={
+                        path === window.location.pathname ? "active" : ""
+                      }
+                      children={subNavTitle}
+                    />
+                  </li>
+                )
+              );
+            })}
+          </ul>
+        </AccordionItemBody>
+      </>
+    );
+  } else {
+    let path = pathToUri(nav);
+    
+    return (
+      <Link
+        to={path}
+        className={
+          path === window.location.pathname
+            ? "acc-item-title active"
+            : "acc-item-title"
+        }
+        children={title}
+      />
+    );
+  }
 }
 
 export default ({ nav }) => {
