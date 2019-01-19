@@ -296,12 +296,9 @@ input#navbar-search:focus {
     height: 40px;
   }
 
-  #navbar .ml-auto {
-    display: none;
-  }
-
-  #navbar #navbar-search {
-    display: block;
+  #navbar #nav-link-version,
+  #navbar #nav-link-git {
+    display: none !important;
   }
 
   #navbar ul {
@@ -417,5 +414,11 @@ input#navbar-search:focus {
   }
   #footer .oss-logo img {
     margin: 2em auto;
+  }
+
+  #navbar-search-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }

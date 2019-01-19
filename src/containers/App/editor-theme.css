@@ -1,8 +1,13 @@
+/* @font-face {
+  font-family: "Fira Code";
+  src: url("https://cdn.rawgit.com/tonsky/FiraCode/master/distr/ttf/FiraCode-Regular.ttf");
+} */
+
 code[class*="language-"],
 pre[class*="language-"] {
   color: #ffffff;
   background: 0 0;
-  font-family: "Dank Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;
+  font-family: "Hack", Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
