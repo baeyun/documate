@@ -34,6 +34,7 @@ module.exports = {
           process.kill(0);
         }
       }
+    else return htmlContent;
 
     return newHtmlContent;
   }
