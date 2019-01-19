@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Col } from "reactstrap";
 
 import Sidebar from "./Sidebar";
-import Fab from './Fab'
+import Fab from "./Fab";
 import "./mobile-menu.css";
 
 const SidenavSourceMap = JSON.parse(
@@ -35,7 +35,10 @@ export default class Document extends Component {
 
     fetch(contentPath)
       .then(d => d.text())
-      .then(t => this.setState({ content: t }))
+      .then(t => {
+        this.setState({ content: t })
+        eval("Prism.highlightAll();")
+      })
       .catch(e => console.error(e));
   }
 

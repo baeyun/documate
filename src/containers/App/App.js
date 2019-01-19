@@ -20,7 +20,16 @@ let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
 
-console.log(JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS));
+let codeLangs = JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS);
+
+for (let i = 0; i < codeLangs.length; i++) {
+  let lang = codeLangs[i];
+  let script = document.createElement("script");
+
+  script.type = "text/javascript";
+  script.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-${lang}.min.js`;
+  document.head.appendChild(script);
+}
 
 class App extends Component {
   render() {
