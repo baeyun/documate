@@ -32,7 +32,6 @@ export default class Page extends Component {
   render() {
     return (
       <div
-        id="main-content"
         style={{ paddingTop: 90 }}
         md="8"
         dangerouslySetInnerHTML={{ __html: this.state.content }}

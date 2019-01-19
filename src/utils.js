@@ -8,7 +8,7 @@ module.exports = {
   },
   pathToUri: path => {
     let match = path.match(/[\.]?[\/]?(.*)\.\w+$/);
-    return match && match[1] && match[1] !== "index" ? "/" + match[1] : "/";
+    return match && match[1] && match[1] !== "index" ? "/" + match[1] : null;
   },
   titleCase: title =>
     title
