@@ -45,9 +45,11 @@ code {
 
 pre {
   width: 100%;
-  overflow-x: auto;
   background: #eee;
-  padding: 10px;
+  margin: 25px 0;
+  overflow: auto;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 pre code {
@@ -99,7 +101,6 @@ pre code {
   align-items: center;
   justify-content: space-between;
 }
-
 
 #navbar-links-left a {
   padding: 5px 20px;
@@ -209,6 +210,22 @@ input#navbar-search:focus {
   margin-bottom: 50px;
 }
 
+/* Pagination */
+
+.pagination-link {
+  font-size: 30px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: rgb(109, 109, 109);
+  transition: border-color 0.2s ease 0s;
+  color: #ffffff;
+}
+
+.pagination-link:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
 /* Footer */
 
 .section-label {
@@ -221,9 +238,8 @@ input#navbar-search:focus {
 }
 
 #footer {
-  margin-top: 150px;
   background-color: #20232a;
-  padding: 100px 0;
+  padding: 0 0 100px;
 }
 
 #footer ul {
@@ -269,6 +285,10 @@ input#navbar-search:focus {
 /* Override default Bootstrap mobile styles */
 
 @media only screen and (max-width: 860px) {
+  pre {
+    border-radius: 0 !important;
+  }
+
   .accordion__arrow {
     display: none;
   }
@@ -325,7 +345,8 @@ input#navbar-search:focus {
     padding: 6px 10px;
     font-size: 15px;
   }
-  #navbar-search {}
+  #navbar-search {
+  }
   #sidebar {
     position: absolute;
     top: 40px;
@@ -333,7 +354,7 @@ input#navbar-search:focus {
     left: 0;
     right: 0;
     overflow-y: auto;
-    z-index: 1;
+    z-index: -1;
     padding-top: 0 !important;
     transform: translateY(50px);
     opacity: 0;
@@ -341,6 +362,7 @@ input#navbar-search:focus {
   }
   #sidebar.active-mobile {
     transform: translateY(0);
+    z-index: 1;
     opacity: 1;
   }
   #sidebar-fab {
@@ -385,8 +407,11 @@ input#navbar-search:focus {
   #main-content > p:first-of-type {
     font-size: 18px;
   }
+  #pagination .page-previous a,
+  #pagination .page-next a {
+    font-size: 16px;
+  }
   #footer {
-    margin-top: 100px;
     padding-top: 0;
     padding-bottom: 50px;
   }

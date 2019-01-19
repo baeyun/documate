@@ -14,33 +14,42 @@ your readers can enjoy reading along.
 
 - **Markdown-only** - You can embed HTML content in your Markdown files as usual
 - **Minimal** - Documate is not opinionated about how you lay out or format your docs. In any case,
-it knows how to transpile your Markdown 1-1 to HTML.
+  it knows how to transpile your Markdown 1-1 to HTML.
 - **Responsive** - Your site will look stunningly responsive and immersive across different viewports
 - **Blazing fast serving** - Run `documate start` and view your docs locally in no time
 - **Production-ready builds** - Your builds are minified and scripts uglified. Thanks to [ParcelJS](https://parceljs.org/)
 
->
 > Note
 >
 > Documate doesn't generate docs or static content from code comments. Instead, you can copy and paste your docs into Markdown with a few tweaks and your site should be ready in no time.
->
 
 ## Code Demo
 
 The demo below tries to show how cool [Documate](/) code tags appear. We use [HighlightJS](/)
 
-```javascript
-function tick() {
-  const element = (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {new Date().toLocaleTimeString()}.</h2>
-    </div>
-  );
-  ReactDOM.render(element, document.getElementById('root'));
-}
+```jsx
+import { useState, useEffect } from 'react';
 
-setInterval(tick, 1000);
+function FriendListItem(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() => {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  return (
+    <li style={{ color: isOnline ? 'green' : 'black' }}>
+      {props.friend.name}
+    </li>
+  );
+}
 ```
 
 Without much further to say, [let's get started](/getting-started)!

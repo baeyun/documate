@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Col } from "reactstrap";
 
+import Pagination from "./Pagination";
 import Sidebar from "./Sidebar";
 import Fab from "./Fab";
 import "./mobile-menu.css";
@@ -12,6 +13,10 @@ const SidenavSourceMap = JSON.parse(
 // Get SIDENAV
 const { SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
   "/documate/nav.js");
+
+function highlightCode() {
+  eval("Prism.highlightAll();");
+}
 
 export default class Document extends Component {
   constructor(props) {
@@ -36,13 +41,19 @@ export default class Document extends Component {
     fetch(contentPath)
       .then(d => d.text())
       .then(t => {
-        this.setState({ content: t })
-        eval("Prism.highlightAll();")
+        this.setState({ content: t });
+        highlightCode();
       })
       .catch(e => console.error(e));
   }
 
+  componentDidMount() {
+    highlightCode();
+  }
+
   render() {
+    highlightCode();
+
     return (
       <>
         <Container id="main-content-wrapper" style={{ paddingTop: 53 }}>
@@ -53,6 +64,7 @@ export default class Document extends Component {
             dangerouslySetInnerHTML={{ __html: this.state.content }}
           />
         </Container>
+        <Pagination />
         <Sidebar nav={SIDENAV} />
         <Fab />
       </>

@@ -7,6 +7,7 @@ import Document from "../../components/Document";
 import Footer from "../../components/Footer";
 
 import "./App.css";
+import "./editor-theme.css";
 
 // Get TOPNAV
 const { TOPNAV } = require(process.env.REACT_APP_DOCUMATE_CWD +

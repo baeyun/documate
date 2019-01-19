@@ -61,10 +61,11 @@ export default ({ nav }) => {
       id="sidebar"
       md="4"
     >
-      <Accordion>
+      <Accordion accordion={false}>
         {Object.keys(nav).map((title, i) => {
           return (
             <AccordionItem
+              expanded={true}
               key={`navitem-${i}`}
               children={navWalker(title, nav[title])}
             />

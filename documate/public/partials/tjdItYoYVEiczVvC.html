@@ -22,16 +22,27 @@ it knows how to transpile your Markdown 1-1 to HTML.</li>
 </blockquote>
 <h2 id="code-demo">Code Demo</h2>
 <p>The demo below tries to show how cool <a href="/">Documate</a> code tags appear. We use <a href="/">HighlightJS</a></p>
-<pre><code class="language-javascript">function tick() {
-  const element = (
-    &lt;div&gt;
-      &lt;h1&gt;Hello, world!&lt;/h1&gt;
-      &lt;h2&gt;It is {new Date().toLocaleTimeString()}.&lt;/h2&gt;
-    &lt;/div&gt;
-  );
-  ReactDOM.render(element, document.getElementById(&#39;root&#39;));
-}
+<pre><code class="language-jsx">import { useState, useEffect } from &#39;react&#39;;
 
-setInterval(tick, 1000);</code></pre>
+function FriendListItem(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() =&gt; {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return () =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  return (
+    &lt;li style={{ color: isOnline ? &#39;green&#39; : &#39;black&#39; }}&gt;
+      {props.friend.name}
+    &lt;/li&gt;
+  );
+}</code></pre>
 <p>Without much further to say, <a href="/getting-started">let&#39;s get started</a>!</p>
 <p>Made with ❤ by <a href="https://twitter.com/bukharim96">@bukharim96</a> and <a href="https://twitter.com/undefinedbuddy">@undefinedbuddy</a>.</p>
