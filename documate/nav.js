@@ -1,4 +1,4 @@
-{
+module.exports = {
   "TOPNAV": {
     "Home": "./index.html",
     "About": "./about.html",
