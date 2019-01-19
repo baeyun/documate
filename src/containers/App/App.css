@@ -114,12 +114,9 @@ pre code {
   color: #ffffff;
 }
 
-#navbar-links-left a:hover {
+#navbar-links-left a:hover,
+#navbar-links-left a.active {
   background-color: unset;
-  color: #61dafb !important;
-}
-
-#navbar-links-left a:active {
   color: #61dafb !important;
   border-bottom-color: #61dafb;
 }

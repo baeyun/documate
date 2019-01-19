@@ -53,14 +53,19 @@ export default class DocumateNavbar extends React.Component {
           </NavbarBrand>
           <Collapse isOpen={true} navbar>
             <Nav id="navbar-links-left" navbar>
-              {Object.keys(navItems).map((navitem, i) => (
-                <NavItem key={"nav-item-" + i}>
-                  <NavLink
-                    href={pathToUri(navItems[navitem])}
-                    children={navitem}
-                  />
-                </NavItem>
-              ))}
+              {Object.keys(navItems).map((navitem, i) => {
+                let path = pathToUri(navItems[navitem]);
+
+                return (
+                  <NavItem key={"nav-item-" + i}>
+                    <NavLink
+                      className={path === window.location.pathname && "active"}
+                      href={path}
+                      children={navitem}
+                    />
+                  </NavItem>
+                );
+              })}
               <NavItem
                 id="navbar-mobile-search-item"
                 style={{
