@@ -9,40 +9,33 @@ import {
   NavLink,
   Input
 } from "reactstrap";
-// import * as algoliasearch from "algoliasearch";
-// import { InstantSearch } from 'react-instantsearch-dom';
-// import algoliasearch from 'algoliasearch/lite';
 
 import SearchIcon from "./SearchIcon";
 import { pathToUri } from "../utils";
+import * as algoliasearch from "algoliasearch";
 
-// let searchClient = algoliasearch("I4BUJTTEDG", "1cdcfe706c2bd82721ea35f6b35c5549");
-// let index = searchClient.initIndex("results");
-// let searchObject = require("../../documate/nav");
+let searchClient = algoliasearch(
+  "I4BUJTTEDG",
+  "1cdcfe706c2bd82721ea35f6b35c5549"
+);
+let index = searchClient.initIndex("results");
+let searchObject = require("../../documate/nav");
 
-// index.addObject(searchObject, function(err) {
-//   if (err) console.error(err);
-// });
-
-// const Search = () => (
-//   <InstantSearch
-//     indexName="results"
-//     searchClient={searchClient}
-//   >
-//     {/* Widgets */}
-//   </InstantSearch>
-// );
-// On content search (API key, index must be available)
-// index.search("Intro", function(err, content) {
-//   if (err) console.error(err);
-
-//   console.table(content.hits);
-// });
+index.addObject(searchObject, function(err) {
+  if (err) console.error(err);
+});
 
 export default class DocumateNavbar extends React.Component {
   state = {
     isSearchOpen: false
   };
+
+  onSearchChange() {
+    index.search(document.getElementById('navbar-search').value, function(err, results) {
+      if (err) console.error(err);
+      console.log(results)
+    });
+  }
 
   toggleSearchbar() {
     if (!this.state.isSearchOpen === true) {
@@ -110,7 +103,6 @@ export default class DocumateNavbar extends React.Component {
               navbar
             >
               <NavItem>
-                {/* <Search /> */}
                 <Input
                   style={
                     (window.innerWidth < 860 && {
@@ -138,6 +130,7 @@ export default class DocumateNavbar extends React.Component {
                   type="search"
                   id="navbar-search"
                   placeholder="Search docs"
+                  onChange={this.onSearchChange.bind(this)}
                 />
                 <SearchIcon onClick={this.toggleSearchbar.bind(this)} />
               </NavItem>

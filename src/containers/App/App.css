@@ -54,11 +54,35 @@ pre {
   overflow: auto;
   border-radius: 10px;
   padding: 20px;
+  position: relative;
 }
 
 pre code {
   color: #333;
   background: none;
+}
+
+span.copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  padding: 15px;
+  opacity: 0.5;
+  transition: opacity .2s;
+  font-weight: bold;
+}
+
+span.copy-button svg {
+  fill: white;
+}
+
+span.copy-button.copied {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+  color: #282c34;
+  margin: 10px;
 }
 
 /* Button Links */
