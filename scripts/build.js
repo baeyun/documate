@@ -14,7 +14,9 @@ const {
 const CWD = process.cwd();
 const sitePath = `${CWD}/documate/website`;
 const outputPath = sitePath + "/partials";
-const { TOPNAV, SIDENAV } = require(CWD + "/documate/nav.js");
+const {
+  navs: { TOPNAV, SIDENAV }
+} = require(CWD + "/documate/config.js");
 
 createCleanDirectory(sitePath); // Empty dir for site
 createCleanDirectory(outputPath); // Empty dir for partials
