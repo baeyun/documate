@@ -2,11 +2,12 @@ import React from "react";
 
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import { titleCase } from "../utils";
 
 let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
+
+const searchables = JSON.parse(process.env.REACT_APP_DOCUMATE_SEARCHABLES);
 
 export default () => {
   let currentPathIndex = possibleDocPaths.indexOf(window.location.pathname);
@@ -39,7 +40,7 @@ export default () => {
                 <Link
                   className="pagination-link"
                   to={previousPathLink}
-                  children={titleCase(previousPathLink.match(/[\w\-]+$/)[0])}
+                  children={searchables[previousPathLink][0].title}
                 />
               </Col>
             )) || <Col className="page-previous" md="6" sm="6" xs="6" />}
@@ -63,7 +64,7 @@ export default () => {
                 <Link
                   className="pagination-link"
                   to={nextPathLink}
-                  children={titleCase(nextPathLink.match(/[\w\-]+$/)[0])}
+                  children={searchables[nextPathLink][0].title}
                 />
               </Col>
             )}
