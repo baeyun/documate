@@ -19,6 +19,10 @@ const { TOPNAV, SIDENAV } = require(CWD + "/documate/nav.js");
 createCleanDirectory(sitePath); // Empty dir for site
 createCleanDirectory(outputPath); // Empty dir for partials
 
+// Create redirect rules file. This is necessary
+// for static site deployment services like netlify
+writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n");
+
 // Generate docs and pages
 const { siteName } = require(CWD + "/documate/config");
 const topnavSourceMap = processTopnavPages(TOPNAV, outputPath);
