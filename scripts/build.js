@@ -2,6 +2,7 @@
  * Documate production build
  */
 
+const { normalize } = require("path");
 const { readFileSync, writeFileSync } = require("fs");
 
 const { pathToUri } = require("../src/utils");
