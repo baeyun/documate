@@ -4,6 +4,7 @@ import { Container, Col } from "reactstrap";
 import Pagination from "./Pagination";
 import Sidebar from "./Sidebar";
 import Fab from "./Fab";
+import { titleCase } from "../utils";
 import "./mobile-menu.css";
 
 const SidenavSourceMap = JSON.parse(
@@ -42,6 +43,11 @@ export default class Document extends Component {
       .then(d => d.text())
       .then(t => {
         this.setState({ content: t });
+
+        // Get project name from config
+        document.title =
+          "Documate - " + titleCase(pathname.match(/[\w\-]+$/)[0]);
+
         highlightCode();
       })
       .catch(e => console.error(e));

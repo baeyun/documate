@@ -61,6 +61,41 @@ pre code {
   background: none;
 }
 
+/* Button Links */
+
+.btn-links-container {
+  margin: 20px 0;
+}
+
+.btn-link {
+  display: inline-block;
+  font-size: 20px;
+  background-color: #61dafb;
+  color: #000000;
+  padding: 10px 25px;
+  white-space: nowrap;
+  margin: 10px;
+  transition: background-color 0.2s ease-out;
+}
+
+.btn-link:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.btn-link-arrow {
+  color: #61dafb;
+  margin: 10px;
+}
+
+.btn-link-arrow:hover {
+  color: #fff;
+}
+
+.btn-link-arrow svg {
+  margin-left: 10px;
+}
+
 #navbar {
   position: fixed;
   top: 0;
@@ -74,7 +109,7 @@ pre code {
 #navbar a {
   color: #ffffff;
   font-size: 14px;
-  padding: 0 15px;
+  padding: 0 15px 0;
   border-radius: 50px;
   border-bottom: 3px solid transparent;
 }
@@ -139,6 +174,10 @@ input#navbar-search:focus {
   background-color: #373940;
   border-radius: 0.25rem;
   box-shadow: none;
+}
+
+#navbar-search-icon {
+  display: none;
 }
 
 /* Sidebar */
@@ -305,6 +344,10 @@ input#navbar-search:focus {
     border-radius: 0 !important;
   }
 
+  .btn-link {
+    font-size: 16px;
+  }
+
   .accordion__arrow {
     display: none;
   }
@@ -357,8 +400,6 @@ input#navbar-search:focus {
   #navbar-links-left a {
     padding: 6px 10px;
     font-size: 15px;
-  }
-  #navbar-search {
   }
   #sidebar {
     position: absolute;
@@ -431,13 +472,20 @@ input#navbar-search:focus {
   #footer .oss-logo img {
     margin: 2em auto;
   }
+  #page {
+    margin-top: 40px !important;
+  }
+  /* !! Search */
+  input#navbar-search {
+    display: none;
+  }
+  #navbar-search:focus {
+    background-color: #ffffff !important;
+  }
   #navbar-search-icon {
+    display: inline-block;
     position: absolute;
     top: 0;
     right: 10px;
-  }
-
-  #navbar-search:focus {
-    background-color: #ffffff !important;
   }
 }

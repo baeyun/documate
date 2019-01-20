@@ -1,6 +1,7 @@
 module.exports = {
   "TOPNAV": {
     "Home": "./index.html",
+    "Docs": "./docs/",
     "About": "./about.html",
     "Contact": "./contact.html"
   },

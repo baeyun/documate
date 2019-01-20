@@ -10,11 +10,11 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 <h6 id="heading-6">Heading 6</h6>
 <h2 id="buttons">Buttons</h2>
 <p>Buttons come in 5 different (common?) forms:</p>
-<p><button>Default</button></p>
-<p><button class="primary">Primary</button></p>
-<p><button class="success">Success</button></p>
-<p><button class="warning">Warning</button></p>
-<p><button class="danger">Danger</button></p>
+<p><button class="btn btn-default">Default</button></p>
+<p><button class="btn btn-primary">Primary</button></p>
+<p><button class="btn btn-success">Success</button></p>
+<p><button class="btn btn-warning">Warning</button></p>
+<p><button class="btn btn-danger">Danger</button></p>
 <h2 id="blockquotes">Blockquotes</h2>
 <p>And a great deal of quotes:</p>
 <blockquote>
@@ -26,30 +26,30 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 <p>Documate uses <a href="https://highlightjs.org">HighlightJS</a> to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn&#39;t support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.</p>
 <pre><code class="language-javascript">// Packem core modules exposed by FFI wrapper
 import { DevServer, Config, fromConfig, sys } from &quot;packem&quot;;
+import { yellow } from &quot;chalk&quot;;
 
 const root = &quot;./src&quot;;
+const cores = sys.SYSTEM_CORES / 2;
+
 const devserver = new DevServer();
-const threshold = sys.SYSTEM_CORES;
-const appConfig = new Config({
-  root,
-  output: &quot;./dist/app&quot;
-});
-const legacyConfig = new Config({
-  root,
-  output: &quot;./dist/legacy&quot;
-});
+const appConfig = new Config({ output: &quot;./dist/app&quot; });
+const legacyConfig = new Config({ output: &quot;./dist/legacy&quot; });
 
 [appConfig, legacyConfig].map(config =&gt; {
-  fromConfig({ ...config, threshold }).start();
+  fromConfig({ ...config, root, cores }).start();
 });
 
 devserver.on(&quot;start&quot;, (bundle, id) =&gt; {
-  devserver.send(&quot;insert&quot;, id, `/** Copyright (c) 2019 */\n${bundle}`);
+  devserver.send(
+    &quot;insert&quot;,
+    id,
+    `/** Copyright (c) MyWebsite ${new Date().getFullYear()} */\n${bundle}`
+  );
   devserver.send(&quot;remove&quot;, id, bundle.getCurrentDiff());
 });
 
 devserver.on(&quot;close&quot;, () =&gt; {
-  console.log(&quot;Shutting DevServer&quot;);
+  console.log(yellow(&quot;Shutting DevServer...&quot;));
 });</code></pre>
 <h2 id="code-sweets">Code Sweets</h2>
 <p>These tiny tidbits are so sweet. Just don&#39;t overuse &#39;em:</p>
@@ -57,3 +57,22 @@ devserver.on(&quot;close&quot;, () =&gt; {
 <h2 id="responsive-tables">Responsive Tables</h2>
 <p>Documate doesn&#39;t currently support tables. We know it sounds ridiculous, but bear with us. We are
 working on it.</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Is it cool?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Create React App</td>
+<td>Yep</td>
+<td>Makes my life easy</td>
+</tr>
+<tr>
+<td>Documate</td>
+<td>Yep</td>
+<td>Why bother maintaining a site?</td>
+</tr>
+</tbody></table>

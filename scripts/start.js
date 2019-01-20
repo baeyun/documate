@@ -51,7 +51,8 @@ function generateDocs(nav, outputPath) {
           htmlDocContent
         );
 
-        pathToSourceMap[pathToUri(pathSlashSub)] = "/partials/" + newPartialName;
+        pathToSourceMap[pathToUri(pathSlashSub)] =
+          "/partials/" + newPartialName;
       } else {
         walk(pathSlashSub);
       }
@@ -78,25 +79,27 @@ createCleanDirectory(outputPath);
 // copy to partials dir under new uid name
 let TopnavSourceMap = {};
 Object.keys(TOPNAV).map(k => {
-  var htmlContent = readFileSync(
-    normalize(`${CWD}/documate/${TOPNAV[k]}`)
-  ).toString();
+  let path = normalize(`${CWD}/documate/${TOPNAV[k]}`);
 
-  // Embed all images as inline base64
-  htmlContent = embedBase64Imgs(
-    htmlContent,
-    CWD + "/documate/"
-  );
+  try {
+    var htmlContent = readFileSync(path).toString();
 
-  // Output
-  let newPartialName = uniqider() + ".html";
-  writeFileSync(
-    // Output with new filename
-    `${outputPath}/${newPartialName}`,
-    htmlContent
-  );
+    // Embed all images as inline base64
+    htmlContent = embedBase64Imgs(htmlContent, CWD + "/documate/");
 
-  TopnavSourceMap[pathToUri(TOPNAV[k])] = "/partials/" + newPartialName;
+    // Output
+    let newPartialName = uniqider() + ".html";
+    writeFileSync(
+      // Output with new filename
+      `${outputPath}/${newPartialName}`,
+      htmlContent
+    );
+
+    TopnavSourceMap[pathToUri(TOPNAV[k])] = "/partials/" + newPartialName;
+  } catch(e) {
+    // It's propably a link
+    TopnavSourceMap[pathToUri(TOPNAV[k])] = null;
+  }
 });
 
 // Set global REACT_APP_DOCUMATE_TOPNAVSOURCEMAP env var

@@ -9,9 +9,35 @@ import {
   NavLink,
   Input
 } from "reactstrap";
+// import * as algoliasearch from "algoliasearch";
+// import { InstantSearch } from 'react-instantsearch-dom';
+// import algoliasearch from 'algoliasearch/lite';
 
 import SearchIcon from "./SearchIcon";
 import { pathToUri } from "../utils";
+
+// let searchClient = algoliasearch("I4BUJTTEDG", "1cdcfe706c2bd82721ea35f6b35c5549");
+// let index = searchClient.initIndex("results");
+// let searchObject = require("../../documate/nav");
+
+// index.addObject(searchObject, function(err) {
+//   if (err) console.error(err);
+// });
+
+// const Search = () => (
+//   <InstantSearch
+//     indexName="results"
+//     searchClient={searchClient}
+//   >
+//     {/* Widgets */}
+//   </InstantSearch>
+// );
+// On content search (API key, index must be available)
+// index.search("Intro", function(err, content) {
+//   if (err) console.error(err);
+
+//   console.table(content.hits);
+// });
 
 export default class DocumateNavbar extends React.Component {
   state = {
@@ -55,15 +81,20 @@ export default class DocumateNavbar extends React.Component {
           <Collapse isOpen={true} navbar>
             <Nav id="navbar-links-left" navbar>
               {Object.keys(navItems).map((navitem, i) => {
-                let path = pathToUri(navItems[navitem]);
+                let uri =
+                  pathToUri(navItems[navitem]) ||
+                  navItems[navitem].replace(/^\./, "");
 
                 return (
                   <NavItem key={"nav-item-" + i}>
                     <NavLink
                       className={
-                        path === window.location.pathname ? "active" : ""
+                        uri === window.location.pathname ||
+                        (window.location.pathname.includes(uri) && uri !== "/")
+                          ? "active"
+                          : ""
                       }
-                      href={path}
+                      href={uri}
                       children={navitem}
                     />
                   </NavItem>
@@ -79,17 +110,19 @@ export default class DocumateNavbar extends React.Component {
               navbar
             >
               <NavItem>
+                {/* <Search /> */}
                 <Input
                   style={
                     (window.innerWidth < 860 && {
                       display: this.state.isSearchOpen ? "inline" : "none",
                       position: "absolute",
                       right: -53,
-                      top: 0,
+                      top: 1,
                       width: "100%",
                       backgroundColor: "#ffffff",
                       color: "#20232a",
-                      paddingLeft: 20
+                      paddingLeft: 20,
+                      height: 40
                     }) || {
                       display: "inline",
                       width: "unset"
@@ -107,17 +140,6 @@ export default class DocumateNavbar extends React.Component {
                   placeholder="Search docs"
                 />
                 <SearchIcon onClick={this.toggleSearchbar.bind(this)} />
-                <div id="results-container">
-                  <div id="result">
-                    <h4>Reconciler</h4>
-                  </div>
-                  <div id="result">
-                    <h4>Fiber</h4>
-                  </div>
-                  <div id="result">
-                    <h4>DOM update intervals</h4>
-                  </div>
-                </div>
               </NavItem>
               <NavItem>
                 <NavLink id="nav-link-version" href="#">

@@ -21,8 +21,8 @@ let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
 
+// Add necessary lang scripts from Prism
 let codeLangs = JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS);
-
 for (let i = 0; i < codeLangs.length; i++) {
   let lang = codeLangs[i];
   let script = document.createElement("script");
@@ -32,6 +32,7 @@ for (let i = 0; i < codeLangs.length; i++) {
   document.head.appendChild(script);
 }
 
+// Heart...
 class App extends Component {
   render() {
     return (

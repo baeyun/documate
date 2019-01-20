@@ -21,15 +21,15 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 
 Buttons come in 5 different (common?) forms:
 
-<button>Default</button>
+<button class="btn btn-default">Default</button>
 
-<button class="primary">Primary</button>
+<button class="btn btn-primary">Primary</button>
 
-<button class="success">Success</button>
+<button class="btn btn-success">Success</button>
 
-<button class="warning">Warning</button>
+<button class="btn btn-warning">Warning</button>
 
-<button class="danger">Danger</button>
+<button class="btn btn-danger">Danger</button>
 
 ## Blockquotes
 
@@ -47,30 +47,30 @@ Documate uses [HighlightJS](https://highlightjs.org) to highlight code blocks. I
 ```javascript
 // Packem core modules exposed by FFI wrapper
 import { DevServer, Config, fromConfig, sys } from "packem";
+import { yellow } from "chalk";
 
 const root = "./src";
+const cores = sys.SYSTEM_CORES / 2;
+
 const devserver = new DevServer();
-const threshold = sys.SYSTEM_CORES;
-const appConfig = new Config({
-  root,
-  output: "./dist/app"
-});
-const legacyConfig = new Config({
-  root,
-  output: "./dist/legacy"
-});
+const appConfig = new Config({ output: "./dist/app" });
+const legacyConfig = new Config({ output: "./dist/legacy" });
 
 [appConfig, legacyConfig].map(config => {
-  fromConfig({ ...config, threshold }).start();
+  fromConfig({ ...config, root, cores }).start();
 });
 
 devserver.on("start", (bundle, id) => {
-  devserver.send("insert", id, `/** Copyright (c) 2019 */\n${bundle}`);
+  devserver.send(
+    "insert",
+    id,
+    `/** Copyright (c) MyWebsite ${new Date().getFullYear()} */\n${bundle}`
+  );
   devserver.send("remove", id, bundle.getCurrentDiff());
 });
 
 devserver.on("close", () => {
-  console.log("Shutting DevServer");
+  console.log(yellow("Shutting DevServer..."));
 });
 ```
 
@@ -84,3 +84,8 @@ These tiny tidbits are so sweet. Just don't overuse 'em:
 
 Documate doesn't currently support tables. We know it sounds ridiculous, but bear with us. We are
 working on it.
+
+| Project          | Is it cool? | Why                            |
+| ---------------- | ----------- | ------------------------------ |
+| Create React App | Yep         | Makes my life easy             |
+| Documate         | Yep         | Why bother maintaining a site? |

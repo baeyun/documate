@@ -8,8 +8,14 @@ module.exports = {
   },
   pathToUri: path => {
     let match = path.match(/[\.]?[\/]?(.*)\.\w+$/);
-    return match && match[1] && match[1] !== "index" ? "/" + match[1] : "/";
+    if (match && match[1] === "index") return "/";
+    return match && match[1] ? "/" + match[1] : null;
   },
+  titleCase: title =>
+    title
+      .split(/[\-\s]/g)
+      .map(word => `${word.substring(0, 1).toUpperCase()}${word.substring(1)}`)
+      .join(" "),
   embedBase64Imgs(htmlContent, srcPath) {
     let imgMatches = htmlContent.match(/\<img.+\/?\>/gim);
     var newHtmlContent = "";
