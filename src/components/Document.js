@@ -10,10 +10,7 @@ import "./mobile-menu.css";
 const SidenavSourceMap = JSON.parse(
   process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP
 );
-const { siteName } = require(process.env.REACT_APP_DOCUMATE_CWD +
-  "/documate/config.js");
-const { SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
-  "/documate/nav.js");
+const SIDENAV = JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAV);
 
 function highlightCode() {
   eval("Prism.highlightAll();");
@@ -39,14 +36,16 @@ export default class Document extends Component {
 
     document.body.scrollIntoView();
 
+    console.log(contentPath);
+
     fetch(contentPath)
       .then(d => d.text())
       .then(t => {
         this.setState({ content: t });
 
-        document.title = `${siteName} - ${titleCase(
-          pathname.match(/[\w\-]+$/)[0]
-        )}`;
+        document.title = `${
+          process.env.REACT_APP_DOCUMATE_SITENAME
+        } - ${titleCase(pathname.match(/[\w\-]+$/)[0])}`;
 
         highlightCode();
       })

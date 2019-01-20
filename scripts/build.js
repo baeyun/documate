@@ -29,6 +29,8 @@ const { sidenavSourceMap, usedCodeLangs } = markdownDocsToHtml(
 
 // SET GLOBALS
 process.env.REACT_APP_DOCUMATE_SITENAME = siteName;
+process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
+process.env.REACT_APP_DOCUMATE_SIDENAV = JSON.stringify(SIDENAV);
 process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP = JSON.stringify(
   topnavSourceMap
 );
