@@ -10,8 +10,8 @@ import "./mobile-menu.css";
 const SidenavSourceMap = JSON.parse(
   process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP
 );
-
-// Get SIDENAV
+const { siteName } = require(process.env.REACT_APP_DOCUMATE_CWD +
+  "/documate/config.js");
 const { SIDENAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
   "/documate/nav.js");
 
@@ -44,9 +44,9 @@ export default class Document extends Component {
       .then(t => {
         this.setState({ content: t });
 
-        // Get project name from config
-        document.title =
-          "Documate - " + titleCase(pathname.match(/[\w\-]+$/)[0]);
+        document.title = `${siteName} - ${titleCase(
+          pathname.match(/[\w\-]+$/)[0]
+        )}`;
 
         highlightCode();
       })

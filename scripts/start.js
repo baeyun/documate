@@ -96,11 +96,15 @@ Object.keys(TOPNAV).map(k => {
     );
 
     TopnavSourceMap[pathToUri(TOPNAV[k])] = "/partials/" + newPartialName;
-  } catch(e) {
+  } catch (e) {
     // It's propably a link
     TopnavSourceMap[pathToUri(TOPNAV[k])] = null;
   }
 });
+
+// SET GLOBALS
+const { siteName } = require(CWD + "/documate/config");
+process.env.REACT_APP_DOCUMATE_SITENAME = siteName;
 
 // Set global REACT_APP_DOCUMATE_TOPNAVSOURCEMAP env var
 process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP = JSON.stringify(
