@@ -88,6 +88,7 @@ module.exports = {
         let pathSlashSub = nav[i];
         if (pathSlashSub.constructor === String) {
           let newPartialName = uniqider() + ".html";
+          let path = pathToUri(pathSlashSub);
           let mdDocContent = readFileSync(
             `${CWD}/documate/${pathSlashSub}`
           ).toString();
@@ -107,12 +108,12 @@ module.exports = {
 
               let [, permalink, title] = match;
 
-              if (!searchables[newPartialName]) {
-                searchables[newPartialName] = [{ permalink, title }];
+              if (!searchables[path]) {
+                searchables[path] = [{ permalink, title }];
                 continue;
               }
 
-              searchables[newPartialName].push({ permalink, title });
+              searchables[path].push({ permalink, title });
             }
 
           // Extract used code languages for code highlighting
@@ -137,8 +138,7 @@ module.exports = {
             htmlDocContent
           );
 
-          sidenavSourceMap[pathToUri(pathSlashSub)] =
-            "/partials/" + newPartialName;
+          sidenavSourceMap[path] = "/partials/" + newPartialName;
         } else {
           walk(pathSlashSub);
         }
