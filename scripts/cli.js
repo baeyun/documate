@@ -7,8 +7,8 @@ const chalk = require("chalk");
 const [, , ...args] = process.argv;
 const CWD = process.cwd();
 
-if (!existsSync(CWD + "/documate/nav.js")) {
-  console.error("Documate requires a nav.js present in documate folder");
+if (!existsSync(CWD + "/documate/config.js")) {
+  console.error("Documate requires a config.js present in ./documate/");
   process.kill(0);
 }
 

@@ -108,13 +108,24 @@ export default class DocumateNavbar extends React.Component {
         expand="md"
       >
         <Container>
-          <NavbarBrand id="navbar-brand" href="/">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png"
-              width="40"
-              alt=""
+          <NavbarBrand
+            id="navbar-brand"
+            href="/"
+            style={{ margin: "0px 10px 0 0", border: "none" }}
+          >
+            {process.env.REACT_APP_DOCUMATE_LOGOSRC && (
+              <img
+                src={process.env.REACT_APP_DOCUMATE_LOGOSRC}
+                style={{ marginRight: 7 }}
+                width={32}
+                height={32}
+                alt="Logo"
+              />
+            )}
+            <span
+              id="navbar-brand-title"
+              children={process.env.REACT_APP_DOCUMATE_SITENAME}
             />
-            <span id="navbar-brand-title">Documate</span>
           </NavbarBrand>
           <Collapse isOpen={true} navbar>
             <Nav id="navbar-links-left" navbar>

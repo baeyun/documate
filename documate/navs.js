@@ -1,7 +1,6 @@
 module.exports = {
   TOPNAV: {
     Home: "./index.html",
-    About: "./about.html",
     Docs: "./docs/"
   },
   SIDENAV: {
