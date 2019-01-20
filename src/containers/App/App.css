@@ -186,7 +186,7 @@ span.copy-button.copied {
   border-bottom-color: #61dafb;
 }
 
-/* input#navbar-search {
+input#navbar-search {
   background: transparent;
   border: none;
   color: #ffffff;
@@ -196,7 +196,7 @@ input#navbar-search:focus {
   background-color: #373940;
   border-radius: 0.25rem;
   box-shadow: none;
-} */
+}
 
 #navbar-search-icon {
   display: none;
@@ -221,6 +221,14 @@ input#navbar-search:focus {
   display: block;
   padding: 2px 15px 10px;
   color: #fff;
+}
+
+div#search-results a {
+  border-radius: 0;
+}
+
+div#search-results a:focus {
+  background: transparent;
 }
 
 div#search-results a small {
@@ -386,6 +394,10 @@ div#search-results a span {font-size: 15px;font-weight: 300;}
   display: none;
 }
 
+div#search-results div.search-result {
+  margin: 12px 0;
+}
+
 /* Override default Bootstrap mobile styles */
 
 @media only screen and (max-width: 860px) {
@@ -431,13 +443,6 @@ div#search-results a span {font-size: 15px;font-weight: 300;}
   .collapse.show.navbar-collapse {
     display: flex;
     overflow-x: auto;
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 20px,
-      black 90%,
-      transparent
-    );
   }
   #navbar-brand-title {
     display: none;
@@ -529,11 +534,24 @@ div#search-results a span {font-size: 15px;font-weight: 300;}
     margin-top: 40px !important;
   }
   /* !! Search */
+  
+  /* input#navbar-search {
+    
+  } */
+
+  #search-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
 
   #navbar-search-icon {
     display: inline-block;
     position: absolute;
-    top: -6px;
+    top: 13px;
     right: 16px;
+    z-index: 1;
   }
 }
