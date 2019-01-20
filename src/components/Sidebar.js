@@ -54,7 +54,7 @@ function navWalker(title, nav, accord = true) {
     );
   } else {
     let path = pathToUri(nav);
-    
+
     return (
       <Link
         to={path}
@@ -85,11 +85,10 @@ export default ({ nav }) => {
       id="sidebar"
       md="4"
     >
-      <Accordion accordion={false}>
+      <Accordion>
         {Object.keys(nav).map((title, i) => {
           return (
             <AccordionItem
-              expanded={true}
               key={`navitem-${i}`}
               children={navWalker(title, nav[title])}
             />

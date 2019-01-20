@@ -6,10 +6,15 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 ## Typography
 
 # Heading 1
+
 ## Heading 2
+
 ### Heading 3
+
 #### Heading 4
+
 ##### Heading 5
+
 ###### Heading 6
 
 ## Buttons
@@ -17,15 +22,21 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 Buttons come in 5 different (common?) forms:
 
 <button>Default</button>
+
 <button class="primary">Primary</button>
+
 <button class="success">Success</button>
+
 <button class="warning">Warning</button>
+
 <button class="danger">Danger</button>
 
 ## Blockquotes
 
 And a great deal of quotes:
 
+> Quote
+>
 > "Imagination is more important than knowledge."
 > ~ Albert Einstein
 
@@ -34,11 +45,33 @@ And a great deal of quotes:
 Documate uses [HighlightJS](https://highlightjs.org) to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn't support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.
 
 ```javascript
-import documate from 'documate';
+// Packem core modules exposed by FFI wrapper
+import { DevServer, Config, fromConfig, sys } from "packem";
 
-const documentOrigin = [...prefix('./documate/index.md')];
+const root = "./src";
+const devserver = new DevServer();
+const threshold = sys.SYSTEM_CORES;
+const appConfig = new Config({
+  root,
+  output: "./dist/app"
+});
+const legacyConfig = new Config({
+  root,
+  output: "./dist/legacy"
+});
 
-export default documate(documentOrigin).reduce((acc, next) => acc.call(null, next++))
+[appConfig, legacyConfig].map(config => {
+  fromConfig({ ...config, threshold }).start();
+});
+
+devserver.on("start", (bundle, id) => {
+  devserver.send("insert", id, `/** Copyright (c) 2019 */\n${bundle}`);
+  devserver.send("remove", id, bundle.getCurrentDiff());
+});
+
+devserver.on("close", () => {
+  console.log("Shutting DevServer");
+});
 ```
 
 ## Code Sweets

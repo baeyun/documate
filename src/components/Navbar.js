@@ -17,12 +17,17 @@ export default class DocumateNavbar extends React.Component {
   state = {
     isSearchOpen: false
   };
-  
+
   toggleSearchbar() {
-    console.log(true)
+    if (!this.state.isSearchOpen === true) {
+      document.querySelector("#navbar-search-icon path").style.fill = "#20232a";
+    } else {
+      document.querySelector("#navbar-search-icon path").style.fill = "#ffffff";
+    }
+
     this.setState({
       isSearchOpen: !this.state.isSearchOpen
-    })
+    });
   }
 
   render() {
@@ -75,18 +80,44 @@ export default class DocumateNavbar extends React.Component {
             >
               <NavItem>
                 <Input
-                  style={{
-                    display: "inline",
-                    width: "unset"
-                  }}
-                  className={this.state.isSearchOpen ? "active" : ""}
+                  style={
+                    (window.innerWidth < 860 && {
+                      display: this.state.isSearchOpen ? "inline" : "none",
+                      position: "absolute",
+                      right: -53,
+                      top: 0,
+                      width: "100%",
+                      backgroundColor: "#ffffff",
+                      color: "#20232a",
+                      paddingLeft: 20
+                    }) || {
+                      display: "inline",
+                      width: "unset"
+                    }
+                  }
+                  className={
+                    window.innerWidth < 860
+                      ? this.state.isSearchOpen
+                        ? "active"
+                        : ""
+                      : "active"
+                  }
                   type="search"
                   id="navbar-search"
                   placeholder="Search docs"
                 />
-                <SearchIcon
-                  onClick={this.toggleSearchbar.bind(this)}
-                />
+                <SearchIcon onClick={this.toggleSearchbar.bind(this)} />
+                <div id="results-container">
+                  <div id="result">
+                    <h4>Reconciler</h4>
+                  </div>
+                  <div id="result">
+                    <h4>Fiber</h4>
+                  </div>
+                  <div id="result">
+                    <h4>DOM update intervals</h4>
+                  </div>
+                </div>
               </NavItem>
               <NavItem>
                 <NavLink id="nav-link-version" href="#">

@@ -35,6 +35,10 @@ blockquote > p:first-of-type {
   margin-bottom: 10px;
 }
 
+blockquote:last-child {
+  margin-bottom: 0;
+}
+
 code {
   background: rgba(255, 229, 100, 0.2);
   color: #1a1a1a;
@@ -132,7 +136,7 @@ input#navbar-search {
 }
 
 input#navbar-search:focus {
-  background-color: #373940 !important;
+  background-color: #373940;
   border-radius: 0.25rem;
   box-shadow: none;
 }
@@ -171,6 +175,10 @@ input#navbar-search:focus {
 
 /* Main */
 
+#main-content-wrapper {
+  overflow: hidden;
+}
+
 #main-content {
   min-height: calc(100vh - 49px);
 }
@@ -190,6 +198,12 @@ input#navbar-search:focus {
 #main-content a:hover {
   background-color: #bbeffd;
   border-bottom-color: #1a1a1a;
+}
+
+#main-content ul {
+  margin-left: 40px;
+  margin-right: 40px;
+  list-style-type: disc;
 }
 
 #main-content p {
@@ -417,10 +431,13 @@ input#navbar-search:focus {
   #footer .oss-logo img {
     margin: 2em auto;
   }
-
   #navbar-search-icon {
     position: absolute;
-    top: 10px;
+    top: 0;
     right: 10px;
+  }
+
+  #navbar-search:focus {
+    background-color: #ffffff !important;
   }
 }
