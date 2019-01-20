@@ -20,7 +20,7 @@ createCleanDirectory(outputPath); // Empty dir for partials
 // Generate docs and pages
 const { siteName } = require(CWD + "/documate/config");
 const topnavSourceMap = processTopnavPages(TOPNAV, outputPath);
-const { sidenavSourceMap, usedCodeLangs } = markdownDocsToHtml(
+const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
   SIDENAV,
   outputPath
 );
@@ -29,6 +29,7 @@ const { sidenavSourceMap, usedCodeLangs } = markdownDocsToHtml(
 process.env.REACT_APP_DOCUMATE_SITENAME = siteName;
 process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
 process.env.REACT_APP_DOCUMATE_SIDENAV = JSON.stringify(SIDENAV);
+process.env.REACT_APP_DOCUMATE_SEARCHABLES = JSON.stringify(searchables);
 process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP = JSON.stringify(
   topnavSourceMap
 );

@@ -81,15 +81,39 @@ module.exports = {
   markdownDocsToHtml: (nav, outputPath) => {
     var sidenavSourceMap = {};
     var usedCodeLangs = [];
+    var searchables = {};
 
     const walk = nav => {
       for (const i in nav) {
         let pathSlashSub = nav[i];
         if (pathSlashSub.constructor === String) {
+          let newPartialName = uniqider() + ".html";
           let mdDocContent = readFileSync(
             `${CWD}/documate/${pathSlashSub}`
           ).toString();
           var htmlDocContent = marked(mdDocContent);
+
+          // Extract searchable data
+          // then append info to searchables array
+          let headers = htmlDocContent.match(/\<h[1-6].+?\<\/h[1-6]\>/gim);
+          if (headers)
+            for (let i = 0; i < headers.length; i++) {
+              let header = headers[i];
+              let match = header.match(
+                /\<h[1-6]\sid\=\"(.+?)\"\>(.+?)\<\/h[1-6]\>/i
+              );
+
+              if (!match) continue;
+
+              let [, permalink, title] = match;
+
+              if (!searchables[newPartialName]) {
+                searchables[newPartialName] = [{ permalink, title }];
+                continue;
+              }
+
+              searchables[newPartialName].push({ permalink, title });
+            }
 
           // Extract used code languages for code highlighting
           let matches = mdDocContent.match(/^```(\w+)\s*$/gim);
@@ -106,7 +130,6 @@ module.exports = {
           );
 
           // Output
-          let newPartialName = uniqider() + ".html";
           writeFileSync(
             // Output with new filename
             `${outputPath}/${newPartialName}`,
@@ -127,6 +150,6 @@ module.exports = {
     // remove duplicates
     usedCodeLangs = [...new Set(usedCodeLangs)];
 
-    return { sidenavSourceMap, usedCodeLangs };
+    return { sidenavSourceMap, searchables, usedCodeLangs };
   }
 };
