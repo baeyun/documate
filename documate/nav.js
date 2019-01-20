@@ -5,10 +5,7 @@ module.exports = {
     Docs: "./docs/"
   },
   SIDENAV: {
-    Introduction: {
-      Installation: "./docs/introduction.md",
-      Internals: "./docs/introduction.md"
-    },
+    Introduction: "./docs/introduction.md",
     "Getting Started": "./docs/getting-started.md",
     Components: "./docs/components.md",
     Contributing: "./docs/contributing.md"

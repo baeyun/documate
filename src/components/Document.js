@@ -36,8 +36,6 @@ export default class Document extends Component {
 
     document.body.scrollIntoView();
 
-    console.log(contentPath);
-
     fetch(contentPath)
       .then(d => d.text())
       .then(t => {
