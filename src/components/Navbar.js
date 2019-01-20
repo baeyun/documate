@@ -17,12 +17,13 @@ const searchables = JSON.parse(process.env.REACT_APP_DOCUMATE_SEARCHABLES);
 
 export default class DocumateNavbar extends React.Component {
   state = {
-    isSearchOpen: false
+    isSearchOpen: false,
+    isSearchResultsOpen: false
   };
 
   componentDidMount() {
     document.body.addEventListener('click', (e) => {
-      if (!e.target.id || e.target.id != 'search-results') {
+      if (!e.target.id || e.target.id != 'search-results' && window.innerWidth > 860) {
         document.getElementById("search-results").style.display = 'none'
       }
     })
@@ -31,15 +32,20 @@ export default class DocumateNavbar extends React.Component {
   onSearchChange() {
     let searchListContainer = document.getElementById("search-results");
     let inputVal = document.getElementById("navbar-search").value;
+
+    // if (inputVal.length < 3)
+    //   return
+
     searchListContainer.innerHTML = `
       <span id='search-list-header'>
         Search Results
       </span>`;
+    
 
-    if (!inputVal)
-      searchListContainer.style.display = 'none'
-    else
-      searchListContainer.style.display = 'inline-block'
+    // if (!inputVal)
+    //   searchListContainer.style.display = 'none'
+    // else
+    //   searchListContainer.style.display = 'inline-block'
 
     let matches = Object.keys(searchables).map((pageUrl) => {
       let searchableList = searchables[pageUrl]
@@ -63,7 +69,7 @@ export default class DocumateNavbar extends React.Component {
           // let toBold = title.match(re)[0];
           // let boldenTitle = title.replace(toBold, '<b>'+toBold+'</b>');
           
-          listHTML += `<a href="${window.location.origin + m.pageUrl}"><span>${title}</span><small>${m.permalink}</small></a><br>`;
+          listHTML += `<div class="search-result"><a href="${window.location.origin + m.pageUrl}"><span>${title}</span><small>${m.permalink}</small></a></div>`;
         }
     })
     
@@ -85,8 +91,19 @@ export default class DocumateNavbar extends React.Component {
   toggleSearchbar() {
     if (!this.state.isSearchOpen === true) {
       document.querySelector("#navbar-search-icon path").style.fill = "#20232a";
+      document.querySelector('.collapse.show.navbar-collapse').style.overflow = 'hidden'
+      document.getElementById("navbar-search").focus()
+      document.body.style.overflow = 'hidden'
+      this.setState({
+        isSearchResultsOpen: true
+      })
     } else {
       document.querySelector("#navbar-search-icon path").style.fill = "#ffffff";
+      document.querySelector('.collapse.show.navbar-collapse').style.overflow = 'auto'
+      document.body.style.overflow = 'auto'
+      this.setState({
+        isSearchResultsOpen: false
+      })
     }
 
     this.setState({
@@ -158,19 +175,27 @@ export default class DocumateNavbar extends React.Component {
               className="ml-auto"
               navbar
             >
-              <NavItem style={{position: 'relative'}}>
+              <NavItem id="search-container">
                 <Input
+                  autoComplete="false"
+                  autoCapitalize="false"
+                  autoCorrect="false"
+                  autoFocus="false"
+                  maxLength={40}
                   style={
                     (window.innerWidth < 860 && {
-                      display: this.state.isSearchOpen ? "inline" : "none",
-                      position: 'absolute',
-                      right: -11,
-                      top: -20,
-                      width: 500,
+                      display: this.state.isSearchOpen ? "block" : "none",
+                      position: 'fixed',
+                      right: 0,
+                      top: 0,
+                      left: 0,
+                      width: '100%',
                       backgroundColor: 'rgb(255, 255, 255)',
                       color: 'rgb(32, 35, 42)',
-                      paddingLeft: 20,
-                      height: 40
+                      height: 40,
+                      zIndex: 1,
+                      borderRadius: 0,
+                      borderBottom: '1px solid #d0d2d7',
                     }) || {
                       display: "inline",
                       width: "unset"
@@ -183,13 +208,24 @@ export default class DocumateNavbar extends React.Component {
                         : ""
                       : "active"
                   }
-                  type="search"
+                  type="text"
                   id="navbar-search"
                   placeholder="Search docs"
                   onChange={this.onSearchChange.bind(this)}
                 />
                 <SearchIcon onClick={this.toggleSearchbar.bind(this)} />
-                <div style={{
+                <div style={this.state.isSearchResultsOpen == true && {
+                  position: 'absolute',
+                  top: 40,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: '#31363f',
+                  borderRadius: 0,
+                  overflow: 'auto',
+                  boxShadow: '-1px 1px 20px 0px rgba(0,0,0,.3)',
+                  display: 'block'
+                } || {
                   position: 'absolute',
                   top: 43,
                   left: -4,
