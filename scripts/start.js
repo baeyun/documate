@@ -4,8 +4,12 @@
 
 const { readFileSync, writeFileSync } = require("fs");
 
-const { pathToUri, createCleanDirectory } = require("../src/utils");
-const { markdownDocsToHtml, processTopnavPages } = require("./utils");
+const { pathToUri } = require("../src/utils");
+const {
+  createCleanDirectory,
+  markdownDocsToHtml,
+  processTopnavPages
+} = require("./utils");
 
 const CWD = process.cwd();
 const outputPath = `${CWD}/documate/public/partials`;

@@ -1,6 +1,7 @@
-const { existsSync, readFileSync, writeFileSync } = require("fs");
+const { mkdirSync, existsSync, readFileSync, writeFileSync } = require("fs");
 const { normalize } = require("path");
 
+const rimraf = require("rimraf");
 const marked = require("marked");
 const uniqider = require("uniqider");
 const { pathToUri } = require("../src/utils");
@@ -36,7 +37,17 @@ const embedBase64Imgs = (htmlContent, srcPath) => {
 };
 
 module.exports = {
-  embedBase64Imgs: embedBase64Imgs,
+  // copyPublicFolder: () => {
+  //   fs.copySync(paths.appPublic, paths.appBuild, {
+  //     dereference: true,
+  //     filter: file => file !== paths.appHtml,
+  //   });
+  // },
+  createCleanDirectory: dir => {
+    if (!existsSync(dir)) mkdirSync(dir);
+    else rimraf.sync(dir + "/*"); // clear
+  },
+  embedBase64Imgs,
   processTopnavPages: (topnav, outputPath) => {
     // copy to partials dir under new uid name
     let topnavSourceMap = {};

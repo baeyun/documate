@@ -1,16 +1,22 @@
 /**
- * Documate start development build
+ * Documate production build
  */
 
 const { readFileSync, writeFileSync } = require("fs");
 
-const { pathToUri, createCleanDirectory } = require("../src/utils");
-const { markdownDocsToHtml, processTopnavPages } = require("./utils");
+const { pathToUri } = require("../src/utils");
+const {
+  createCleanDirectory,
+  markdownDocsToHtml,
+  processTopnavPages
+} = require("./utils");
 
 const CWD = process.cwd();
-const outputPath = `${CWD}/documate/public/partials`;
+const sitePath = `${CWD}/documate/website`;
+const outputPath = sitePath + "/partials";
 const { TOPNAV, SIDENAV } = require(CWD + "/documate/nav.js");
 
+createCleanDirectory(sitePath); // Empty dir for site
 createCleanDirectory(outputPath); // Empty dir for partials
 
 // Generate docs and pages
@@ -34,4 +40,4 @@ process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
 /**
  * Leave the rest to CRA's start script
  */
-require("./craStart");
+require("./craBuild");
