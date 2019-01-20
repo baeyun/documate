@@ -15,8 +15,13 @@ const CWD = process.cwd();
 const sitePath = `${CWD}/documate/website`;
 const patialsOutputPath = sitePath + "/partials";
 const {
+  title,
+  logo: logoPath,
   navs: { TOPNAV, SIDENAV }
 } = require(CWD + "/documate/config.js");
+let base64logoSrc =
+  "data:image/png;base64," +
+    readFileSync(normalize(`${CWD}/documate/${logoPath}`), "base64") || null;
 
 createCleanDirectory(sitePath); // Empty dir for site
 createCleanDirectory(patialsOutputPath); // Empty dir for partials
@@ -34,7 +39,8 @@ const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
 );
 
 // SET GLOBALS
-process.env.REACT_APP_DOCUMATE_SITENAME = siteName;
+process.env.REACT_APP_DOCUMATE_SITENAME = title;
+process.env.REACT_APP_DOCUMATE_LOGOSRC = base64logoSrc;
 process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
 process.env.REACT_APP_DOCUMATE_SIDENAV = JSON.stringify(SIDENAV);
 process.env.REACT_APP_DOCUMATE_SEARCHABLES = JSON.stringify(searchables);
