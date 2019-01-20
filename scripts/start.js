@@ -17,7 +17,8 @@ const patialsOutputPath = `${CWD}/documate/public/partials`;
 const {
   title,
   logo: logoPath,
-  navs: { TOPNAV, SIDENAV }
+  navs: { TOPNAV, SIDENAV },
+  footerContent
 } = require(CWD + "/documate/config.js");
 let base64logoSrc =
   "data:image/png;base64," +
@@ -45,6 +46,7 @@ process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP = JSON.stringify(
   sidenavSourceMap
 );
 process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
+process.env.REACT_APP_DOCUMATE_FOOTERCONTENT = footerContent;
 
 /**
  * Leave the rest to CRA's start script
