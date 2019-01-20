@@ -5,8 +5,9 @@
 module.exports = {
   // Website's HTML title tag value
   title: "Documate",
-  // Site logo, placed in topbar
-  logo: "./img/logo.png",
+  // Path to site logo, this will be
+  // placed in topbar
+  logo: "./logo.png",
   // Topbar and (documentation's) Sidebar
   // navigation links
   navs: require("./navs"),

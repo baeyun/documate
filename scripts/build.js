@@ -13,13 +13,13 @@ const {
 
 const CWD = process.cwd();
 const sitePath = `${CWD}/documate/website`;
-const outputPath = sitePath + "/partials";
+const patialsOutputPath = sitePath + "/partials";
 const {
   navs: { TOPNAV, SIDENAV }
 } = require(CWD + "/documate/config.js");
 
 createCleanDirectory(sitePath); // Empty dir for site
-createCleanDirectory(outputPath); // Empty dir for partials
+createCleanDirectory(patialsOutputPath); // Empty dir for partials
 
 // Create redirect rules file. This is necessary
 // for static site deployment services like netlify
@@ -27,10 +27,10 @@ writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n");
 
 // Generate docs and pages
 const { siteName } = require(CWD + "/documate/config");
-const topnavSourceMap = processTopnavPages(TOPNAV, outputPath);
+const topnavSourceMap = processTopnavPages(TOPNAV, patialsOutputPath);
 const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
   SIDENAV,
-  outputPath
+  patialsOutputPath
 );
 
 // SET GLOBALS

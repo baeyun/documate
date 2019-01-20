@@ -125,7 +125,6 @@ pre code {
 #navbar #navbar-brand {
   color: #61dafb;
   font-weight: 700;
-  margin-left: 10px;
   font-size: 20px;
 }
 
@@ -362,6 +361,10 @@ input#navbar-search:focus {
 
   #navbar ul {
     line-height: 1.6; /* Fit scrollbar to navbar bottom, yo! */
+  }
+
+  #navbar #navbar-brand {
+    margin-left: 10px !important;
   }
 
   .navbar > .container,
