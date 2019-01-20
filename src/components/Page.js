@@ -32,6 +32,7 @@ export default class Page extends Component {
   render() {
     return (
       <div
+        id="page"
         dangerouslySetInnerHTML={{ __html: this.state.content }}
         style={{ marginTop: 49, minHeight: "calc(100vh - 49px)" }}
         md="8"

@@ -3,30 +3,57 @@ import {
   Container,
   Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
   NavLink,
   Input
 } from "reactstrap";
+// import * as algoliasearch from "algoliasearch";
+// import { InstantSearch } from 'react-instantsearch-dom';
+// import algoliasearch from 'algoliasearch/lite';
 
+import SearchIcon from "./SearchIcon";
 import { pathToUri } from "../utils";
+
+// let searchClient = algoliasearch("I4BUJTTEDG", "1cdcfe706c2bd82721ea35f6b35c5549");
+// let index = searchClient.initIndex("results");
+// let searchObject = require("../../documate/nav");
+
+// index.addObject(searchObject, function(err) {
+//   if (err) console.error(err);
+// });
+
+// const Search = () => (
+//   <InstantSearch
+//     indexName="results"
+//     searchClient={searchClient}
+//   >
+//     {/* Widgets */}
+//   </InstantSearch>
+// );
+// On content search (API key, index must be available)
+// index.search("Intro", function(err, content) {
+//   if (err) console.error(err);
+
+//   console.table(content.hits);
+// });
 
 export default class DocumateNavbar extends React.Component {
   state = {
-    revealMobileSearch: false
+    isSearchOpen: false
   };
 
-  toggleMobileSearch() {
-    if (!this.state.revealMobileSearch)
-      this.setState({
-        revealMobileSearch: true
-      });
-    else
-      this.setState({
-        revealMobileSearch: false
-      });
+  toggleSearchbar() {
+    if (!this.state.isSearchOpen === true) {
+      document.querySelector("#navbar-search-icon path").style.fill = "#20232a";
+    } else {
+      document.querySelector("#navbar-search-icon path").style.fill = "#ffffff";
+    }
+
+    this.setState({
+      isSearchOpen: !this.state.isSearchOpen
+    });
   }
 
   render() {
@@ -73,37 +100,6 @@ export default class DocumateNavbar extends React.Component {
                   </NavItem>
                 );
               })}
-              <NavItem
-                id="navbar-mobile-search-item"
-                style={{
-                  position: "fixed",
-                  right: 16,
-                  zIndex: 1
-                }}
-              >
-                <Input
-                  className={this.state.revealMobileSearch ? "active" : ""}
-                  type="search"
-                  id="navbar-search-mobile"
-                  placeholder="Search docs"
-                />
-                <span onClick={this.toggleMobileSearch.bind(this)}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    alt="Search"
-                    viewBox="0 0 16 16"
-                    style={{
-                      width: 17,
-                      verticalAlign: -2
-                    }}
-                  >
-                    <path
-                      d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z"
-                      fill="#ffffff"
-                    />
-                  </svg>
-                </span>
-              </NavItem>
             </Nav>
             {/* Right */}
             <Nav
@@ -114,17 +110,44 @@ export default class DocumateNavbar extends React.Component {
               navbar
             >
               <NavItem>
+                {/* <Search /> */}
                 <Input
+                  style={
+                    (window.innerWidth < 860 && {
+                      display: this.state.isSearchOpen ? "inline" : "none",
+                      position: "absolute",
+                      right: -53,
+                      top: 1,
+                      width: "100%",
+                      backgroundColor: "#ffffff",
+                      color: "#20232a",
+                      paddingLeft: 20,
+                      height: 40
+                    }) || {
+                      display: "inline",
+                      width: "unset"
+                    }
+                  }
+                  className={
+                    window.innerWidth < 860
+                      ? this.state.isSearchOpen
+                        ? "active"
+                        : ""
+                      : "active"
+                  }
                   type="search"
                   id="navbar-search"
                   placeholder="Search docs"
                 />
+                <SearchIcon onClick={this.toggleSearchbar.bind(this)} />
               </NavItem>
               <NavItem>
-                <NavLink href="#">v2.0.0</NavLink>
+                <NavLink id="nav-link-version" href="#">
+                  v2.0.0
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#">
+                <NavLink id="nav-link-git" href="#">
                   GitHub{" "}
                   <svg
                     x="0px"

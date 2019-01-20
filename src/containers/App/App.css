@@ -35,6 +35,10 @@ blockquote > p:first-of-type {
   margin-bottom: 10px;
 }
 
+blockquote:last-child {
+  margin-bottom: 0;
+}
+
 code {
   background: rgba(255, 229, 100, 0.2);
   color: #1a1a1a;
@@ -57,6 +61,41 @@ pre code {
   background: none;
 }
 
+/* Button Links */
+
+.btn-links-container {
+  margin: 20px 0;
+}
+
+.btn-link {
+  display: inline-block;
+  font-size: 20px;
+  background-color: #61dafb;
+  color: #000000;
+  padding: 10px 25px;
+  white-space: nowrap;
+  margin: 10px;
+  transition: background-color 0.2s ease-out;
+}
+
+.btn-link:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.btn-link-arrow {
+  color: #61dafb;
+  margin: 10px;
+}
+
+.btn-link-arrow:hover {
+  color: #fff;
+}
+
+.btn-link-arrow svg {
+  margin-left: 10px;
+}
+
 #navbar {
   position: fixed;
   top: 0;
@@ -70,7 +109,7 @@ pre code {
 #navbar a {
   color: #ffffff;
   font-size: 14px;
-  padding: 0 15px;
+  padding: 0 15px 0;
   border-radius: 50px;
   border-bottom: 3px solid transparent;
 }
@@ -132,9 +171,13 @@ input#navbar-search {
 }
 
 input#navbar-search:focus {
-  background-color: #373940 !important;
+  background-color: #373940;
   border-radius: 0.25rem;
   box-shadow: none;
+}
+
+#navbar-search-icon {
+  display: none;
 }
 
 /* Sidebar */
@@ -171,12 +214,17 @@ input#navbar-search:focus {
 
 /* Main */
 
+#main-content-wrapper {
+  overflow: hidden;
+}
+
 #main-content {
   min-height: calc(100vh - 49px);
 }
 
 #main-content img {
   max-width: 100%;
+  margin: 1em 0;
 }
 
 #main-content a {
@@ -189,6 +237,12 @@ input#navbar-search:focus {
 #main-content a:hover {
   background-color: #bbeffd;
   border-bottom-color: #1a1a1a;
+}
+
+#main-content ul {
+  margin-left: 40px;
+  margin-right: 40px;
+  list-style-type: disc;
 }
 
 #main-content p {
@@ -290,6 +344,10 @@ input#navbar-search:focus {
     border-radius: 0 !important;
   }
 
+  .btn-link {
+    font-size: 16px;
+  }
+
   .accordion__arrow {
     display: none;
   }
@@ -297,12 +355,9 @@ input#navbar-search:focus {
     height: 40px;
   }
 
-  #navbar .ml-auto {
-    display: none;
-  }
-
-  #navbar #navbar-search {
-    display: block;
+  #navbar #nav-link-version,
+  #navbar #nav-link-git {
+    display: none !important;
   }
 
   #navbar ul {
@@ -345,8 +400,6 @@ input#navbar-search:focus {
   #navbar-links-left a {
     padding: 6px 10px;
     font-size: 15px;
-  }
-  #navbar-search {
   }
   #sidebar {
     position: absolute;
@@ -418,5 +471,21 @@ input#navbar-search:focus {
   }
   #footer .oss-logo img {
     margin: 2em auto;
+  }
+  #page {
+    margin-top: 40px !important;
+  }
+  /* !! Search */
+  input#navbar-search {
+    display: none;
+  }
+  #navbar-search:focus {
+    background-color: #ffffff !important;
+  }
+  #navbar-search-icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 10px;
   }
 }

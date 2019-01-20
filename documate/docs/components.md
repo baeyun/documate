@@ -6,26 +6,37 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 ## Typography
 
 # Heading 1
+
 ## Heading 2
+
 ### Heading 3
+
 #### Heading 4
+
 ##### Heading 5
+
 ###### Heading 6
 
 ## Buttons
 
 Buttons come in 5 different (common?) forms:
 
-<button>Default</button>
-<button class="primary">Primary</button>
-<button class="success">Success</button>
-<button class="warning">Warning</button>
-<button class="danger">Danger</button>
+<button class="btn btn-default">Default</button>
+
+<button class="btn btn-primary">Primary</button>
+
+<button class="btn btn-success">Success</button>
+
+<button class="btn btn-warning">Warning</button>
+
+<button class="btn btn-danger">Danger</button>
 
 ## Blockquotes
 
 And a great deal of quotes:
 
+> Quote
+>
 > "Imagination is more important than knowledge."
 > ~ Albert Einstein
 
@@ -34,11 +45,33 @@ And a great deal of quotes:
 Documate uses [HighlightJS](https://highlightjs.org) to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn't support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.
 
 ```javascript
-import documate from 'documate';
+// Packem core modules exposed by FFI wrapper
+import { DevServer, Config, fromConfig, sys } from "packem";
+import { yellow } from "chalk";
 
-const documentOrigin = [...prefix('./documate/index.md')];
+const root = "./src";
+const cores = sys.SYSTEM_CORES / 2;
 
-export default documate(documentOrigin).reduce((acc, next) => acc.call(null, next++))
+const devserver = new DevServer();
+const appConfig = new Config({ output: "./dist/app" });
+const legacyConfig = new Config({ output: "./dist/legacy" });
+
+[appConfig, legacyConfig].map(config => {
+  fromConfig({ ...config, root, cores }).start();
+});
+
+devserver.on("start", (bundle, id) => {
+  devserver.send(
+    "insert",
+    id,
+    `/** Copyright (c) MyWebsite ${new Date().getFullYear()} */\n${bundle}`
+  );
+  devserver.send("remove", id, bundle.getCurrentDiff());
+});
+
+devserver.on("close", () => {
+  console.log(yellow("Shutting DevServer..."));
+});
 ```
 
 ## Code Sweets
@@ -51,3 +84,8 @@ These tiny tidbits are so sweet. Just don't overuse 'em:
 
 Documate doesn't currently support tables. We know it sounds ridiculous, but bear with us. We are
 working on it.
+
+| Project          | Is it cool? | Why                            |
+| ---------------- | ----------- | ------------------------------ |
+| Create React App | Yep         | Makes my life easy             |
+| Documate         | Yep         | Why bother maintaining a site? |
