@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Col } from "reactstrap";
 
+import Loader from "./Loader";
 import Pagination from "./Pagination";
 import Sidebar from "./Sidebar";
 import Fab from "./Fab";
@@ -21,6 +22,7 @@ export default class Document extends Component {
     super(props);
 
     this.state = {
+      loading: true,
       content: ""
     };
   }
@@ -39,7 +41,7 @@ export default class Document extends Component {
     fetch(contentPath)
       .then(d => d.text())
       .then(t => {
-        this.setState({ content: t });
+        this.setState({ loading: false, content: t });
 
         document.title = `${
           process.env.REACT_APP_DOCUMATE_SITENAME
@@ -60,12 +62,14 @@ export default class Document extends Component {
     return (
       <>
         <Container id="main-content-wrapper" style={{ paddingTop: 53 }}>
-          <Col
-            id="main-content"
-            style={{ paddingTop: 90 }}
-            md="8"
-            dangerouslySetInnerHTML={{ __html: this.state.content }}
-          />
+          {(!this.state.loading && (
+            <Col
+              id="main-content"
+              style={{ paddingTop: 90 }}
+              md="8"
+              dangerouslySetInnerHTML={{ __html: this.state.content }}
+            />
+          )) || <Loader />}
         </Container>
         <Pagination />
         <Sidebar nav={SIDENAV} />
