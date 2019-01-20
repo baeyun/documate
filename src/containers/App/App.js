@@ -9,9 +9,7 @@ import Footer from "../../components/Footer";
 import "./App.css";
 import "./editor-theme.css";
 
-// Get TOPNAV
-const { TOPNAV } = require(process.env.REACT_APP_DOCUMATE_CWD +
-  "/documate/nav.js");
+const TOPNAV = JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAV);
 
 let possibleTopnavPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP)

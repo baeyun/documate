@@ -4,8 +4,12 @@
 
 const { readFileSync, writeFileSync } = require("fs");
 
-const { pathToUri, createCleanDirectory } = require("../src/utils");
-const { markdownDocsToHtml, processTopnavPages } = require("./utils");
+const { pathToUri } = require("../src/utils");
+const {
+  createCleanDirectory,
+  markdownDocsToHtml,
+  processTopnavPages
+} = require("./utils");
 
 const CWD = process.cwd();
 const outputPath = `${CWD}/documate/public/partials`;
@@ -23,6 +27,8 @@ const { sidenavSourceMap, usedCodeLangs } = markdownDocsToHtml(
 
 // SET GLOBALS
 process.env.REACT_APP_DOCUMATE_SITENAME = siteName;
+process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
+process.env.REACT_APP_DOCUMATE_SIDENAV = JSON.stringify(SIDENAV);
 process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP = JSON.stringify(
   topnavSourceMap
 );

@@ -1,12 +1,4 @@
-const { mkdirSync, existsSync } = require("fs");
-
-const rimraf = require("rimraf");
-
 module.exports = {
-  createCleanDirectory: dir => {
-    if (!existsSync(dir)) mkdirSync(dir);
-    else rimraf.sync(dir + "/*"); // clear
-  },
   pathToUri: path => {
     let match = path.match(/[\.]?[\/]?(.*)\.\w+$/);
     if (match && match[1] === "index") return "/";
