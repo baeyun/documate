@@ -12,18 +12,6 @@ import {
 
 import SearchIcon from "./SearchIcon";
 import { pathToUri } from "../utils";
-import * as algoliasearch from "algoliasearch";
-
-let searchClient = algoliasearch(
-  "I4BUJTTEDG",
-  "1cdcfe706c2bd82721ea35f6b35c5549"
-);
-let index = searchClient.initIndex("results");
-let searchObject = require("../../documate/nav");
-
-index.addObject(searchObject, function(err) {
-  if (err) console.error(err);
-});
 
 export default class DocumateNavbar extends React.Component {
   state = {
@@ -31,10 +19,7 @@ export default class DocumateNavbar extends React.Component {
   };
 
   onSearchChange() {
-    index.search(document.getElementById('navbar-search').value, function(err, results) {
-      if (err) console.error(err);
-      console.log(results)
-    });
+    // Search...
   }
 
   toggleSearchbar() {

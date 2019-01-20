@@ -4,7 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 class Footer extends Component {
   render() {
     return (
-      <div id="footer">
+      <footer id="footer">
         <Container>
           <Col md="9" style={{ paddingTop: 53 }}>
             <Row>
@@ -56,7 +56,7 @@ class Footer extends Component {
             </Row>
           </Col>
         </Container>
-      </div>
+      </footer>
     );
   }
 }
