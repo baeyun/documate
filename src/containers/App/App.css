@@ -69,7 +69,7 @@ span.copy-button {
   color: white;
   padding: 15px;
   opacity: 0.5;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
   font-weight: bold;
 }
 
@@ -184,11 +184,7 @@ span.copy-button.copied {
   border-bottom-color: #61dafb;
 }
 
-#navbar-mobile-search-item {
-  display: none;
-}
-
-input#navbar-search {
+/* input#navbar-search {
   background: transparent;
   border: none;
   color: #ffffff;
@@ -198,11 +194,38 @@ input#navbar-search:focus {
   background-color: #373940;
   border-radius: 0.25rem;
   box-shadow: none;
-}
+} */
 
 #navbar-search-icon {
   display: none;
 }
+
+#search-not-found-icon {
+  fill: white;
+  width: 40px;
+}
+
+#not-found {
+  text-align: center;
+  color: white;
+  margin: 20px 0;
+}
+
+/* Search results */
+
+#search-list-header {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  padding: 2px 15px 10px;
+  color: #fff;
+}
+
+div#search-results a small {
+  margin-left: 10px;
+}
+
+div#search-results a span {font-size: 15px;font-weight: 300;}
 
 /* Sidebar */
 
@@ -500,16 +523,11 @@ input#navbar-search:focus {
     margin-top: 40px !important;
   }
   /* !! Search */
-  input#navbar-search {
-    display: none;
-  }
-  #navbar-search:focus {
-    background-color: #ffffff !important;
-  }
+
   #navbar-search-icon {
     display: inline-block;
     position: absolute;
-    top: 0;
-    right: 10px;
+    top: -6px;
+    right: 16px;
   }
 }

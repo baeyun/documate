@@ -3,7 +3,7 @@ import React from "react";
 export default (props) => (
   <svg
     id="navbar-search-icon"
-    style={{ width: "1em", margin: "0 10px", padding: '12px 0' }}
+    style={{ width: "1em", margin: "-1px 10px" }}
     xmlns="http://www.w3.org/2000/svg"
     alt="Search"
     viewBox="0 0 16 16"
