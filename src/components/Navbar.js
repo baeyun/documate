@@ -67,17 +67,19 @@ export default class DocumateNavbar extends React.Component {
     let listHTML = "";
 
     matches.map(arr => {
+      let pageTitle = (arr[0] && window.searchables[arr[0].pageUrl]) ? window.searchables[arr[0].pageUrl][0].title : null
+      listHTML += pageTitle && `<div class="search-result"><span>${pageTitle}</span></div>`;
+
+      // matches
       for (let i = 0; i < arr.length; i++) {
         let m = arr[i];
         let title = m.title;
-        // let re = new RegExp(inputVal, 'gi');
-        // let toBold = title.match(re)[0];
-        // let boldenTitle = title.replace(toBold, '<b>'+toBold+'</b>');
+        let re = new RegExp(inputVal, 'gi');
+        let toBold = title.match(re)[0];
+        let boldenTitle = title.replace(toBold, `<b>${toBold}</b>`);
 
         listHTML += `<div class="search-result"><a href="${window.location
-          .origin + m.pageUrl}"><span>${title}</span><small>${
-          m.permalink
-        }</small></a></div>`;
+          .origin + m.pageUrl}"><span>${boldenTitle}</span></a></div>`;
       }
     });
 

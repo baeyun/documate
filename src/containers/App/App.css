@@ -85,6 +85,10 @@ span.copy-button.copied {
   margin: 10px;
 }
 
+#search-results b {
+  font-weight: bold;
+}
+
 /* Button Links */
 
 .btn-links-container {
