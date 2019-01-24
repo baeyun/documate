@@ -1,5 +1,6 @@
 * {
   outline: none !important;
+  user-select: auto !important;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 

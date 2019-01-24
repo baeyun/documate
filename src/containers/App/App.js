@@ -10,6 +10,7 @@ import "./App.css";
 import "./editor-theme.css";
 
 const TOPNAV = JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAV);
+window.searchables = JSON.parse(process.env.REACT_APP_DOCUMATE_SEARCHABLES);
 
 let possibleTopnavPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP)

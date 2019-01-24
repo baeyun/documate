@@ -13,8 +13,6 @@ import {
 import SearchIcon from "./SearchIcon";
 import { pathToUri } from "../utils";
 
-const searchables = JSON.parse(process.env.REACT_APP_DOCUMATE_SEARCHABLES);
-
 export default class DocumateNavbar extends React.Component {
   state = {
     isSearchOpen: false,
@@ -49,9 +47,9 @@ export default class DocumateNavbar extends React.Component {
     // else
     //   searchListContainer.style.display = 'inline-block'
 
-    let matches = Object.keys(searchables)
+    let matches = Object.keys(window.searchables)
       .map(pageUrl => {
-        let searchableList = searchables[pageUrl];
+        let searchableList = window.searchables[pageUrl];
 
         return searchableList.filter(searchableObj => {
           if (
