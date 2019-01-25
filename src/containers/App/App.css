@@ -67,6 +67,7 @@ span.copy-button {
   top: 0;
   right: 0;
   color: white;
+  background-color: #333333;
   padding: 15px;
   opacity: 0.5;
   transition: opacity 0.2s;
@@ -80,9 +81,15 @@ span.copy-button svg {
 span.copy-button.copied {
   background-color: #ffffff;
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 10px;
   color: #282c34;
   margin: 10px;
+}
+
+#search-results {
+  /* display: block !important; */
+  top: 49px !important;
+  left: unset !important;
 }
 
 #search-results b {
@@ -225,6 +232,16 @@ input#navbar-search:focus {
   display: block;
   padding: 2px 15px 10px;
   color: #fff;
+}
+
+div#search-results .page-title {
+  color: #9a9a9a !important;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 15px 10px;
 }
 
 div#search-results a {
@@ -557,5 +574,15 @@ div#search-results div.search-result {
     top: 13px;
     right: 16px;
     z-index: 1;
+  }
+
+  #search-results {
+    display: none;
+    top: 40px !important;
+    left: -4px !important;
+  }
+
+  pre[class*="language-"] {
+    padding: 1em !important;
   }
 }

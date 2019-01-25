@@ -20,11 +20,9 @@ export default class DocumateNavbar extends React.Component {
   };
 
   componentDidMount() {
+    document.getElementById("search-container").style.position = "unset";
     document.body.addEventListener("click", e => {
-      if (
-        !e.target.id ||
-        (e.target.id != "search-results" && window.innerWidth > 860)
-      ) {
+      if (!e.target.id || e.target.id != "search-results") {
         document.getElementById("search-results").style.display = "none";
       }
     });
@@ -36,6 +34,7 @@ export default class DocumateNavbar extends React.Component {
 
     // if (inputVal.length < 3)
     //   return
+    document.getElementById("search-results").style.display = "block";
 
     searchListContainer.innerHTML = `
       <span id='search-list-header'>
@@ -67,19 +66,25 @@ export default class DocumateNavbar extends React.Component {
     let listHTML = "";
 
     matches.map(arr => {
-      let pageTitle = (arr[0] && window.searchables[arr[0].pageUrl]) ? window.searchables[arr[0].pageUrl][0].title : null
-      listHTML += pageTitle && `<div class="search-result"><span>${pageTitle}</span></div>`;
+      let pageTitle =
+        arr[0] && window.searchables[arr[0].pageUrl]
+          ? window.searchables[arr[0].pageUrl][0].title
+          : null;
+      listHTML +=
+        pageTitle &&
+        `<div class="search-result"><span class="page-title">${pageTitle}</span></div>`;
 
       // matches
       for (let i = 0; i < arr.length; i++) {
         let m = arr[i];
         let title = m.title;
-        let re = new RegExp(inputVal, 'gi');
+        let re = new RegExp(inputVal, "gi");
         let toBold = title.match(re)[0];
         let boldenTitle = title.replace(toBold, `<b>${toBold}</b>`);
 
-        listHTML += `<div class="search-result"><a href="${window.location
-          .origin + m.pageUrl}"><span>${boldenTitle}</span></a></div>`;
+        listHTML += `<div class="search-result">
+          <a href="${window.location.origin +
+            m.pageUrl}"><span>${boldenTitle}</span></a></div>`;
       }
     });
 
@@ -99,6 +104,8 @@ export default class DocumateNavbar extends React.Component {
 
   toggleSearchbar() {
     if (!this.state.isSearchOpen === true) {
+      document.getElementById("search-container").style.position = "fixed";
+      // document.getElementById("search-container").style.display = "block";
       document.querySelector("#navbar-search-icon path").style.fill = "#20232a";
       document.querySelector(".collapse.show.navbar-collapse").style.overflow =
         "hidden";
@@ -108,6 +115,8 @@ export default class DocumateNavbar extends React.Component {
         isSearchResultsOpen: true
       });
     } else {
+      document.getElementById("search-container").style.position = "unset";
+      document.getElementById("search-results").style.display = "none";
       document.querySelector("#navbar-search-icon path").style.fill = "#ffffff";
       document.querySelector(".collapse.show.navbar-collapse").style.overflow =
         "auto";

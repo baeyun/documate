@@ -50,13 +50,13 @@ export default class Document extends Component {
         highlightCode();
 
         let codeBlocks = Array.from(document.querySelectorAll("pre"));
-        let copy = document.createElement("span");
-
-        copy.className = "copy-button";
-        copy.title = "Click to copy this code snippet";
-        copy.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg>`;
 
         codeBlocks.map(block => {
+          let copy = document.createElement("span");
+
+          copy.className = "copy-button";
+          copy.title = "Click to copy this code snippet";
+          copy.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg>`;
           block.appendChild(copy);
           block.addEventListener("mouseover", () => (copy.style.opacity = "1"));
           block.addEventListener("mouseout", () => (copy.style.opacity = ".5"));
