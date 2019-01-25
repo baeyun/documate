@@ -21,15 +21,13 @@ for extra components, feel free to make a fork of Documate and edit the core Mar
 
 Buttons come in 5 different (common?) forms:
 
-<button class="btn btn-default">Default</button>
-
-<button class="btn btn-primary">Primary</button>
-
-<button class="btn btn-success">Success</button>
-
-<button class="btn btn-warning">Warning</button>
-
-<button class="btn btn-danger">Danger</button>
+<div style="display: flex;flex-direction: row;">
+  <button class="btn btn-default">Default</button>
+  <button style="margin-left: 10px;" class="btn btn-primary">Primary</button>
+  <button style="margin-left: 10px;" class="btn btn-success">Success</button>
+  <button style="margin-left: 10px;" class="btn btn-warning">Warning</button>
+  <button style="margin-left: 10px;" class="btn btn-danger">Danger</button>
+</div>
 
 ## Blockquotes
 
@@ -43,6 +41,8 @@ And a great deal of quotes:
 ## Code Blocks
 
 Documate uses [HighlightJS](https://highlightjs.org) to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn't support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.
+
+### JavaScript snippet example
 
 ```javascript
 // Packem core modules exposed by FFI wrapper
@@ -72,6 +72,25 @@ devserver.on("start", (bundle, id) => {
 devserver.on("close", () => {
   console.log(yellow("Shutting DevServer..."));
 });
+```
+
+### HTML snippet example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      alert(JSON.stringify(window.applicationCache));
+    </script>
+  </body>
+</html>
 ```
 
 ## Code Sweets

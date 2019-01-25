@@ -188,10 +188,6 @@ export default class DocumateNavbar extends React.Component {
             >
               <NavItem id="search-container">
                 <Input
-                  autoComplete="false"
-                  autoCapitalize="false"
-                  autoCorrect="false"
-                  autoFocus="false"
                   maxLength={40}
                   style={
                     (window.innerWidth < 860 && {
@@ -219,6 +215,7 @@ export default class DocumateNavbar extends React.Component {
                         : ""
                       : "active"
                   }
+                  autoComplete="off"
                   type="text"
                   id="navbar-search"
                   placeholder="Search docs"
