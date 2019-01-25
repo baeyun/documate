@@ -20,6 +20,33 @@ a.acc-item-title {
   padding: 10px 5px;
 }
 
+a.anchor {
+  padding: 0 5px;
+  margin: 0;
+  position: absolute;
+  left: -25px;
+  top: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-left: 25px;
+}
+
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+  display: block;
+}
+
 blockquote {
   background-color: rgba(255, 229, 100, 0.3);
   border-left: 9px solid #ffe564;
@@ -239,7 +266,10 @@ div#search-results a small {
   margin-left: 10px;
 }
 
-div#search-results a span {font-size: 15px;font-weight: 300;}
+div#search-results a span {
+  font-size: 15px;
+  font-weight: 300;
+}
 
 /* Sidebar */
 
@@ -538,7 +568,7 @@ div#search-results div.search-result {
     margin-top: 40px !important;
   }
   /* !! Search */
-  
+
   /* input#navbar-search {
     
   } */

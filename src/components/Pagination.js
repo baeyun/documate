@@ -40,7 +40,7 @@ export default () => {
                 <Link
                   className="pagination-link"
                   to={previousPathLink}
-                  children={searchables[previousPathLink][0].title}
+                  children={searchables[previousPathLink] && searchables[previousPathLink][0].title}
                 />
               </Col>
             )) || <Col className="page-previous" md="6" sm="6" xs="6" />}
@@ -64,7 +64,7 @@ export default () => {
                 <Link
                   className="pagination-link"
                   to={nextPathLink}
-                  children={searchables[nextPathLink][0].title}
+                  children={searchables[nextPathLink] && searchables[nextPathLink][0].title}
                 />
               </Col>
             )}
