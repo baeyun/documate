@@ -23,7 +23,7 @@ pre[class*="language-"] {
   hyphens: none;
 }
 pre[class*="language-"] {
-  padding: 1em;
+  padding: 1em 2em;
   margin: 2.5em 0;
   overflow: auto;
 }
