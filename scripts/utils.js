@@ -164,12 +164,6 @@ module.exports = {
               usedCodeLangs.push(matches[i].substr(3).trim());
             }
 
-          // // Embed all images as inline base64
-          // htmlDocContent = embedBase64Imgs(
-          //   htmlDocContent,
-          //   CWD + "/documate/docs/"
-          // );
-
           // Output
           writeFileSync(
             // Output with new filename
