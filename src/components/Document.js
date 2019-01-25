@@ -78,7 +78,7 @@ export default class Document extends Component {
       .catch(e => console.error(e));
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     highlightCode();
   }
 
