@@ -130,6 +130,12 @@ module.exports = {
             CWD + "/documate/docs/"
           );
 
+          // Use bootstrap's striped table
+          htmlDocContent = htmlDocContent.replace(
+            "<table>",
+            '<table class="table table-striped">'
+          );
+
           // Output
           writeFileSync(
             // Output with new filename
