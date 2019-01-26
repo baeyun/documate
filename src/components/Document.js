@@ -14,7 +14,7 @@ const SidenavSourceMap = JSON.parse(
 const SIDENAV = JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAV);
 
 function highlightCode() {
-  eval("Prism.highlightAll();");
+  eval("Prism && Prism.highlightAll();");
 }
 
 export default class Document extends Component {
@@ -75,6 +75,7 @@ export default class Document extends Component {
           });
         });
       })
+      .then(() => highlightCode())
       .catch(e => console.error(e));
   }
 
