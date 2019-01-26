@@ -12,7 +12,7 @@ export default class Search extends React.Component {
   componentDidMount() {
     document.getElementById("search-container").style.position = "unset";
     document.body.addEventListener("click", e => {
-      if (!e.target.id || e.target.id != "search-results") {
+      if (!e.target.id || e.target.id != "search-results" || e.target.id != "navbar-search") {
         document.getElementById("search-results").style.display = "none";
       }
     });

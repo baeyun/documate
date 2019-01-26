@@ -17,6 +17,27 @@ function highlightCode() {
   eval("Prism && Prism.highlightAll();");
 }
 
+// Scroll link into view
+function scrollToHash() {
+  if (window.location.hash) {
+    let hash = window.location.hash;
+    let selector = "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a";
+    let links = document.querySelectorAll(selector);
+
+    Array.from(links).map(link => {
+      if (link.getAttribute("href") == hash) {
+        let parent = link.parentNode
+        let scrollOffset = parent.scrollHeight
+        
+        parent.scrollIntoView();
+        window.scroll(0, scrollOffset)
+      }
+    });
+  }
+}
+
+window.addEventListener('load', scrollToHash)
+
 export default class Document extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +96,6 @@ export default class Document extends Component {
           });
         });
       })
-      .then(() => highlightCode())
       .catch(e => console.error(e));
   }
 

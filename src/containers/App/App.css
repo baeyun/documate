@@ -8,8 +8,12 @@ h2 {
   margin-left: 0 !important;
 }
 
-ul {
+ul, ol {
   line-height: 2;
+}
+
+table {
+  background-color: #fff !important;
 }
 
 a {
@@ -290,6 +294,7 @@ div#search-results a {
 
 div#search-results a:focus {
   background: transparent;
+  color: #61dafb;
 }
 
 div#search-results a small {
@@ -361,6 +366,11 @@ div#search-results a span {
   margin-left: 40px;
   margin-right: 40px;
   list-style-type: disc;
+}
+
+#main-content ol {
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 #main-content p {
@@ -624,5 +634,9 @@ div#search-results div.search-result {
 
   pre[class*="language-"] {
     padding: 1em !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-left: 25px !important;
   }
 }
