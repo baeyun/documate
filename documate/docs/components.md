@@ -50,7 +50,7 @@ One thing about blockquotes is you need to create blockquotes in this format:
 
 ### Complex blockquotes
 
-````markdown
+```markdown
 > Note
 >
 > Some content here. This could be _any type of_ **content**
@@ -68,12 +68,12 @@ One thing about blockquotes is you need to create blockquotes in this format:
 >
 > You could use tables as well:
 >
-> | Fruit | I like it |
-> | ---------------- | ----------- |
-> | Apple | Definitely |
+> | Fruit  | I like it   |
+> | ------ | ----------- |
+> | Apple  | Definitely  |
 > | Grapes | My favorite |
-> | Banana | Sometimes |
-````
+> | Banana | Sometimes   |
+```
 
 ### Result
 
@@ -94,11 +94,11 @@ One thing about blockquotes is you need to create blockquotes in this format:
 >
 > You could use tables as well:
 >
-> | Fruit | I like it |
-> | ---------------- | ----------- |
-> | Apple | Definitely |
+> | Fruit  | I like it   |
+> | ------ | ----------- |
+> | Apple  | Definitely  |
 > | Grapes | My favorite |
-> | Banana | Sometimes |
+> | Banana | Sometimes   |
 
 ## Code Blocks
 
@@ -150,18 +150,18 @@ console.log(filteredItems);
 #### JSX
 
 ```jsx
-import React from 'react'
-import { withProps } from 'recompose'
+import React from "react";
+import { withProps } from "recompose";
 
-import Item from './components/Item'
+import Item from "./components/Item";
 
 export default withProps(({ items }) => (
   <>
-    {
-      items.map((item) => <Item id={generateUniqueId()} />)
-    }
+    {items.map(item => (
+      <Item id={generateUniqueId()} />
+    ))}
   </>
-))
+));
 ```
 
 #### Rust
@@ -226,6 +226,8 @@ macro_rules! s {
 </html>
 ```
 
+The following syntaxes are supported: `abap`, `actionscript`, `ada`, `apacheconf`, `apl`, `applescript`, `arduino`, `arff`, `asciidoc`, `asm6502`, `aspnet`, `autohotkey`, `autoit`, `bash`, `basic`, `batch`, `bison`, `brainfuck`, `bro`, `c`, `clike`, `clojure`, `coffeescript`, `core`, `cpp`, `crystal`, `csharp`, `csp`, `css-extras`, `css`, `d`, `dart`, `diff`, `django`, `docker`, `eiffel`, `elixir`, `elm`, `erb`, `erlang`, `flow`, `fortran`, `fsharp`, `gedcom`, `gherkin`, `git`, `glsl`, `go`, `graphql`, `groovy`, `haml`, `handlebars`, `haskell`, `haxe`, `hpkp`, `hsts`, `http`, `ichigojam`, `icon`, `inform7`, `ini`, `io`, `j`, `java`, `javascript`, `jolie`, `json`, `jsx`, `julia`, `keyman`, `kotlin`, `latex`, `less`, `liquid`, `lisp`, `livescript`, `lolcode`, `lua`, `makefile`, `markdown`, `markup-templating`, `markup`, `matlab`, `mel`, `mizar`, `monkey`, `n4js`, `nasm`, `nginx`, `nim`, `nix`, `nsis`, `objectivec`, `ocaml`, `opencl`, `oz`, `parigp`, `parser`, `pascal`, `perl`, `php-extras`, `php`, `plsql`, `powershell`, `processing`, `prolog`, `properties`, `protobuf`, `pug`, `puppet`, `pure`, `python`, `q`, `qore`, `r`, `reason`, `renpy`, `rest`, `rip`, `roboconf`, `ruby`, `rust`, `sas`, `sass`, `scala`, `scheme`, `scss`, `smalltalk`, `smarty`, `soy`, `sql`, `stylus`, `swift`, `tap`, `tcl`, `textile`, `tsx`, `tt2`, `twig`, `typescript`, `vbnet`, `velocity`, `verilog`, `vhdl`, `vim`, `visual-basic`, `wasm`, `wiki`, `xeora`, `xojo`, `xquery`, `yaml`.
+
 ## Code Sweets
 
 These tiny tidbits are so sweet. Just don't overuse 'em:
@@ -234,8 +236,7 @@ These tiny tidbits are so sweet. Just don't overuse 'em:
 
 ## Responsive Tables
 
-Documate doesn't currently support tables. We know it sounds ridiculous, but bear with us. We are
-working on it.
+Documate uses Bootstrap's striped table (`.table .table-striped`) to display tables by default. You can always overrride its styles.
 
 | Project          | Is it cool? | Why                            |
 | ---------------- | ----------- | ------------------------------ |

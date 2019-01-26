@@ -4,13 +4,10 @@ const { version } = require("../package.json");
 const { existsSync } = require("fs");
 const chalk = require("chalk");
 
+const { throwErr } = require("./utils");
+
 const [, , ...args] = process.argv;
 const CWD = process.cwd();
-
-if (!existsSync(CWD + "/documate/config.js")) {
-  console.error("Documate requires a config.js present in ./documate/");
-  process.kill(0);
-}
 
 // Set global Documate env vars
 process.env.REACT_APP_DOCUMATE_CWD = CWD;
@@ -20,21 +17,25 @@ switch (args[0]) {
    * documate init example-app
    */
   case "init":
-    // require('../src/init')
+    require("./init");
     break;
 
   /**
    * documate start
    */
   case "start":
-    require("./start");
+    if (!existsSync(CWD + "/documate/config.js")) {
+      throwErr("A config.js must be present in ./documate/");
+    } else require("./start");
     break;
 
   /**
    * documate build
    */
   case "build":
-    require("./build");
+    if (!existsSync(CWD + "/documate/config.js")) {
+      throwErr("A config.js must be present in ./documate/");
+    } else require("./build");
     break;
 
   /**

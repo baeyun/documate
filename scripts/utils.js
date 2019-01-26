@@ -1,6 +1,7 @@
 const { mkdirSync, existsSync, readFileSync, writeFileSync } = require("fs");
 const { normalize } = require("path");
 
+const chalk = require("chalk");
 const rimraf = require("rimraf");
 const marked = require("marked");
 const uniqider = require("uniqider");
@@ -136,7 +137,9 @@ module.exports = {
 
           // Extract searchable data
           // then append info to searchables array
-          let headers = htmlDocContent.match(/\<h[1-6]\sid\=\".+?\"\sdata-title\=\".+?\"\>/gim);
+          let headers = htmlDocContent.match(
+            /\<h[1-6]\sid\=\".+?\"\sdata-title\=\".+?\"\>/gim
+          );
           if (headers)
             for (let i = 0; i < headers.length; i++) {
               let header = headers[i];
@@ -185,5 +188,10 @@ module.exports = {
     usedCodeLangs = [...new Set(usedCodeLangs)];
 
     return { sidenavSourceMap, searchables, usedCodeLangs };
+  },
+  throwErr(msg) {
+    console.log("\033c");
+    console.error(chalk.red(`  DOCUMATE ERR: ${msg}\n`));
+    process.kill(0);
   }
 };

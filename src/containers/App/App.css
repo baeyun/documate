@@ -333,6 +333,10 @@ div#search-results a span {
   letter-spacing: 0.08em;
 }
 
+.acc-item-title.active {
+  color: #1a1a1a !important;
+}
+
 /* Main */
 
 #main-content-wrapper {

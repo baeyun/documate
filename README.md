@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bukharim96/documate/master/src/assets/img/documate-logo.png" alt="Documate Logo" />
+  <img width="100" src="https://raw.githubusercontent.com/bukharim96/documate/master/documate/logo.png" alt="Documate Logo" />
 </p>
 
 <h1 align="center">Documate</h1>

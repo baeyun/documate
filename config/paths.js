@@ -67,19 +67,19 @@ const resolveModule = (resolveFn, filePath) => {
 
 // config after eject: we're in ./config/
 module.exports = {
-  dotenv: resolveApp('.env'),
-  appPath: resolveApp('.'),
+  dotenv: path.join(__dirname, '../.env'),
+  appPath: path.join(__dirname, '../.'),
   appBuild: path.resolve(process.cwd(), 'documate/website'),
   appPublic: resolveApp('documate/public'),
   appHtml: resolveApp('documate/public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
-  appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
-  appTsConfig: resolveApp('tsconfig.json'),
-  yarnLockFile: resolveApp('yarn.lock'),
+  appIndexJs: path.join(__dirname, '../src/index.js'),
+  appPackageJson: path.join(__dirname, '../package.json'),
+  appSrc: path.join(__dirname, '../src'),
+  appTsConfig: path.join(__dirname, '../tsconfig.json'),
+  yarnLockFile: path.join(__dirname, '../yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
-  proxySetup: resolveApp('src/setupProxy.js'),
-  appNodeModules: resolveApp('node_modules'),
+  proxySetup: path.join(__dirname, '../src/setupProxy.js'),
+  appNodeModules: path.join(__dirname, '../node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
