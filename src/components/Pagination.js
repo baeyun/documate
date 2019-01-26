@@ -4,7 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
 let possibleDocPaths = Object.keys(
-  JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
+  JSON.parse(process.env.REACT_APP_DOCUMATE_DOCSSOURCEMAP)
 );
 
 export default () => {
@@ -38,7 +38,11 @@ export default () => {
                 <Link
                   className="pagination-link"
                   to={previousPathLink}
-                  children={window.searchables[previousPathLink] && window.searchables[previousPathLink][0].title}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      window.searchables[previousPathLink] &&
+                      window.searchables[previousPathLink][0].title
+                  }}
                 />
               </Col>
             )) || <Col className="page-previous" md="6" sm="6" xs="6" />}
@@ -62,7 +66,11 @@ export default () => {
                 <Link
                   className="pagination-link"
                   to={nextPathLink}
-                  children={window.searchables[nextPathLink] && window.searchables[nextPathLink][0].title}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      window.searchables[nextPathLink] &&
+                      window.searchables[nextPathLink][0].title
+                  }}
                 />
               </Col>
             )}

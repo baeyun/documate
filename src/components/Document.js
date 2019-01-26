@@ -9,9 +9,9 @@ import { titleCase } from "../utils";
 import "./mobile-menu.css";
 
 const SidenavSourceMap = JSON.parse(
-  process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP
+  process.env.REACT_APP_DOCUMATE_DOCSSOURCEMAP
 );
-const SIDENAV = JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAV);
+const DOCS = JSON.parse(process.env.REACT_APP_DOCUMATE_DOCS);
 
 function highlightCode() {
   eval("Prism && Prism.highlightAll();");
@@ -99,7 +99,7 @@ export default class Document extends Component {
           )) || <Loader />}
         </Container>
         <Pagination />
-        <Sidebar nav={SIDENAV} />
+        <Sidebar nav={DOCS} />
         <Fab />
       </>
     );

@@ -22,7 +22,7 @@ let possibleTopnavPaths = Object.keys(
 );
 
 let possibleDocPaths = Object.keys(
-  JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
+  JSON.parse(process.env.REACT_APP_DOCUMATE_DOCSSOURCEMAP)
 );
 
 // Heart...

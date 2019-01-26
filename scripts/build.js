@@ -22,7 +22,7 @@ const patialsOutputPath = sitePath + "/partials";
 const {
   title,
   logo: logoPath,
-  navs: { TOPNAV, SIDENAV },
+  navs: { TOPNAV, DOCS },
   footerContent,
   repoUrl,
   codeBlockTheme
@@ -49,7 +49,7 @@ if (existsSync(faviconDir))
 // Generate docs and pages
 const topnavSourceMap = processTopnavPages(TOPNAV, patialsOutputPath);
 const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
-  SIDENAV,
+  DOCS,
   patialsOutputPath
 );
 
@@ -59,12 +59,12 @@ process.env.REACT_APP_DOCUMATE_PROJECTVERSION =
 process.env.REACT_APP_DOCUMATE_SITENAME = title;
 process.env.REACT_APP_DOCUMATE_LOGOSRC = base64logoSrc;
 process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
-process.env.REACT_APP_DOCUMATE_SIDENAV = JSON.stringify(SIDENAV);
+process.env.REACT_APP_DOCUMATE_DOCS = JSON.stringify(DOCS);
 process.env.REACT_APP_DOCUMATE_SEARCHABLES = JSON.stringify(searchables);
 process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP = JSON.stringify(
   topnavSourceMap
 );
-process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP = JSON.stringify(
+process.env.REACT_APP_DOCUMATE_DOCSSOURCEMAP = JSON.stringify(
   sidenavSourceMap
 );
 process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
