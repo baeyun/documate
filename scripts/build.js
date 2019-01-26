@@ -3,7 +3,12 @@
  */
 
 const { normalize } = require("path");
-const { readFileSync, writeFileSync, createReadStream, createWriteStream } = require("fs");
+const {
+  existsSync,
+  readFileSync,
+  copyFileSync,
+  copySync
+} = require("fs-extra");
 
 const {
   createCleanDirectory,
@@ -29,11 +34,20 @@ createCleanDirectory(patialsOutputPath); // Empty dir for partials
 
 // Create redirect rules file. This is necessary
 // for static site deployment services like netlify
-writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n");
-createReadStream(normalize(__dirname + "/temps/_redirects")).pipe(createWriteStream(sitePath + "/_redirects"));
+copyFileSync(
+  normalize(__dirname + "/temps/_redirects"),
+  normalize(sitePath + "/_redirects")
+);
+
+// Copy the favicon folder over
+let faviconDir = normalize(CWD + "/documate/public/favicons/")
+if (existsSync(faviconDir))
+  copySync(
+    faviconDir,
+    normalize(sitePath + "/favicons/")
+  );
 
 // Generate docs and pages
-const { siteName } = require(CWD + "/documate/config");
 const topnavSourceMap = processTopnavPages(TOPNAV, patialsOutputPath);
 const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
   SIDENAV,
