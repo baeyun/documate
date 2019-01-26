@@ -132,26 +132,29 @@ span.copy-button.copied {
 .btn-link {
   display: inline-block;
   font-size: 20px;
-  background-color: #61dafb;
-  color: #000000;
+  background-color: #61dafb !important;
+  color: #000000 !important;
   padding: 10px 25px;
   white-space: nowrap;
   margin: 10px;
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out !important;
+  border: none !important;
 }
 
 .btn-link:hover {
-  color: #000000;
-  background-color: #ffffff;
+  color: #000000 !important;
+  background-color: #ffffff !important;
 }
 
 .btn-link-arrow {
-  color: #61dafb;
+  color: #61dafb !important;
   margin: 10px;
+  background-color: transparent !important;
+  border: none !important;
 }
 
 .btn-link-arrow:hover {
-  color: #fff;
+  color: #fff !important;
 }
 
 .btn-link-arrow svg {
@@ -335,14 +338,16 @@ div#search-results a span {
   margin: 1em 0;
 }
 
-#main-content a {
+#main-content a,
+#page a {
   text-decoration: none;
   background-color: rgba(187, 239, 253, 0.30196078431372547);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   color: #1a1a1a;
 }
 
-#main-content a:hover {
+#main-content a:hover,
+#page a:hover {
   background-color: #bbeffd;
   border-bottom-color: #1a1a1a;
 }

@@ -30,7 +30,7 @@ createCleanDirectory(patialsOutputPath); // Empty dir for partials
 
 // Create redirect rules file. This is necessary
 // for static site deployment services like netlify
-writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n");
+writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n/favicons/    /favicons/");
 
 // Generate docs and pages
 const { siteName } = require(CWD + "/documate/config");
