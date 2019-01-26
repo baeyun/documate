@@ -35,6 +35,18 @@
   margin: 5px 0;
 }
 
+.accordion__title:hover .acc-item-title,
+.accordion__title:focus .acc-item-title {
+  color: rgb(26, 26, 26) !important;
+}
+
+.accordion__title:hover .accordion__arrow::after,
+.accordion__title:hover .accordion__arrow::before,
+.accordion__title:focus .accordion__arrow::after,
+.accordion__title:focus .accordion__arrow::before {
+  background-color: rgb(26, 26, 26) !important;
+}
+
 .accordion__body {
   padding: 5px 10px 20px;
   display: block;

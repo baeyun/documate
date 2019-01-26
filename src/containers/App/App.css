@@ -5,6 +5,7 @@ h2 {
   margin: 35px 0;
   padding-top: 40px;
   line-height: 1.2;
+  margin-left: 0 !important;
 }
 
 ul {
@@ -28,6 +29,10 @@ a.anchor {
   top: auto;
 }
 
+th {
+  font-weight: bold;
+}
+
 h1,
 h2,
 h3,
@@ -35,7 +40,6 @@ h4,
 h5,
 h6 {
   position: relative;
-  margin-left: 25px;
 }
 
 h1:hover a.anchor,
@@ -123,6 +127,11 @@ span.copy-button.copied {
   font-weight: bold;
 }
 
+#page p {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
 /* Button Links */
 
 .btn-links-container {
@@ -151,6 +160,7 @@ span.copy-button.copied {
   margin: 10px;
   background-color: transparent !important;
   border: none !important;
+  font-size: 20px;
 }
 
 .btn-link-arrow:hover {
@@ -316,11 +326,6 @@ div#search-results a span {
   line-height: 3;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.acc-item-title:hover,
-.acc-item-title:focus {
-  color: rgb(26, 26, 26) !important;
 }
 
 /* Main */
