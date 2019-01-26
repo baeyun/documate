@@ -3,9 +3,8 @@
  */
 
 const { normalize } = require("path");
-const { readFileSync, writeFileSync } = require("fs");
+const { readFileSync, writeFileSync, createReadStream, createWriteStream } = require("fs");
 
-const { pathToUri } = require("../src/utils");
 const {
   createCleanDirectory,
   markdownDocsToHtml,
@@ -30,7 +29,8 @@ createCleanDirectory(patialsOutputPath); // Empty dir for partials
 
 // Create redirect rules file. This is necessary
 // for static site deployment services like netlify
-writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n/favicons/    /favicons/");
+writeFileSync(sitePath + "/_redirects", "/*    /index.html   200\n");
+createReadStream(normalize(__dirname + "/temps/_redirects")).pipe(createWriteStream(sitePath + "/_redirects"));
 
 // Generate docs and pages
 const { siteName } = require(CWD + "/documate/config");
