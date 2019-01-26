@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import { loadCodeLanguages } from "../../utils";
+
 import Navbar from "../../components/Navbar";
 import Page from "../../components/Page";
 import Document from "../../components/Document";
@@ -21,15 +23,7 @@ let possibleDocPaths = Object.keys(
 );
 
 // Add necessary lang scripts from Prism
-let codeLangs = JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS);
-for (let i = 0; i < codeLangs.length; i++) {
-  let lang = codeLangs[i];
-  let script = document.createElement("script");
-
-  script.type = "text/javascript";
-  script.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-${lang}.min.js`;
-  document.head.appendChild(script);
-}
+loadCodeLanguages(JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS));
 
 // Heart...
 class App extends Component {
