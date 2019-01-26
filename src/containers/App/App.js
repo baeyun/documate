@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import { loadCodeLanguages } from "../../utils";
+import { loadCodeBlockAssets } from "../../utils";
 
 import Navbar from "../../components/Navbar";
 import Page from "../../components/Page";
@@ -9,10 +9,13 @@ import Document from "../../components/Document";
 import Footer from "../../components/Footer";
 
 import "./App.css";
-import "./editor-theme.css";
+
+// Load necessary Prism themes and languages
+loadCodeBlockAssets();
 
 const TOPNAV = JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAV);
 window.searchables = JSON.parse(process.env.REACT_APP_DOCUMATE_SEARCHABLES);
+let codeTheme = process.env.REACT_APP_DOCUMATE_CODEBLOCKTHEME;
 
 let possibleTopnavPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP)
@@ -21,9 +24,6 @@ let possibleTopnavPaths = Object.keys(
 let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP)
 );
-
-// Add necessary lang scripts from Prism
-loadCodeLanguages(JSON.parse(process.env.REACT_APP_DOCUMATE_CODELANGS));
 
 // Heart...
 class App extends Component {

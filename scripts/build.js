@@ -23,7 +23,8 @@ const {
   title,
   logo: logoPath,
   navs: { TOPNAV, SIDENAV },
-  footerContent
+  footerContent,
+  codeBlockTheme
 } = require(CWD + "/documate/config.js");
 let base64logoSrc =
   "data:image/png;base64," +
@@ -68,6 +69,9 @@ process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP = JSON.stringify(
 );
 process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
 process.env.REACT_APP_DOCUMATE_FOOTERCONTENT = footerContent;
+process.env.REACT_APP_DOCUMATE_CODEBLOCKTHEME = codeBlockTheme
+  ? codeBlockTheme
+  : "default";
 
 /**
  * Leave the rest to CRA's start script

@@ -21,7 +21,7 @@ module.exports = {
   // Syntax highlighting theme in code
   // blocks. Check [https://prismjs.com/]
   // for more themes
-  codeBlockTheme: "default",
+  codeBlockTheme: "coy",
   // This will apear in the footer
   // throughout the site
   footerContent: `<div style="color: #fff; text-align: center;">&copy; Copyright ${new Date().getFullYear()}</div>`
