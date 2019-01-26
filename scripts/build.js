@@ -24,6 +24,7 @@ const {
   logo: logoPath,
   navs: { TOPNAV, SIDENAV },
   footerContent,
+  repoUrl,
   codeBlockTheme
 } = require(CWD + "/documate/config.js");
 let base64logoSrc =
@@ -41,12 +42,9 @@ copyFileSync(
 );
 
 // Copy the favicon folder over
-let faviconDir = normalize(CWD + "/documate/public/favicons/")
+let faviconDir = normalize(CWD + "/documate/public/favicons/");
 if (existsSync(faviconDir))
-  copySync(
-    faviconDir,
-    normalize(sitePath + "/favicons/")
-  );
+  copySync(faviconDir, normalize(sitePath + "/favicons/"));
 
 // Generate docs and pages
 const topnavSourceMap = processTopnavPages(TOPNAV, patialsOutputPath);
@@ -56,6 +54,8 @@ const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
 );
 
 // SET GLOBALS
+process.env.REACT_APP_DOCUMATE_PROJECTVERSION =
+  require(CWD + "/package.json").version || null;
 process.env.REACT_APP_DOCUMATE_SITENAME = title;
 process.env.REACT_APP_DOCUMATE_LOGOSRC = base64logoSrc;
 process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
@@ -69,6 +69,7 @@ process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP = JSON.stringify(
 );
 process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
 process.env.REACT_APP_DOCUMATE_FOOTERCONTENT = footerContent;
+process.env.REACT_APP_DOCUMATE_REPOURL = (repoUrl && repoUrl) || null;
 process.env.REACT_APP_DOCUMATE_CODEBLOCKTHEME = codeBlockTheme
   ? codeBlockTheme
   : "default";

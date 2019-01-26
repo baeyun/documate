@@ -19,6 +19,7 @@ const {
   logo: logoPath,
   navs: { TOPNAV, SIDENAV },
   footerContent,
+  repoUrl,
   codeBlockTheme
 } = require(CWD + "/documate/config.js");
 let base64logoSrc =
@@ -35,6 +36,8 @@ const { sidenavSourceMap, searchables, usedCodeLangs } = markdownDocsToHtml(
 );
 
 // SET GLOBALS
+process.env.REACT_APP_DOCUMATE_PROJECTVERSION =
+  require(CWD + "/package.json").version || null;
 process.env.REACT_APP_DOCUMATE_SITENAME = title;
 process.env.REACT_APP_DOCUMATE_LOGOSRC = base64logoSrc;
 process.env.REACT_APP_DOCUMATE_TOPNAV = JSON.stringify(TOPNAV);
@@ -48,6 +51,7 @@ process.env.REACT_APP_DOCUMATE_SIDENAVSOURCEMAP = JSON.stringify(
 );
 process.env.REACT_APP_DOCUMATE_CODELANGS = JSON.stringify(usedCodeLangs);
 process.env.REACT_APP_DOCUMATE_FOOTERCONTENT = footerContent;
+process.env.REACT_APP_DOCUMATE_REPOURL = (repoUrl && repoUrl) || null;
 process.env.REACT_APP_DOCUMATE_CODEBLOCKTHEME = codeBlockTheme
   ? codeBlockTheme
   : "default";
