@@ -275,6 +275,7 @@ export default class DocumateNavbar extends React.Component {
                   <NavLink
                     id="nav-link-git"
                     href={process.env.REACT_APP_DOCUMATE_REPOURL}
+                    target="_blank"
                   >
                     GitHub{" "}
                     <svg
