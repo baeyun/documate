@@ -139,13 +139,13 @@ module.exports = {
           // Extract searchable data
           // then append info to searchables array
           let headers = htmlDocContent.match(
-            /\<h[2-6]\sid\=\".+?\"\sdata-title\=\".+?\"\>/gim
+            /\<h[1-6]\sid\=\".+?\"\sdata-title\=\".+?\"\>/gim
           );
           if (headers)
             for (let i = 0; i < headers.length; i++) {
               let header = headers[i];
               let match = header.match(
-                /\<h[2-6]\sid\=\"(.+?)\"\sdata-title\=\"(.+?)\"\>/i
+                /\<h[1-6]\sid\=\"(.+?)\"\sdata-title\=\"(.+?)\"\>/i
               );
 
               if (!match) continue;

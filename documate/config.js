@@ -17,8 +17,8 @@ module.exports = {
 
   // Main theme colors
   themeColors: {
-    primary: "#e966ff",
-    secondary: "#460950"
+    primary: "#61dafb",
+    secondary: "#20232a"
   },
 
   // Syntax highlighting theme in code blocks

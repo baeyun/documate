@@ -27,7 +27,7 @@ let base64logoSrc =
     readFileSync(normalize(`${CWD}/documate/${logoPath}`), "base64") || null;
 let primaryThemeColor = themeColors.primary || "#61dafb";
 let lightPrimaryThemeColor = color(primaryThemeColor)
-  .lighten(0.5)
+  .lighten(0.3)
   .string();
 let secondaryThemeColor = themeColors.secondary || "#20232a";
 let lightSecondaryThemeColor = color(secondaryThemeColor)
