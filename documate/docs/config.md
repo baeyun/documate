@@ -25,9 +25,9 @@ module.exports = {
   repoUrl: "http://github.com/bukharim96/documate",
 
   // Main theme colors
-  theme: {
-    primaryColor: "#20232a",
-    secondaryColor: "#61dafb"
+  themeColors: {
+    primary: "#61dafb",
+    secondary: "#20232a"
   },
 
   // Syntax highlighting theme in code blocks
@@ -72,14 +72,14 @@ Link to your projects's repository. It could be GitHub, GitLab, BitBucket or jus
 repoUrl: "https://github.com/my-username/that-awesome-documate-project"
 ```
 
-### config.theme
+### config.themeColors
 
 Defines the theme of your app. It has a `primaryColor` and `secondaryColor` properties which indicate the base and secondary color schemes respectively. By default, the React theme uses `#61dafb` and `#20232a` as primary and secondary colors and your site is configured that way by default. The value provided to any of these fields must be a string representation of any standard CSS color format (`hex`, `rgb`, `hsl`, etc).
 
 ```javascript
-theme: {
-  primaryColor: "#20232a",
-  secondaryColor: "#61dafb"
+themeColors: {
+  primary: "#61dafb",
+  secondary: "#20232a"
 }
 ```
 
