@@ -34,17 +34,18 @@ markedRenderer.table = (header, body) => {
 
 // Embed images
 markedRenderer.image = (href, title, text) => {
-  let imgPath = normalize(SRC_PATH + href);
+  // if (!existsSync(imgPath)) {
+  //   console.error(`DOCUMATE ERR: Unable to find image in: ${imgPath}`);
+  //   process.kill(0);
+  // }
 
-  // convert to base64 and replace src
-  if (!existsSync(imgPath)) {
-    console.warn(`DOCUMATE ERR: Unable to find image in: ${imgPath}`);
-    process.kill(0);
-  }
+  // convert to base64 if local
+  let source = href.includes("http")
+    ? href
+    : "data:image/png;base64," +
+      readFileSync(normalize(SRC_PATH + href), "base64");
 
-  let base64Src = "data:image/png;base64," + readFileSync(imgPath, "base64");
-
-  return `<img src="${base64Src}"${(title && ' title="' + title + '"') ||
+  return `<img src="${source}"${(title && ' title="' + title + '"') ||
     ""}${(text && ' alt="' + text + '"') || ""} />`;
 };
 
