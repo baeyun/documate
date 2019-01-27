@@ -1,0 +1,86 @@
+<h1 id="representing-docs-in-the-sidebar" data-title="Representing docs in the sidebar">
+    <a href="#representing-docs-in-the-sidebar" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    Representing docs in the sidebar
+  </h1><p>For your docs to be available in your site, you need to tell Documate where it should be placed and Documate will handle all the routes, placements, accordion states, etc.</p>
+<p>If you navigate to <code>/documate/navs.js</code>, you will encounter a structure like this:</p>
+<pre><code class="language-javascript">/**
+ * Documate navigation
+ */
+
+module.exports = {
+  TOPNAV: {
+    Home: &quot;./index.html&quot;,
+    Docs: &quot;./docs/&quot;
+  },
+  DOCS: {
+    Introduction: &quot;./docs/introduction.md&quot;,
+    &quot;Getting Started&quot;: {
+      Installation: &quot;./docs/getting-started/installation.md&quot;,
+      &quot;Creating your first project&quot;:
+        &quot;./docs/getting-started/creating-your-first-project.md&quot;,
+      Configuration: &quot;./docs/config.md&quot;,
+      &quot;Connecting your docs&quot;: &quot;./docs/config.md&quot;
+    },
+    Components: &quot;./docs/components.md&quot;,
+    Contributing: &quot;./docs/contributing.md&quot;
+  }
+};</code></pre>
+<blockquote>
+<p>Note</p>
+<p>None of these fields are required.</p>
+</blockquote>
+<p>This structure is what will define how your docs will be placed. Meaning, you cannot have a link to a file which isn&#39;t listed in the <code>navs.js</code> file. Furthermore, the general layout would be something of this sort:</p>
+<pre><code class="language-javascript">module.exports = {
+  TOPNAV: {
+    NavItemTitle: &quot;/link/to/html/file-or-slug.html&quot;
+  },
+  DOCS: {
+    DocItemName: &#39;link/to/markdown/or/html/file.md&#39;
+  }
+};</code></pre>
+<h2 id="the-code-topnav-code-property" data-title="The <code>TOPNAV</code> property">
+    <a href="#the-code-topnav-code-property" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    The <code>TOPNAV</code> property
+  </h2><p>The <code>TOPNAV</code> property is an object that contains a <em>key-value</em> representation of what would appear in the navbar on top. The key of this property defines the text that will be displayed in the navbar on top. The value of this property must point to either:</p>
+<ul>
+<li>A local HTML file that exists on your disk, or</li>
+<li>A complete/relative URL link (i.e. <code>https://google.com</code> and <code>./my-docs/my-api/my-func</code> are all possible).</li>
+</ul>
+<p>This is how it should appear in your <code>navs.js</code> file:</p>
+<pre><code class="language-javascript">TOPNAV: {
+    &quot;My Blog&quot;: &quot;./blog.html&quot;,
+    &quot;Some Twitter Link&quot;: &quot;https://twitter.com/undefinedbuddy/&quot;
+}</code></pre>
+<blockquote>
+<p>Note</p>
+<p>If your key needs a space in between characters, wrap it in a string (JavaScript object keys are strings)</p>
+</blockquote>
+<h2 id="the-code-docs-code-property" data-title="The <code>DOCS</code> property">
+    <a href="#the-code-docs-code-property" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    The <code>DOCS</code> property
+  </h2><p>The <code>DOCS</code> property is an object that represents the contents of the sidebar. The key of this property is the text that will be displayed in the sidebar. The value of this property must point to either:</p>
+<ul>
+<li>A local Markdown file that exists on your disk, or</li>
+<li>A local HTML file that exists on your disk.</li>
+</ul>
+<p>This is how it should appear in your <code>navs.js</code> file:</p>
+<pre><code class="language-javascript">DOCS: {
+    &quot;Welcome to My App&quot;: &quot;./link/to/my/welcome-page.html&quot;,
+    &quot;Integrating with webpack&quot;: &quot;./link/to/my/cool/pages/webpack.md&quot;
+}</code></pre>
+<blockquote>
+<p>Note</p>
+<ol>
+<li><p>In both <code>TOPNAV</code> and <code>DOCS</code>, you must define proper values to your keys.</p>
+</li>
+<li><p>For a custom sidebar, you can contribute to Documate to support features like:</p>
+<ul>
+<li>Alignment of the sidebar to the left</li>
+<li>Expand all accordions</li>
+<li>Sidebar dropdown button to appear in the topbar (on mobile)</li>
+<li>Remove accordion feature from the sidebar</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>Check the next section to make a quick build of your docs.</p>

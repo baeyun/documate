@@ -1,4 +1,4 @@
-# Welcome to Documate v0.1.0
+# Welcome to Documate v2.0.0
 
 Documate is a minimal static site generator that takes your Markdown-based code and outputs a whimsy React-ish site.
 
@@ -6,11 +6,11 @@ Documate is a minimal static site generator that takes your Markdown-based code 
 
 So we've been working on some Open Source projects and after all the struggles, we decided to have a website. Consequently, we needed to maintain the site somehow and we found it to be very clumsy and caused us a lot of maintainability issues. That aside, how could we possibly cater for different viewports? We thought of trying [Docusaurus](https://docusaurus.io/) and/or other similar tools but they never met the standards of accessibility we needed.
 
-Eventually, we decided to make a new static site generator that uses Bootstrap 4 (for the base layout), Create React App v2.1.2 (ejected) and bit of [React's official site]() UI.
+Eventually, we decided to make a new static site generator that uses [Bootstrap 4](https://getbootstrap.com/) (for the base layout), [Create React App v2.1.2](https://github.com/facebook/create-react-app/releases/tag/v2.1.2) (ejected) and bit of [React's official site]() UI.
 
 ## Why Markdown?
 
-The reason for using Markdown is simply because docs in JSX, EJS, etc seem to be cluttery with all the unnecessary tags that remove brevity and make readability a pain. Documate puts developer experience into consideration.
+The reason for using Markdown is simply because docs written in HTML, JSX, Handlebars or any other markup that uses angle brackets seem to be cluttery with all the unnecessary tags that remove brevity and make readability a pain. Documate puts developer experience into consideration.
 
 Another bonus of using Markdown is that any GitHub docs of your previous projects (in Markdown) can be put into a site with Documate.
 
@@ -27,6 +27,7 @@ All you need is to run two commands and then you deploy. Although Documate can't
 
 > Note
 >
-> Documate doesn't generate docs or static content from code comments. Instead, you can copy and paste your code comments into Markdown with a few formattings and your docs should ready to get *documated*
+> Documate doesn't generate docs or static content from code comments. Instead, you can copy and paste your code comments into Markdown with a few formattings and your docs should ready to get *documated*.
+> Please read the [Components](/docs/components) section to enable Documate to render your docs properly.
 
 Without much further to say, [let's get started](/getting-started)!
