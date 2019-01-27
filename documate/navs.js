@@ -8,10 +8,16 @@ module.exports = {
     Docs: "./docs/"
   },
   DOCS: {
-    Introduction: "./docs/introduction.md",
-    "Getting Started": "./docs/getting-started.md",
+    "Welcome to Documate": "./docs/welcome.md",
+    "Getting Started": {
+      Installation: "./docs/getting-started/installation.md",
+      "Creating your first project":
+        "./docs/getting-started/creating-your-first-project.md",
+      Configuration: "./docs/config.md",
+      "Connecting your docs": "./docs/getting-started/connecting-your-docs.md",
+      "Building your site": "./docs/getting-started/building-your-site.md"
+    },
     Components: "./docs/components.md",
-    Configuration: "./docs/config.md",
     Contributing: "./docs/contributing.md"
   }
 };

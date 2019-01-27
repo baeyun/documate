@@ -70,6 +70,8 @@ function navWalker(title, nav, accord = true) {
 }
 
 export default ({ nav }) => {
+  let pathname = window.location.pathname;
+
   return (
     <Col
       style={{
@@ -79,18 +81,32 @@ export default ({ nav }) => {
         bottom: 0,
         float: "right",
         background: "#f7f7f7",
-        paddingTop: 148,
-        borderLeft: "1px solid rgb(236, 236, 236)"
+        padding: "148px 0 60px 30px",
+        borderLeft: "1px solid rgb(236, 236, 236)",
+        overflowY: "auto"
       }}
       id="sidebar"
       md="4"
     >
-      <Accordion>
+      <Accordion accordion={false}>
         {Object.keys(nav).map((title, i) => {
+          let expanded = false;
+          let navItem = nav[title];
+
+          if (navItem.constructor === Object) {
+            for (let k in navItem) {
+              if (pathToUri(navItem[k]) === pathname) {
+                expanded = true;
+                break;
+              }
+            }
+          }
+
           return (
             <AccordionItem
               key={`navitem-${i}`}
-              children={navWalker(title, nav[title])}
+              children={navWalker(title, navItem)}
+              expanded={expanded}
             />
           );
         })}

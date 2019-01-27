@@ -1,7 +1,10 @@
 # Components
 
-In this section, all the basic components in a Markdown document are listed. If you wish to have support
-for extra components, feel free to make a fork of Documate and edit the core Markdown converter ([ShowdownJS](http://showdownjs.com/)) thereof. You can manage and create custom Showdown plugins to fit your needs which you can integrate flawlessly into Documate to achieve greater flexibility. Such an interface doesn't exist but is on its way.
+In this section, all the basic components in a Markdown document are listed.
+
+> Tip
+>
+> You can create custom styles by using Bootstrap 4 class names. For a fresh start with Bootstrap, check [this link](https://getbootstrap.com/docs/4.0/getting-started/introduction/).
 
 ## Typography
 
@@ -31,67 +34,199 @@ Buttons come in 5 different (common?) forms:
 
 ## Blockquotes
 
-And a great deal of quotes:
+One thing about blockquotes is you need to create blockquotes in this format:
 
-> Quote
+```markdown
+> A tip or something
 >
-> "Imagination is more important than knowledge."
-> ~ Albert Einstein
+> Opinion, statement or just some dummy text.
+```
+
+### Result
+
+> A tip or something
+>
+> Opinion, statement or just some dummy text.
+
+### Complex blockquotes
+
+```markdown
+> Note
+>
+> Some content here. This could be _any type of_ **content**
+>
+> - Maybe just a list item
+> - An unordered list item
+> - Or something like that
+>
+> 1. Sometimes things look neater
+> 2. When they're ordered
+> 3. So keep your docs tidy
+>
+> Try using some `inlineCode()` and when things get instense,
+> you can embed a code editor in a blockquote with a `<pre>` tag. Pretty sweet, right?
+>
+> You could use tables as well:
+>
+> | Fruit  | I like it   |
+> | ------ | ----------- |
+> | Apple  | Definitely  |
+> | Grapes | My favorite |
+> | Banana | Sometimes   |
+```
+
+### Result
+
+> Note
+>
+> Some content here. This could be _any type of_ **content**
+>
+> - Maybe just a list item
+> - An unordered list item
+> - Or something like that
+>
+> 1. Sometimes things look neater
+> 2. When they're ordered
+> 3. So keep your docs tidy
+>
+> Try using some `inlineCode()` and when things get instense,
+> you can embed a code editor in a blockquote with a `<pre>` tag. Pretty sweet, right?
+>
+> You could use tables as well:
+>
+> | Fruit  | I like it   |
+> | ------ | ----------- |
+> | Apple  | Definitely  |
+> | Grapes | My favorite |
+> | Banana | Sometimes   |
 
 ## Code Blocks
 
-Documate uses [HighlightJS](https://highlightjs.org) to highlight code blocks. If you wish to configure Highlight on your own, simply create and edit a build or create a fork of Documate wherein you define your own custom behaviour (including removing code highlights). Documate doesn't support configuration options. Prefix any language supported by HighlightJS next to the opening triple backticks and Documate will do the rest.
+Documate uses [PrismJS](https://prismjs.com) to highlight code blocks with a [custom CSS theme](https://github.com/bukharim96/documate/blob/master/src/editor-theme.css). Prefix any language supported by Prism next to the opening triple backticks and just start coding. Documate will do the rest.
 
-### JavaScript snippet example
+### Examples
+
+#### JavaScript
 
 ```javascript
-// Packem core modules exposed by FFI wrapper
-import { DevServer, Config, fromConfig, sys } from "packem";
-import { yellow } from "chalk";
+// Filter object with Array.prototype.reduce
 
-const root = "./src";
-const cores = sys.SYSTEM_CORES / 2;
+const items = {
+  1: {
+    id: 1,
+    name: "Apples"
+  },
+  2: {
+    id: 2,
+    name: "Grapes"
+  }
+};
 
-const devserver = new DevServer();
-const appConfig = new Config({ output: "./dist/app" });
-const legacyConfig = new Config({ output: "./dist/legacy" });
+const filterId = 1;
 
-[appConfig, legacyConfig].map(config => {
-  fromConfig({ ...config, root, cores }).start();
-});
+const filteredItems = Object.keys(items).reduce(
+  (acc, key) =>
+    items[key].id === filterId
+      ? acc
+      : {
+          ...acc,
+          [key]: items[key]
+        },
+  {}
+);
 
-devserver.on("start", (bundle, id) => {
-  devserver.send(
-    "insert",
-    id,
-    `/** Copyright (c) MyWebsite ${new Date().getFullYear()} */\n${bundle}`
-  );
-  devserver.send("remove", id, bundle.getCurrentDiff());
-});
+console.log(filteredItems);
 
-devserver.on("close", () => {
-  console.log(yellow("Shutting DevServer..."));
-});
+// Logs:
+//
+// {
+//   2: {
+//     id: 2,
+//     name: "Grapes"
+//   }
+// }
 ```
 
-### HTML snippet example
+#### JSX
+
+```jsx
+import React from "react";
+import { withProps } from "recompose";
+
+import Item from "./components/Item";
+
+export default withProps(({ items }) => (
+  <>
+    {items.map(item => (
+      <Item id={generateUniqueId()} />
+    ))}
+  </>
+));
+```
+
+#### Rust
+
+```rust
+// Adapted from servo's CGlib
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default)]
+pub struct CGSize {
+    pub width: CGFloat,
+    pub height: CGFloat,
+}
+
+impl CGSize {
+    #[inline]
+    pub fn new(width: CGFloat, height: CGFloat) -> CGSize {
+        CGSize {
+            width: width,
+            height: height,
+        }
+    }
+
+    #[inline]
+    pub fn apply_transform(&self, t: &CGAffineTransform) -> CGSize {
+        unsafe {
+            ffi::CGSizeApplyAffineTransform(*self, *t)
+        }
+    }
+}
+
+// Macro rule (from libc)
+
+macro_rules! s {
+    ($($(#[$attr:meta])* pub $t:ident $i:ident { $($field:tt)* })*) => ($(
+        __item! {
+            #[repr(C)]
+            $(#[$attr])*
+            pub $t $i { $($field)* }
+        }
+        impl ::dox::Copy for $i {}
+        impl ::dox::Clone for $i {
+            fn clone(&self) -> $i { *self }
+        }
+    )*)
+}
+```
+
+#### HTML
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Documate</title>
   </head>
   <body>
     <script>
-      alert(JSON.stringify(window.applicationCache));
+      alert(JSON.stringify(window.navigator));
     </script>
   </body>
 </html>
 ```
+
+The following syntaxes are supported: `abap`, `actionscript`, `ada`, `apacheconf`, `apl`, `applescript`, `arduino`, `arff`, `asciidoc`, `asm6502`, `aspnet`, `autohotkey`, `autoit`, `bash`, `basic`, `batch`, `bison`, `brainfuck`, `bro`, `c`, `clike`, `clojure`, `coffeescript`, `core`, `cpp`, `crystal`, `csharp`, `csp`, `css-extras`, `css`, `d`, `dart`, `diff`, `django`, `docker`, `eiffel`, `elixir`, `elm`, `erb`, `erlang`, `flow`, `fortran`, `fsharp`, `gedcom`, `gherkin`, `git`, `glsl`, `go`, `graphql`, `groovy`, `haml`, `handlebars`, `haskell`, `haxe`, `hpkp`, `hsts`, `http`, `ichigojam`, `icon`, `inform7`, `ini`, `io`, `j`, `java`, `javascript`, `jolie`, `json`, `jsx`, `julia`, `keyman`, `kotlin`, `latex`, `less`, `liquid`, `lisp`, `livescript`, `lolcode`, `lua`, `makefile`, `markdown`, `markup-templating`, `markup`, `matlab`, `mel`, `mizar`, `monkey`, `n4js`, `nasm`, `nginx`, `nim`, `nix`, `nsis`, `objectivec`, `ocaml`, `opencl`, `oz`, `parigp`, `parser`, `pascal`, `perl`, `php-extras`, `php`, `plsql`, `powershell`, `processing`, `prolog`, `properties`, `protobuf`, `pug`, `puppet`, `pure`, `python`, `q`, `qore`, `r`, `reason`, `renpy`, `rest`, `rip`, `roboconf`, `ruby`, `rust`, `sas`, `sass`, `scala`, `scheme`, `scss`, `smalltalk`, `smarty`, `soy`, `sql`, `stylus`, `swift`, `tap`, `tcl`, `textile`, `tsx`, `tt2`, `twig`, `typescript`, `vbnet`, `velocity`, `verilog`, `vhdl`, `vim`, `visual-basic`, `wasm`, `wiki`, `xeora`, `xojo`, `xquery`, `yaml`.
 
 ## Code Sweets
 
@@ -101,8 +236,7 @@ These tiny tidbits are so sweet. Just don't overuse 'em:
 
 ## Responsive Tables
 
-Documate doesn't currently support tables. We know it sounds ridiculous, but bear with us. We are
-working on it.
+Documate uses Bootstrap's striped table (`.table .table-striped`) to display tables by default. You can always overrride its styles.
 
 | Project          | Is it cool? | Why                            |
 | ---------------- | ----------- | ------------------------------ |

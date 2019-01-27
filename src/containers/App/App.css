@@ -5,10 +5,20 @@ h2 {
   margin: 35px 0;
   padding-top: 40px;
   line-height: 1.2;
+  margin-left: 0 !important;
 }
 
-ul {
+p {
+  margin-bottom: 1rem;
+}
+
+ul,
+ol {
   line-height: 2;
+}
+
+table {
+  background-color: #fff !important;
 }
 
 a {
@@ -28,6 +38,10 @@ a.anchor {
   top: auto;
 }
 
+th {
+  font-weight: bold;
+}
+
 h1,
 h2,
 h3,
@@ -35,7 +49,6 @@ h4,
 h5,
 h6 {
   position: relative;
-  margin-left: 25px;
 }
 
 h1:hover a.anchor,
@@ -123,6 +136,11 @@ span.copy-button.copied {
   font-weight: bold;
 }
 
+#page p {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
 /* Button Links */
 
 .btn-links-container {
@@ -151,6 +169,7 @@ span.copy-button.copied {
   margin: 10px;
   background-color: transparent !important;
   border: none !important;
+  font-size: 20px;
 }
 
 .btn-link-arrow:hover {
@@ -280,6 +299,7 @@ div#search-results a {
 
 div#search-results a:focus {
   background: transparent;
+  color: #61dafb;
 }
 
 div#search-results a small {
@@ -292,6 +312,15 @@ div#search-results a span {
 }
 
 /* Sidebar */
+
+#sidebar::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background-color: transparent; /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
 
 #sidebar .accordion {
   padding-left: 0;
@@ -318,9 +347,8 @@ div#search-results a span {
   letter-spacing: 0.08em;
 }
 
-.acc-item-title:hover,
-.acc-item-title:focus {
-  color: rgb(26, 26, 26) !important;
+.acc-item-title.active {
+  color: #1a1a1a !important;
 }
 
 /* Main */
@@ -356,6 +384,11 @@ div#search-results a span {
   margin-left: 40px;
   margin-right: 40px;
   list-style-type: disc;
+}
+
+#main-content ol {
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 #main-content p {
@@ -532,6 +565,8 @@ div#search-results div.search-result {
     transform: translateY(0);
     z-index: 1;
     opacity: 1;
+    padding-left: 15px !important;
+    padding-top: 10px !important;
   }
   #sidebar-fab {
     display: flex;
@@ -619,5 +654,14 @@ div#search-results div.search-result {
 
   pre[class*="language-"] {
     padding: 1em !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-left: 25px !important;
   }
 }

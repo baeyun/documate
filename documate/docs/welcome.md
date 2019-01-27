@@ -1,9 +1,4 @@
-<p align="center">
-  <img width="100" src="https://raw.githubusercontent.com/bukharim96/documate/master/documate/public/favicons/android-icon-144x144.png" alt="Documate Logo" />
-</p>
-
-<h1 align="center">Documate</h1>
-<p align="center"><i>Converting your Markdown-docs into a fancy React-ish site.</i></p>
+# Welcome to Documate v2.0.0
 
 Documate is a minimal static site generator that takes your Markdown-based code and outputs a whimsy React-ish site.
 
@@ -33,8 +28,6 @@ All you need is to run two commands and then you deploy. Although Documate can't
 > Note
 >
 > Documate doesn't generate docs or static content from code comments. Instead, you can copy and paste your code comments into Markdown with a few formattings and your docs should ready to get *documated*.
-> Please read the [Components](/docs/components) to enable Documate to render your docs properly.
+> Please read the [Components](/docs/components) section to enable Documate to render your docs properly.
 
 Without much further to say, [let's get started](/getting-started)!
-
-Made with ❤ by [@bukharim96](https://twitter.com/bukharim96) and [@undefinedbuddy](https://twitter.com/undefinedbuddy). If you liked Documate, consider buying us a cup of coffee.
