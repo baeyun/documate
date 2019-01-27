@@ -147,3 +147,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas,
     "Courier New", monospace !important;
 }
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 { 
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+}
+
+h3 {
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+h4 {
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+}
+
+h5 {
+  font-size: .83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+}
+
+h6 {
+  font-size: .67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+}
