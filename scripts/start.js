@@ -3,10 +3,8 @@
  */
 
 const { normalize } = require("path");
-const { readFileSync, writeFileSync } = require("fs");
+const { readFileSync } = require("fs");
 const color = require("color");
-
-const { pathToUri } = require("../src/utils");
 const {
   createCleanDirectory,
   markdownDocsToHtml,
@@ -79,7 +77,8 @@ process.env.REACT_APP_DOCUMATE_THEMECOLOR = `#main-content a,
 
 #main-content a:hover,
 #page a:hover,
-.btn-link,
+#page a.btn-link,
+a.btn-link,
 .accordion__body a.active::before {
   background-color: ${primaryThemeColor} !important;
 }

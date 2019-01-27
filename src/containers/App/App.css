@@ -159,7 +159,7 @@ span.copy-button.copied {
   border: none !important;
 }
 
-.btn-link:hover {
+#page a.btn-link:hover, a.btn-link:hover {
   color: #000000 !important;
   background-color: #ffffff !important;
 }
