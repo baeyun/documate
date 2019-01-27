@@ -15,7 +15,6 @@ loadCodeBlockAssets();
 
 const TOPNAV = JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAV);
 window.searchables = JSON.parse(process.env.REACT_APP_DOCUMATE_SEARCHABLES);
-let codeTheme = process.env.REACT_APP_DOCUMATE_CODEBLOCKTHEME;
 
 let possibleTopnavPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_TOPNAVSOURCEMAP)
@@ -24,6 +23,16 @@ let possibleTopnavPaths = Object.keys(
 let possibleDocPaths = Object.keys(
   JSON.parse(process.env.REACT_APP_DOCUMATE_DOCSSOURCEMAP)
 );
+
+// Inject theme colors into app
+
+(function() {
+  let style = document.createElement("style");
+
+  style.type = "text/css";
+  style.textContent = process.env.REACT_APP_DOCUMATE_THEMECOLOR;
+  document.head.appendChild(style);
+})();
 
 // Heart...
 class App extends Component {

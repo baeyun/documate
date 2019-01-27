@@ -14,6 +14,7 @@ export default () => (
     {/* <span children="Loading..." /> */}
     {/* By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL */}
     <svg
+      id="loader"
       style={{
         width: 128,
         height: 110,

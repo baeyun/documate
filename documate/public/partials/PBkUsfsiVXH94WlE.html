@@ -1,0 +1,83 @@
+<h1 id="documate-code-config-code-file" data-title="Documate <code>config</code> file">
+    <a style="background-color: transparent !important;" href="#documate-code-config-code-file" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    Documate <code>config</code> file
+  </h1><p>The configuration file contains a few settings that can help you change the feel and behaviour of your app. Feel free to mess around with it. You can find it in the <code>/documate/config.js</code> file (relative to your project&#39;s root path).</p>
+<p>You might&#39;ve noticed that there is a config file in your project&#39;s documate folder. This file will define some parts of your app that are open to changes. That includes the title, logo, repository URL (all version control managers supported. You can even have a custom link), theme, etc.</p>
+<p>A typical Documate config would look something like this:</p>
+<pre><code class="language-javascript">/**
+ * Documate site settings
+ */
+
+module.exports = {
+  // Website&#39;s HTML title tag value
+  title: &quot;Documate&quot;,
+
+  // Path to site logo, this will be placed in the Topbar
+  logo: &quot;./logo.png&quot;,
+
+  // Topbar and (documentation&#39;s) Sidebar navigation links
+  navs: require(&quot;./navs&quot;),
+
+  // GitHub repository
+  repoUrl: &quot;http://github.com/bukharim96/documate&quot;,
+
+  // Main theme colors
+  theme: {
+    primaryColor: &quot;#20232a&quot;,
+    secondaryColor: &quot;#61dafb&quot;
+  },
+
+  // Syntax highlighting theme in code blocks
+  // Check [https://documate.netlify.com/docs/config] for more themes
+  codeBlockTheme: &quot;default&quot;,
+
+  // This will apear in the footer throughout the site
+  footerContent: `Copyright ${new Date().getFullYear()}`
+};
+</code></pre>
+<h3 id="config-title" data-title="config.title">
+    <a style="background-color: transparent !important;" href="#config-title" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.title
+  </h3><p>This is the title of your docs that you&#39;ll be seeing across all pages of your docs. It is dynamic so make sure not to edit your app&#39;s title from Create React App&#39;s <code>/public/index.html</code> file.</p>
+<pre><code class="language-javascript">title: &quot;Documate&quot;</code></pre>
+<h3 id="config-logo" data-title="config.logo">
+    <a style="background-color: transparent !important;" href="#config-logo" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.logo
+  </h3><p>This property defines the site&#39;s logo path which is placed in the navbar on top, just before your site&#39;s name.</p>
+<pre><code class="language-javascript">logo: &quot;./logo.png&quot;</code></pre>
+<h3 id="config-navs" data-title="config.navs">
+    <a style="background-color: transparent !important;" href="#config-navs" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.navs
+  </h3><p>Defines the layout for the links in the sidebar. Also responsible for introducing/removing docs into/from your site. For more details on the <code>navs</code> object, <a href="/docs/navs">check this link</a>.</p>
+<pre><code class="language-javascript">navs: require(&quot;./navs&quot;)</code></pre>
+<h3 id="config-repourl" data-title="config.repoUrl">
+    <a style="background-color: transparent !important;" href="#config-repourl" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.repoUrl
+  </h3><p>Link to your projects&#39;s repository. It could be GitHub, GitLab, BitBucket or just a custom link since no interactions with external APIs are made.</p>
+<pre><code class="language-javascript">repoUrl: &quot;https://github.com/my-username/that-awesome-documate-project&quot;</code></pre>
+<h3 id="config-theme" data-title="config.theme">
+    <a style="background-color: transparent !important;" href="#config-theme" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.theme
+  </h3><p>Defines the theme of your app. It has a <code>primaryColor</code> and <code>secondaryColor</code> properties which indicate the base and secondary color schemes respectively. By default, the React theme uses <code>#61dafb</code> and <code>#20232a</code> as primary and secondary colors and your site is configured that way by default. The value provided to any of these fields must be a string representation of any standard CSS color format (<code>hex</code>, <code>rgb</code>, <code>hsl</code>, etc).</p>
+<pre><code class="language-javascript">theme: {
+  primaryColor: &quot;#20232a&quot;,
+  secondaryColor: &quot;#61dafb&quot;
+}</code></pre>
+<h3 id="config-codeblocktheme" data-title="config.codeBlockTheme">
+    <a style="background-color: transparent !important;" href="#config-codeblocktheme" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.codeBlockTheme
+  </h3><p>Syntax highlighting theme in code blocks. The name must match one of <a href="https://prismjs.com/">Prism&#39;s</a> official themes or a custom theme. In our case, we modified the <a href="https://prismjs.com/index.html?theme=prism-tomorrow">Tomorrow Night</a> theme to match React&#39;s site code block theme. </p>
+<pre><code class="language-javascript">codeBlockTheme: &quot;coy&quot;</code></pre>
+<p>The following values are possible: <code>default</code>, <code>coy</code>, <code>dark</code>, <code>funky</code>, <code>okaidia</code>, <code>solarizedlight</code>, <code>tomorrow</code>, <code>twilight</code>, <code>prism</code>.</p>
+<h3 id="config-footercontent" data-title="config.footerContent">
+    <a style="background-color: transparent !important;" href="#config-footercontent" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+    config.footerContent
+  </h3><p>The footer content will appear throughout every page of the site.</p>
+<pre><code class="language-javascript">footerContent: `Copyright ${new Date().getFullYear()}`</code></pre>
+<blockquote>
+<p>Tip</p>
+<p>Ideally, if your footer grows larger (with all the Bootstrap classes, inline styles etc) it would be in your
+best interest to place the content in a different file (as <code>/documate/footer.html</code> for instance) and read it
+synchronously.</p>
+</blockquote>
+<p>If you have any issues, feel free to file an issue or submit a Pull Request for an update approval.</p>
