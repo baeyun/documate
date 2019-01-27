@@ -8,6 +8,10 @@ h2 {
   margin-left: 0 !important;
 }
 
+p {
+  margin-bottom: 1rem;
+}
+
 ul,
 ol {
   line-height: 2;
