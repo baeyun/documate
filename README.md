@@ -30,11 +30,6 @@ All you need is to run two commands and then you deploy. Although Documate can't
 - **Blazing fast serving** - Run `documate start` and view your docs locally in no time. Check Documate's [README.md](https://github.com/bukharim96/documate) for more details on dependency versions.
 - **Production-ready builds** - Your builds are minified and scripts uglified for good.
 
-> Note
->
 > Documate doesn't generate docs or static content from code comments. Instead, you can copy and paste your code comments into Markdown with a few formattings and your docs should ready to get *documated*.
-> Please read the [Components](/docs/components) to enable Documate to render your docs properly.
-
-Without much further to say, [let's get started](/getting-started)!
 
 Made with ❤ by [@bukharim96](https://twitter.com/bukharim96) and [@undefinedbuddy](https://twitter.com/undefinedbuddy). If you liked Documate, consider buying us a cup of coffee.

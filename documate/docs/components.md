@@ -232,7 +232,24 @@ The following syntaxes are supported: `abap`, `actionscript`, `ada`, `apacheconf
 
 These tiny tidbits are so sweet. Just don't overuse 'em:
 
+
 `packem.require('./custom')`, `UNSAFE_shouldComponentUpdate`
+
+## Images
+
+To embed an image, use the following syntax:
+
+```markdown
+![Picture of lizard](./img/lizard.jpg "Some shy lizard")
+```
+
+<center>
+
+![Picture of lizard](./img/lizard.jpg "Some shy lizard")
+
+</center>
+
+Inspect this image to view its `alt` text.
 
 ## Responsive Tables
 

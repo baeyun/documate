@@ -14,8 +14,12 @@ export default () => (
     {/* <span children="Loading..." /> */}
     {/* By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL */}
     <svg
-      width="45"
-      height="45"
+      style={{
+        width: 128,
+        height: 110,
+        position: 'absolute',
+        top: 'calc(100vh - 64%)',
+      }}
       viewBox="0 0 45 45"
       xmlns="http://www.w3.org/2000/svg"
       stroke="#61dafb"
