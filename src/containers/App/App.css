@@ -8,7 +8,8 @@ h2 {
   margin-left: 0 !important;
 }
 
-ul, ol {
+ul,
+ol {
   line-height: 2;
 }
 
@@ -307,6 +308,15 @@ div#search-results a span {
 }
 
 /* Sidebar */
+
+#sidebar::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background-color: transparent; /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
 
 #sidebar .accordion {
   padding-left: 0;
@@ -642,7 +652,12 @@ div#search-results div.search-result {
     padding: 1em !important;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-left: 25px !important;
   }
 }
