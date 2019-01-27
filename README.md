@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100" src="https://raw.githubusercontent.com/bukharim96/documate/master/documate/logo.png" alt="Documate Logo" />
+  <img width="100" src="https://raw.githubusercontent.com/bukharim96/documate/master/documate/public/favicons/android-icon-144x144.png" alt="Documate Logo" />
 </p>
 
 <h1 align="center">Documate</h1>

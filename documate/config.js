@@ -27,7 +27,7 @@ module.exports = {
   
   // This will apear in the footer throughout the site
   footerContent: `
-  <div style="color: #fff;">
+  <div style="color: #fff;text-align: center;">
     Made with <span style="color: #ff6398;">❤</span> by <a 
     style="color: #61dafb" href="https://twitter.com/bukharim96">@bukharim96</a> and <a 
     style="color: #61dafb" href="https://twitter.com/undefinedbuddy">@undefinedbuddy</a> <a class="github-button" href="https://github.com/bukharim96/documate" data-icon="octicon-star" data-show-count="true" aria-label="Star bukharim96/documate on GitHub">Star</a>

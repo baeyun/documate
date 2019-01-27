@@ -551,6 +551,8 @@ div#search-results div.search-result {
     transform: translateY(0);
     z-index: 1;
     opacity: 1;
+    padding-left: 15px !important;
+    padding-top: 10px !important;
   }
   #sidebar-fab {
     display: flex;
