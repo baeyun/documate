@@ -7,7 +7,8 @@ const marked = require("marked");
 const uniqider = require("uniqider");
 const { pathToUri } = require("../src/utils");
 
-const CWD = process.cwd();
+// Relative current working directory
+const CWD = process.argv[2] || process.cwd();
 const SRC_PATH = CWD + "/documate/docs/";
 
 // Setup markdown renderer

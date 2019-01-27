@@ -65,13 +65,16 @@ const resolveModule = (resolveFn, filePath) => {
   return resolveFn(`${filePath}.js`);
 };
 
+// Relative current working directory
+const CWD = process.argv[2] || process.cwd();
+
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: path.join(__dirname, '../.env'),
-  appPath: path.join(__dirname, '../.'),
-  appBuild: path.resolve(process.cwd(), 'documate/website'),
-  appPublic: resolveApp('documate/public'),
-  appHtml: resolveApp('documate/public/index.html'),
+  appPath: path.join(__dirname, '../'),
+  appBuild: path.join(CWD, 'documate/website'),
+  appPublic: path.join(CWD, 'documate/public'),
+  appHtml: path.join(CWD, 'documate/public/index.html'),
   appIndexJs: path.join(__dirname, '../src/index.js'),
   appPackageJson: path.join(__dirname, '../package.json'),
   appSrc: path.join(__dirname, '../src'),

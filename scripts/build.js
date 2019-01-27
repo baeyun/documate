@@ -16,7 +16,7 @@ const {
   processTopnavPages
 } = require("./utils");
 
-const CWD = process.cwd();
+const CWD = process.argv[2] || process.cwd();
 const sitePath = `${CWD}/documate/website`;
 const patialsOutputPath = sitePath + "/partials";
 const {
