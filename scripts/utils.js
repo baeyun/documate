@@ -7,7 +7,8 @@ const marked = require("marked");
 const uniqider = require("uniqider");
 const { pathToUri } = require("../src/utils");
 
-const CWD = process.cwd();
+// Relative current working directory
+const CWD = process.argv[2] || process.cwd();
 const SRC_PATH = CWD + "/documate/docs/";
 
 // Setup markdown renderer
@@ -138,13 +139,13 @@ module.exports = {
           // Extract searchable data
           // then append info to searchables array
           let headers = htmlDocContent.match(
-            /\<h[1-6]\sid\=\".+?\"\sdata-title\=\".+?\"\>/gim
+            /\<h[2-6]\sid\=\".+?\"\sdata-title\=\".+?\"\>/gim
           );
           if (headers)
             for (let i = 0; i < headers.length; i++) {
               let header = headers[i];
               let match = header.match(
-                /\<h[1-6]\sid\=\"(.+?)\"\sdata-title\=\"(.+?)\"\>/i
+                /\<h[2-6]\sid\=\"(.+?)\"\sdata-title\=\"(.+?)\"\>/i
               );
 
               if (!match) continue;

@@ -2,6 +2,8 @@
 
 const { version } = require("../package.json");
 const { existsSync } = require("fs");
+const { exec } = require("child_process");
+const path = require("path")
 const chalk = require("chalk");
 
 const { throwErr } = require("./utils");
@@ -21,21 +23,29 @@ switch (args[0]) {
     break;
 
   /**
-   * documate start
+   * documate start & build cmds
    */
   case "start":
-    if (!existsSync(CWD + "/documate/config.js")) {
-      throwErr("A config.js must be present in ./documate/");
-    } else require("./start");
-    break;
-
-  /**
-   * documate build
-   */
   case "build":
     if (!existsSync(CWD + "/documate/config.js")) {
       throwErr("A config.js must be present in ./documate/");
-    } else require("./build");
+    }
+    
+    const startProcess = exec(
+      `cd ${path.normalize(__dirname + "/../")} && node scripts/${args[0]}.js ${CWD}`
+    )
+  
+    startProcess.stdout.on('data', function(data) {
+      process.stdout.write(data.toString())
+    })
+  
+    startProcess.stderr.on('data', function(data) {
+      process.stdout.write(data.toString())
+    })
+  
+    startProcess.on('exit', function(data) {
+      process.stdout.write(data.toString())
+    })
     break;
 
   /**
