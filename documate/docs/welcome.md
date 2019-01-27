@@ -1,4 +1,4 @@
-# Welcome to Documate v2.0.0
+# Welcome to Documate v2.0
 
 Documate is a minimal static site generator that takes your Markdown-based code and outputs a whimsy React-ish site.
 

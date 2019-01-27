@@ -17,9 +17,9 @@ module.exports = {
   repoUrl: "http://github.com/bukharim96/documate",
 
   // Main theme colors
-  theme: {
-    primaryColor: "#20232a",
-    secondaryColor: "#61dafb"
+  themeColors: {
+    primary: "#61dafb",
+    secondary: "#20232a"
   },
 
   // Syntax highlighting theme in code blocks
