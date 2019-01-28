@@ -99,8 +99,8 @@ module.exports = {
       try {
         var htmlContent = readFileSync(path).toString();
 
-        // Embed all images as inline base64
-        htmlContent = embedBase64Imgs(htmlContent, CWD + "/documate/");
+        // // Embed all images as inline base64
+        // htmlContent = embedBase64Imgs(htmlContent, CWD + "/documate/");
 
         // Output
         let newPartialName = uniqider() + ".html";
